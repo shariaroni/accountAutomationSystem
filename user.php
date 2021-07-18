@@ -70,11 +70,12 @@ class user{
         }
     }
 
-    public function getLoginUser($email,$pass){
-        $sql = "SELECT * FROM tabel_user WHERE email = :email AND pass = :pass LIMIT 1";
+    public function getLoginUser($email,$pass,$type){
+        $sql = "SELECT * FROM tabel_user WHERE email = :email AND pass = :pass AND type = :type LIMIT 1";
         $query = $this->db->pdo->prepare($sql);
         $query->bindValue(':email',$email);
         $query->bindValue(':pass',$pass);
+        $query->bindValue(':type',$type);
         $query->execute();
         $result = $query->fetch(PDO::FETCH_OBJ);
         return $result;
@@ -83,10 +84,11 @@ class user{
     public function userLogin($data){
         $email  = $data['email'];
         $pass   = md5($data['pass']);
+        $type   = $data['type'];
 
         $chk_email = $this->emailCheck($email);
 
-        if ($email == "" or $pass == "") {
+        if ($email == "" or $pass == "" or $type == "") {
             $mgs = "<div class='alert alert-danger'><strong>Error!</strong>Field must not be Empty</div>";
             return $mgs;
         }
@@ -101,7 +103,7 @@ class user{
             return $mgs;
         }
 
-        $result = $this->getLoginUser($email, $pass);
+        $result = $this->getLoginUser($email, $pass,$type);
         if ($result) {
             session::init();
             session::set("login", true);

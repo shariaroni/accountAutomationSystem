@@ -71,6 +71,18 @@
                     <input name="pass" id="pass" class="form-control" type="password" placeholder="*****">
                 </div>
                 <div class="form-group mt-3">
+                    <select class="form-select mt-3 mul-select" name="type">
+                        <option class="dropdown-menu" value="type">Registration as a</option>
+                        <option value="general">আবেদনকারী</option>
+                        <option value="recommendingOfficer">সুপারিশকারী কর্মকর্তা</option>
+                        <option value="accountOfficer">কর্মকর্তা (হিসাব দপ্তর)</option>
+                        <option value="deputyDirector">উপ পরিচালক (হিসাব দপ্তর)</option>
+                        <option value="director">পরিচালক (হিসাব দপ্তর)</option>
+                        <option value="treasure">ট্রেজারার</option>
+                        <option value="vc">ভাইস-চ্যান্সেলর</option>
+                    </select>
+                </div>
+                <div class="form-group mt-3">
                     <input name="submit" class="btn btn-success mt-3" type="submit" value="লগ ইন">
                 </div>
             </form>

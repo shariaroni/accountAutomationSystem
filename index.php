@@ -16,7 +16,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ব্যবহারকারীদের তথ্য</title>
+    <title>ব্যবহারকারীর তথ্য</title>
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </head>
@@ -60,53 +60,35 @@
     </div>
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h2 class="text-center mt-3">ব্যবহারকারীদের তালিকা <span class="pull-right"><strong>
-            <br>
-            <?php
-                $name = session::get("name");
-                if (isset($name)) {
-                    echo $name;
-                }
-            ?></strong>
-            </span></h2>
+            <h2 class="text-center mt-3">ব্যবহারকারীর তথ্য</h2>
         </div>
-        
-        <div style="max-width: 1000px; margin: 0 auto">
-            <div class="panel-body container">
-                <a class="d-grid col-4 mx-auto btn btn-warning btn-lg" href="budgetSeleaction.php">
-                    বাজেট আবেদন করুন
-                </a>
-                <table class="table table-striped mt-5">
-                    <tr>
-                        <th width="20%">নং</th>
-                        <th width="20%">নাম</th>
-                        <th width="20%">মোবাইল</th>
-                        <th width="20%">ইমেইল</th>
-                        <th width="20%">তথ্য</th>
-                    </tr>
-                    <?php
-                        $user = new user();
-                        $userdata = $user->getuserdata();
-                        if ($userdata) {
-                            $i = 0;
-                            foreach($userdata as $data){
-                                $i++;
-                    ?>
-                    <tr>
-                        <td><?php echo $i; ?></td>
-                        <td><?php echo $data['name']; ?></td>
-                        <td><?php echo $data['mobile']; ?></td>
-                        <td><?php echo $data['email']; ?></td>
-                        <td><a class="btn btn-primary" href="profile.php?id=<?php echo $data['id']; ?>">View</a></td>
-                    </tr>
-                    <?php } }else{ ?>
-                    <tr>
-                        <td colspan="5">
-                            <h2> No User Data Found</h2>
-                        </td>
-                    </tr>
-                    <?php } ?>
-                </table>
+        <div class="card mb-3" style="max-width: 700px; margin: 0 auto">
+            <div class="row g-0">
+                <div class="col-md-4">
+                <img src="images/man.png" class="img-fluid rounded-start p-2" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <span class="pull-right">
+                                <strong>
+                                    <?php
+                                        $name = session::get("name");
+                                        if (isset($name)) {
+                                            echo $name;
+                                        }
+                                    ?>
+                                </strong>
+                            </span>
+                        </h5>
+                        <p class="card-text">   
+                        This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <a class="btn btn-warning" href="budgetSeleaction.php">
+                        বাজেট আবেদন করুন</a>
+                        
+                        <a class="btn btn-secondary" href="">পূর্বের বাজেট আবেদন</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
