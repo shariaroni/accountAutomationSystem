@@ -20,15 +20,14 @@
 
     if (isset($_POST['submit'])) {
         $office_head = $_POST['office_head'];
-        $others = $_POST['others'];
         $need = $_POST['need'];
         $value = $_POST['value'];
 
-        $query = "INSERT INTO generalinformation () VALUES ('')";
+        $query = "INSERT INTO generalinformation (office_head, need, value) VALUES ('$office_head', '$need', '$value')";
         
         $run = mysqli_query($db, $query);
         if ($run) {
-            $_SESSION['status'] = "Data Inserted";
+            $_SESSION['status'] = "Data Inserted Successfully";
             header("Location: recommendingOfficerOpinion.php");
         }
         else{
@@ -101,7 +100,7 @@
                     <div class="col col-sm-6 col-md-6 col-lg-4 col-xl-3">
                         <div class="form-group">
                             <select class="form-select mt-3 mul-select" multiple="true">
-                                <option value="office/department head">অফিস/বিভাগীয় প্রধান</option>
+                                <option value="office_head">অফিস/বিভাগীয় প্রধান</option>
                                 <option value="Mr. A">Mr. A</option>
                                 <option value="Mr. B">Mr. B</option>
                                 <option value="Mr. C">Mr. C</option>

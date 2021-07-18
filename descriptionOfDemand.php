@@ -28,11 +28,11 @@
         
         $run = mysqli_query($db, $query);
         if ($run) {
-            $_SESSION['status'] = "Data Inserted";
+            $_SESSION['status'] = "Data Inserted Successfully";
             header("Location: generalInformation.php");
         }
         else{
-            $_SESSION['status'] = "Data Not Inserted";
+            $_SESSION['status'] = "Data Not Inserted Successfully!";
             header("Location: descriptionOfDemand.php");
         }
     }
@@ -87,6 +87,19 @@
 </head>
 <body>
 <div class="container">
+    <!--- alert mgs
+    <?php
+        if (isset($_SESSION['status'])) {
+    ?>
+        <div class="alert alert-success" role="alert">
+            <?php echo $_SESSION['status']; ?>
+        </div>
+    <?php } else{ ?>
+        <div class="alert alert-danger" role="alert">
+            <?php echo $_SESSION['status']; ?>
+        </div>
+    <?php } ?>
+    --->
     <h1>
         <strong>Account</strong> Automation System
     </h1>

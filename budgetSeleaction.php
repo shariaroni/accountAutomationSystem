@@ -27,7 +27,7 @@
         $run = mysqli_query($db, $query);
 
         if ($run) {
-            $_SESSION['status'] = "Data Inserted";
+            $_SESSION['status'] = "Data Inserted Successfully";
             header("Location: DescriptionOfDemand.php");
         }
         else{
@@ -134,6 +134,7 @@
                 <input class="btn btn-success" type="submit" name="submit" value="নিশ্চিত করুন">
             </div>
         </form>
+        
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
                 <li class="page-item disabled">
