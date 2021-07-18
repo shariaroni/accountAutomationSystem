@@ -14,10 +14,11 @@ class user{
         $email  = $data['email'];
         $mobile = $data['mobile'];
         $pass   = md5($data['pass']);
+        $type   = $data['type']; 
 
         $chk_email = $this->emailCheck($email);
 
-        if ($name == "" or $email == "" or $mobile == "" or $pass == "" ) {
+        if ($name == "" or $email == "" or $mobile == "" or $pass == "" or $type == "") {
             $mgs = "<div class='alert alert-danger'><strong>Error!</strong>Field must not be Empty</div>";
             return $mgs;
         }
@@ -37,12 +38,13 @@ class user{
             return $mgs;
         }
 
-        $sql = "INSERT INTO tabel_user (name, email, mobile, pass) VALUES(:name, :email, :mobile, :pass)";
+        $sql = "INSERT INTO tabel_user (name, email, mobile, pass, type) VALUES(:name, :email, :mobile, :pass, :type)";
         $query = $this->db->pdo->prepare($sql);
         $query->bindValue(':name',$name);
         $query->bindValue(':email',$email);
         $query->bindValue(':mobile',$mobile);
         $query->bindValue(':pass',$pass);
+        $query->bindValue(':type',$type);
         $result = $query->execute();
         if ($result) {
             $mgs = "<div class='alert alert-success'><strong>Success</strong>Thank you, You have been Registered.</div>";
