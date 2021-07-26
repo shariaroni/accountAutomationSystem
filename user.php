@@ -139,12 +139,11 @@ class user{
             user login start
 ------------------------------------------*/
 
-    public function getLoginUser($email,$pass,$type){
-        $sql = "SELECT * FROM tabel_user WHERE email = :email AND pass = :pass AND type = :type LIMIT 1";
+    public function getLoginUser($email,$pass){
+        $sql = "SELECT * FROM tabel_user WHERE email = :email AND pass = :pass LIMIT 1";
         $query = $this->db->pdo->prepare($sql);
         $query->bindValue(':email',$email);
         $query->bindValue(':pass',$pass);
-        $query->bindValue(':type',$type);
         $query->execute();
         $result = $query->fetch(PDO::FETCH_OBJ);
         return $result;
@@ -153,7 +152,6 @@ class user{
     public function userLogin($data){
         $email  = $data['email'];
         $pass   = md5($data['pass']);
-        $type   = $data['type'];
 
         $conn = mysqli_connect('localhost', 'root', '', 'db_lr');
 
@@ -161,7 +159,7 @@ class user{
 
         
 
-        if ($email == "" or $pass == "" or $type == "") {
+        if ($email == "" or $pass == "") {
             $mgs = "<div class='alert alert-danger'><strong>Error!</strong>Field must not be Empty</div>";
             return $mgs;
         }
@@ -181,7 +179,7 @@ class user{
             return $mgs;
         }
 
-        $result = $this->getLoginUser($email, $pass, $type);
+        $result = $this->getLoginUser($email, $pass);
         if ($result) {
             session::init();
             session::set("login", true);
@@ -214,7 +212,7 @@ class user{
             }
         }
         else{
-            $mgs = "<div class='alert alert-danger'><strong>Error!</strong> Email or password is invalid!</div>";
+            $mgs = "<div class='alert alert-danger'><strong>Error!</strong> Email or Password is invalid!</div>";
             return $mgs;
         }
     }

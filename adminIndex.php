@@ -77,6 +77,7 @@
                     <tr>
                         <th width="20%">নং</th>
                         <th width="20%">নাম</th>
+                        <th width="20%">পদবী</th>
                         <th width="20%">মোবাইল</th>
                         <th width="20%">ইমেইল</th>
                         <th width="20%">তথ্য</th>
@@ -92,6 +93,7 @@
                     <tr>
                         <td><?php echo $i; ?></td>
                         <td><?php echo $data['name']; ?></td>
+                        <td><?php echo $data['type']; ?></td>
                         <td><?php echo $data['mobile']; ?></td>
                         <td><?php echo $data['email']; ?></td>
                         <td><a class="btn btn-primary" href="profile.php?id=<?php echo $data['id']; ?>">View</a></td>

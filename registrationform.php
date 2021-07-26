@@ -85,8 +85,9 @@
                     <input name="pass" id="pass" class="form-control" type="password" placeholder="*****">
                 </div>
                 <div class="form-group mt-3">
-                    <select class="form-select mt-3 mul-select" name="type">
-                        <option class="dropdown-menu" value="type">Registration as a</option>
+                   <!--- <label for="type">পদবী</label>  -->
+                    <select class="form-select mul-select" name="type">
+                        <option class="dropdown-menu" value="type">পদবী বাছাই করুন</option>
                         <option value="general">আবেদনকারী</option>
                         <option value="recommendingOfficer">সুপারিশকারী কর্মকর্তা</option>
                         <option value="accountOfficer">কর্মকর্তা (হিসাব দপ্তর)</option>
