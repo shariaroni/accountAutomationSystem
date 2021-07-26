@@ -4,6 +4,11 @@
     session::checksession();
 ?>
 <?php
+    if (isset($_GET['action']) && $_GET['action'] == "logout") {
+        session::distroy(); 
+    }
+?>
+<?php
     $db = mysqli_connect("localhost","root","","db_lr");
 
     if (isset($_POST['submit'])) {
@@ -56,10 +61,10 @@
                         <a class="nav-link" href="home.php">হোম</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="profile.php?id=<?php echo $id; ?>">প্রোফাইল</a>
+                        <a class="nav-link" href="profile.php?id=<?php echo $id; ?>">প্রোফাইল</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" href="?action=logout">প্রস্থান</a>
+                        <a class="nav-link" href="?action=logout">প্রস্থান</a>
                     </li>
                     <?php }else{ ?>
                     <li class="nav-item">

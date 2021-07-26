@@ -65,7 +65,7 @@
         <div class="card mb-3" style="max-width: 700px; margin: 0 auto">
             <div class="row g-0">
                 <div class="col-md-4">
-                <img src="images/man.png" class="img-fluid rounded-start p-2" alt="...">
+                <img src="images/man.png" class="img-fluid rounded-start p-2">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
@@ -82,7 +82,13 @@
                             </span>
                         </h5>
                         <p class="card-text">
-                          আবেদনকারী     
+                          আবেদনকারী
+                            <?php
+                                $type = session::get("type");
+                                    if (isset($type)) {
+                                        echo $type;
+                                    }
+                            ?>     
                         </p>
                         <a class="btn btn-warning" href="budgetSeleaction.php">
                         বাজেট আবেদন করুন</a>

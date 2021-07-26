@@ -19,11 +19,11 @@
     $db = mysqli_connect("localhost","root","","db_lr");
 
     if (isset($_POST['submit'])) {
-        $office_head = $_POST['office_head'];
+        $recommending = $_POST['recommending'];
         $need = $_POST['need'];
         $value = $_POST['value'];
 
-        $query = "INSERT INTO generalinformation (office_head, need, value) VALUES ('$office_head', '$need', '$value')";
+        $query = "INSERT INTO generalinformation (recommending, need, value) VALUES ('$recommending', '$need', '$value')";
         
         $run = mysqli_query($db, $query);
         if ($run) {
@@ -91,8 +91,8 @@
                 সুপারিশের আবেদন করুন
             </div>
             <div style="max-width: 400px; margin: 0 auto">
-                <select class="form-select" name="month">
-                    <option class="dropdown-menu" value="month">সুপারিশকারী কর্মকর্তা বাছাই করুন</option>
+                <select class="form-select" name="recommending">
+                    <option class="dropdown-menu" value="recommending null">সুপারিশকারী কর্মকর্তা বাছাই করুন</option>
                     <option value="office_head">অফিস/বিভাগীয় প্রধান</option>
                     <option value="Mr. A">Mr. A</option>
                     <option value="Mr. B">Mr. B</option>

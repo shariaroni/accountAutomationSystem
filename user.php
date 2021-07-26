@@ -9,7 +9,9 @@ class user{
     public function __construct(){
         $this->db = new database();
     }
-
+/*----------------------------------------
+        user registration start
+------------------------------------------*/
     public function userRegistration($data)
     {
         $name   = $data['name'];
@@ -129,6 +131,13 @@ class user{
             return false;
         }
     }
+/*----------------------------------------
+        user registration end
+------------------------------------------*/
+
+/*----------------------------------------
+            user login start
+------------------------------------------*/
 
     public function getLoginUser($email,$pass,$type){
         $sql = "SELECT * FROM tabel_user WHERE email = :email AND pass = :pass AND type = :type LIMIT 1";
@@ -179,14 +188,39 @@ class user{
             session::set("id", $result->id);
             session::set("name", $result->name);
             session::set("loginmgs", "<div class='alert alert-success'><strong>Success</strong>You are LoggedIn.</div>");
-            header("Location: index.php");
+            if ($row['type']=='general') {
+                header("Location: index.php");
+            }
+            if ($row['type']=='recommendingOfficer') {
+                header("Location: recommendingOfficerIndex.php");
+            }
+            if ($row['type']=='accountOfficer') {
+                header("Location: accountOfficerIndex.php");
+            }
+            if ($row['type']=='deputyDirector') {
+                header("Location: deputyDirectorIndex.php");
+            }
+            if ($row['type']=='director') {
+                header("Location: directorIndex.php");
+            }
+            if ($row['type']=='treasure') {
+                header("Location: treasureIndex.php");
+            }
+            if ($row['type']=='vc') {
+                header("Location: vcSirIndex.php");
+            }
+            if ($row['type']=='admin') {
+                header("Location: adminIndex.php");
+            }
         }
         else{
             $mgs = "<div class='alert alert-danger'><strong>Error!</strong> Email or password is invalid!</div>";
             return $mgs;
         }
     }
-
+/*----------------------------------------
+            user login End
+------------------------------------------*/
     public function getuserdata(){
         $sql = "SELECT * FROM tabel_user ORDER BY id ASC";
         $query = $this->db->pdo->prepare($sql);
