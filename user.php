@@ -266,7 +266,7 @@ class user{
             return $mgs;
         }
     }
-    
+
     public function updateAdminVerificationStatus($id){
         $sql = "UPDATE tabel_user SET admin_verification_status = 1 WHERE id= :id LIMIT 1";
         $query = $this->db->pdo->prepare($sql);
