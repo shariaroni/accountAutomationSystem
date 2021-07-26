@@ -13,7 +13,7 @@
 	$result = $conn->query("SELECT * FROM tabel_user WHERE admin_verification_status = 0 LIMIT $start, $limit");
 	$users = $result->fetch_all(MYSQLI_ASSOC);
 
-	$result1 = $conn->query("SELECT count(id) AS id FROM tabel_user");
+	$result1 = $conn->query("SELECT count(id) AS id FROM tabel_user WHERE admin_verification_status = 0");
 	$custCount = $result1->fetch_all(MYSQLI_ASSOC);
 	$total = $custCount[0]['id'];
 	$pages = ceil( $total / $limit );
@@ -32,8 +32,13 @@
         $userId = $_POST['check'];
         foreach($userId as $key => $id){
     		$user->updateAdminVerificationStatus($id);
-        }
-    }
+        }?>
+        <script>
+            window.location.href = 'adminIndex.php';
+        </script>
+<?php }
+
+    
  ?>
 
 <!DOCTYPE html>
@@ -42,7 +47,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>নিবন্ধন</title>
+    <title>Admin Index</title>
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </head>
@@ -56,19 +61,19 @@
                         <nav aria-label="...">
                             <ul class="pagination">
                                 <li class="page-item disabled">
-                                    <a href="adminVerification.php?page=<?= $Previous; ?>" aria-label="Previous">
+                                    <a href="adminIndex.php?page=<?= $Previous; ?>" aria-label="Previous">
                                         <span class = "page-link"> Previous </span>
                                     </a>
                                 </li>
                                 <?php for($i = 1; $i<= $pages; $i++) : ?>
                                     <li class="page-item">
-                                        <a href="adminVerification.php?page=<?= $i; ?>"> 
+                                        <a href="adminIndex.php?page=<?= $i; ?>"> 
                                             <span class = "page-link"> <?= $i; ?> </span>
                                         </a>
                                     </li>
                                 <?php endfor; ?>
                                 <li class="page-item disabled">
-                                    <a href="adminVerification.php?page=<?= $Previous; ?>" aria-label="Previous">
+                                    <a href="adminIndex.php?page=<?= $Next; ?>" aria-label="Next">
                                         <span class = "page-link"> Next </span>
                                     </a>
                                 </li>
