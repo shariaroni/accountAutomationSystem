@@ -4,6 +4,11 @@
     session::checksession();
 ?>
 <?php
+    if (isset($_GET['action']) && $_GET['action'] == "logout") {
+        session::distroy(); 
+    }
+?>
+<?php
     $db = mysqli_connect("localhost","root","","db_lr");
 
     if (isset($_POST['submit'])) {
