@@ -90,44 +90,17 @@
             <div style="margin-top: 50px;" class="h3 text-center">
                 সুপারিশের আবেদন করুন
             </div>
-            <style>
-                .mul-select{
-                    width: 100%;
-                }
-            </style>
-            <div  class="container-fluid h-100 bg-light text-dark">
-                <div class="row justify-content-center align-items-center h-100">
-                    <div class="col col-sm-6 col-md-6 col-lg-4 col-xl-3">
-                        <div class="form-group">
-                            <select class="form-select mt-3 mul-select" multiple="true">
-                                <option value="office_head">অফিস/বিভাগীয় প্রধান</option>
-                                <option value="Mr. A">Mr. A</option>
-                                <option value="Mr. B">Mr. B</option>
-                                <option value="Mr. C">Mr. C</option>
-                                <option value="Mr. D">Mr. D</option>
-                                <option value="Mr. E">Mr. E</option>
-                                <option value="Mr. F">Mr. F</option>
-                                <option value="Mr. G">Mr. G</option>
-                                <option value="Mr. H">Mr. H</option>
-                                <option value="Mr. I">Mr. I</option>
-                                <option value="Mr. X">Mr. X</option>
-                                <option value="Mr. Y">Mr. Y</option>
-                                <option value="Mr. Z">Mr. Z</option>
-                                <option value="Mr. M">Mr. M</option>
-                            </select>
-                        </div> 
-                    </div>
-                </div>
-            </div>    
-            <script>
-                $(document).ready(function(){
-                    $(".mul-select").select2({
-                        placeholder     : "অন্যান্য(বাছাই করুন)",
-                        tags            : true,
-                        tokenSeparators : ['/',',',';'," "] 
-                    });
-                })
-            </script>
+            <div style="max-width: 400px; margin: 0 auto">
+                <select class="form-select" name="month">
+                    <option class="dropdown-menu" value="month">সুপারিশকারী কর্মকর্তা বাছাই করুন</option>
+                    <option value="office_head">অফিস/বিভাগীয় প্রধান</option>
+                    <option value="Mr. A">Mr. A</option>
+                    <option value="Mr. B">Mr. B</option>
+                    <option value="Mr. C">Mr. C</option>
+                    <option value="Mr. D">Mr. D</option>
+                    <option value="Mr. E">Mr. E</option>
+                </select>
+            </div>
             <div class="h3 text-center mt-5">
                 অগ্রীম টাকার প্রয়োজনীয়তা
             </div>
