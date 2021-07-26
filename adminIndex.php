@@ -117,7 +117,7 @@
 </body>
 </html>
 
-<!-- Oni Bro Starts haha
+<!-- Oni Bro Starts
 <?php
     include 'user.php';
     include 'header.php';

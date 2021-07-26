@@ -173,11 +173,13 @@ class user{
         $res =  $conn->query($sql);
         $row = $res->fetch_assoc();
         $verification_status = $row['verification_status'];
-
-        if ($verification_status == false) {
-            $mgs = "<div class='alert alert-danger'><strong>Error!</strong> Please verify your email first.</div>";
+        $admin_verification_status = $row['admin_verification_status'];
+        if ($verification_status == false || $admin_verification_status == false) {
+            $mgs = "<div class='alert alert-danger'><strong>Error!</strong> Account is not verified yet.</div>";
             return $mgs;
         }
+
+
 
         $result = $this->getLoginUser($email, $pass);
         if ($result) {
