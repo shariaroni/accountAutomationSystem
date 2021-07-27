@@ -283,6 +283,21 @@ class user{
             return $mgs;
         }
     }
+    
+    public function updateAdminVerificationRemove($id){
+        $sql = "UPDATE tabel_user SET admin_verification_status = 0 WHERE id= :id LIMIT 1";
+        $query = $this->db->pdo->prepare($sql);
+        $query->bindValue(':id',$id);
+        $result = $query->execute();
+        if ($result) {
+            $mgs = "<div class='alert alert-success'><strong>Success</strong> User data updated seccessfully.</div>";
+            return $mgs;
+        }
+        else{
+            $mgs = "<div class='alert alert-danger'><strong>Error!</strong>Sorry! User data not updated!</div>";
+            return $mgs;
+        }
+    }
 }
 
 ?>
