@@ -37,7 +37,7 @@
                                 <li><a class="dropdown-item" href="#">রাহিদুল ইসলাম রূপক</a></li>
                                 <li><a class="dropdown-item" href="#">সামিউল বাসার রবিন</a></li>
                                 <li><a class="dropdown-item" href="#">জেড. এম. আসিফ জামিল</a></li>
-                                <li><a class="dropdown-item" href="#">লতিফুর ইসলাম জিহাদ</a></li>
+                                <li><a class="dropdown-item" href="https://github.com/zihad18">লতিফুর রহমান জিহাদ</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="https://shariaroni.wordpress.com/">শাহরিয়ার অনি</a></li>
                             </ul>
