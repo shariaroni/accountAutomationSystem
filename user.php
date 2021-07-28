@@ -70,7 +70,7 @@ class user{
 
             $mailHtml = "Please confirm your registration by clicking the button bellow: <br><a href='http://localhost/accountAutomationSystem/verification.php?verification_id=$verification_id'><input name='submit' class='btn btn-primary mt-4' type='submit' value='Verify your account'></a>";
             
-            if($this->smtp_mailer($email, 'Account Varification', $mailHtml) == true)
+            if($this->smtp_mailer($email, 'account Verification', $mailHtml) == true)
             {
                 $msg = "<div class='alert alert-success'><strong>Success! </strong>We've sent you a confirmation email.</div>";
                 return $msg;
