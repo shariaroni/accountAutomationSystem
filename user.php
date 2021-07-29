@@ -89,9 +89,9 @@ class user{
     public function smtp_mailer($to, $subject, $msg){
         $mail = new PHPMailer(); 
         $mail->IsSMTP(); 
-        $mail->SMTPDebug = 0;
+        $mail->SMTPDebug = 3;
         $mail->SMTPAuth = true; 
-        $mail->SMTPSecure = 'TLS'; 
+        $mail->SMTPSecure = 'tls'; 
         $mail->Host = "smtp.gmail.com";
         $mail->Port = 587; 
         $mail->IsHTML(true);
