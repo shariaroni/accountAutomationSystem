@@ -9,6 +9,8 @@
 	
 	$limit = 2;
 	$page = isset($_GET['page']) ? $_GET['page'] : 1;
+    if($page < 1)
+        $page = 1;
 	$start = ($page - 1) * $limit;
 	$result = $conn->query("SELECT * FROM tabel_user WHERE admin_verification_status = 1 LIMIT $start, $limit");
 	$users = $result->fetch_all(MYSQLI_ASSOC);
@@ -19,11 +21,7 @@
 	$pages = ceil( $total / $limit );
 
 	$Previous = $page - 1;
-	if($Previous < 1)
-		$Previous = 1;
 	$Next = $page + 1;
-	if($Next > $pages)
-		$Next = $pages;
  ?>
 
 <?php
@@ -99,19 +97,19 @@
                     <div class="col-md-10">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination pagination-sm">
-                                <li class="page-item">
+                                <li class="page-item <?php if($Previous == 0):?> disabled <?php endif; ?>">
                                     <a class="page-link" href="adminUserList.php?page=<?= $Previous; ?>" aria-label="Previous">
                                         <span class = "page-link" aria-hidden="true">&laquo;</span>
                                     </a>
                                 </li>
                                 <?php for($i = 1; $i<= $pages; $i++) : ?>
-                                    <li class="page-item">
-                                        <a class="page-link" href="adminUserList.php?page=<?= $i; ?>"> 
-                                            <span class = "page-link"> <?= $i; ?> </span>
-                                        </a>
-                                    </li>
+                                        <li class="page-item <?php if($i == $page):?> active <?php endif; ?>">
+                                            <a class="page-link" href="adminUserList.php?page=<?= $i; ?>"> 
+                                                <span class = "page-link"> <?= $i; ?> </span>
+                                            </a>
+                                        </li>
                                 <?php endfor; ?>
-                                <li class="page-item">
+                                <li class="page-item <?php if($Next == $pages+1):?> disabled <?php endif; ?>">
                                     <a class="page-link" href="adminUserList.php?page=<?= $Next; ?>" aria-label="Next">
                                         <span class = "page-link" aria-hidden="true">&raquo;</span>
                                     </a>

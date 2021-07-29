@@ -89,7 +89,7 @@ class user{
     public function smtp_mailer($to, $subject, $msg){
         $mail = new PHPMailer(); 
         $mail->IsSMTP(); 
-        $mail->SMTPDebug = 3;
+        $mail->SMTPDebug = 0;
         $mail->SMTPAuth = true; 
         $mail->SMTPSecure = 'tls'; 
         $mail->Host = "smtp.gmail.com";
@@ -113,10 +113,6 @@ class user{
         }else{
             return true;
         }
-    }
-    public function prepareData($conn, $data)
-    {
-        return mysqli_real_escape_string($conn, stripslashes(htmlspecialchars($data)));
     }
 
     public function emailCheck($email){
