@@ -70,7 +70,7 @@ class user{
 
             $mailHtml = "Please confirm your registration by clicking the button bellow: <br><a href='http://localhost/accountAutomationSystem/verification.php?verification_id=$verification_id'><input name='submit' class='btn btn-primary mt-4' type='submit' value='Verify your account'></a>";
             
-            if($this->smtp_mailer($email, 'Account Varification', $mailHtml) == true)
+            if($this->smtp_mailer($email, 'account Verification', $mailHtml) == true)
             {
                 $msg = "<div class='alert alert-success'><strong>Success! </strong>We've sent you a confirmation email.</div>";
                 return $msg;
@@ -91,7 +91,7 @@ class user{
         $mail->IsSMTP(); 
         $mail->SMTPDebug = 0;
         $mail->SMTPAuth = true; 
-        $mail->SMTPSecure = 'TLS'; 
+        $mail->SMTPSecure = 'tls'; 
         $mail->Host = "smtp.gmail.com";
         $mail->Port = 587; 
         $mail->IsHTML(true);
@@ -113,10 +113,6 @@ class user{
         }else{
             return true;
         }
-    }
-    public function prepareData($conn, $data)
-    {
-        return mysqli_real_escape_string($conn, stripslashes(htmlspecialchars($data)));
     }
 
     public function emailCheck($email){

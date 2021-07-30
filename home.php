@@ -32,12 +32,12 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">যোগাযোগ</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">ফয়সাল নির্ঝর</a></li>
-                                <li><a class="dropdown-item" href="#">মোঃ শাহাবুদ্দিন</a></li>
-                                <li><a class="dropdown-item" href="#">রাহিদুল ইসলাম রূপক</a></li>
-                                <li><a class="dropdown-item" href="#">সামিউল বাসার রবিন</a></li>
+                                <li><a class="dropdown-item" href="https://github.com/faisaljabet">ফয়সাল নির্ঝর</a></li>
+                                <li><a class="dropdown-item" href="https://github.com/sujoncep">মোঃ শাহাবুদ্দিন</a></li>
+                                <li><a class="dropdown-item" href="https://github.com/Rahedul">রাহিদুল ইসলাম রূপক</a></li>
+                                <li><a class="dropdown-item" href="https://github.com/samiul-basher">সামিউল বাসার রবিন</a></li>
                                 <li><a class="dropdown-item" href="#">জেড. এম. আসিফ জামিল</a></li>
-                                <li><a class="dropdown-item" href="#">লতিফুর ইসলাম জিহাদ</a></li>
+                                <li><a class="dropdown-item" href="https://github.com/zihad18">লতিফুর রহমান জিহাদ</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="https://shariaroni.wordpress.com/">শাহরিয়ার অনি</a></li>
                             </ul>

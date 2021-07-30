@@ -19,11 +19,7 @@
 	$pages = ceil( $total / $limit );
 
 	$Previous = $page - 1;
-	if($Previous < 1)
-		$Previous = 1;
 	$Next = $page + 1;
-	if($Next > $pages)
-		$Next = $pages;
  ?>
 
 <?php
@@ -98,19 +94,19 @@
                     <div class="col-md-10">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination pagination-sm">
-                                <li class="page-item">
+                                <li class="page-item<?php if($Previous == 0):?> disabled <?php endif; ?>">
                                     <a class="page-link" href="adminVerification.php?page=<?= $Previous; ?>" aria-label="Previous">
                                         <span class = "page-link" aria-hidden="true">&laquo;</span>
                                     </a>
                                 </li>
                                 <?php for($i = 1; $i<= $pages; $i++) : ?>
-                                    <li class="page-item">
+                                    <li class="page-item <?php if($i == $page):?> active <?php endif; ?>">
                                         <a class="page-link" href="adminVerification.php?page=<?= $i; ?>"> 
                                             <span class = "page-link"> <?= $i; ?> </span>
                                         </a>
                                     </li>
                                 <?php endfor; ?>
-                                <li class="page-item">
+                                <li class="page-item <?php if($Next == $pages+1):?> disabled <?php endif; ?>">
                                     <a class="page-link" href="adminVerification.php?page=<?= $Next; ?>" aria-label="Next">
                                         <span class = "page-link" aria-hidden="true">&raquo;</span>
                                     </a>
