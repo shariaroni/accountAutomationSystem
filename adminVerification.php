@@ -1,8 +1,15 @@
 <?php
-    include 'header.php';
     include 'user.php';
+    include 'header.php';
+    session::checksession();
 ?>
-
+<?php
+    $loginmgs = session::get("loginmgs");
+    if (isset($loginmgs)) {
+        echo $loginmgs;
+    }
+    session::set("loginmgs",NULL);
+?>
 <?php
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 	$conn = mysqli_connect('localhost', 'root', '', 'db_lr');
@@ -37,6 +44,12 @@
     
  ?>
 
+<?php
+    if (isset($_GET['action']) && $_GET['action'] == "logout") {
+        session::distroy(); 
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,40 +62,9 @@
 </head>
 <body>
 
-    <!-- Navbar start -->
-    <div class="container">
-        <h1>
-            <strong>Account</strong> Automation System
-        </h1>
-        <nav class="navbar navbar-expand-sm navbar-light" style="background-color: #e3f2fd;">
-            <div class="container-fluid container">
-                <a class="navbar-brand" href="https://just.edu.bd/"><img src="images/logo.png" alt="JUST logo" width="30" height="30" class="d-inline-block align-text-top">
-                        যবিপ্রবি</a>
-                <ul class="navbar-nav mt-2">
-                    <?php
-                        $id = session::get("id");
-                        $userlogin = session::get("login");
-                        if ($userlogin == true) {
-                    ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="home.php">হোম</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="profile.php?id=<?php echo $id; ?>">প্রোফাইল</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="?action=logout">প্রস্থান</a>
-                    </li>
-                    <?php }else{ ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="home.php">Home</a>
-                    </li>
-                    <?php } ?>
-                </ul>
-            </div>
-        </nav>
-    </div>
-    <!-- Navbar End -->
+    <?php
+        include 'navbar.php';
+    ?>
     
     <div class="panel-heading">
             <h2 class="text-center mt-3">অননুমোদিত ব্যবহারকারী</h2>
@@ -90,6 +72,7 @@
     <div class="container">
         <div style="margin: 0 auto">
             <form action="" method="POST">
+                <!-- Pagination Start -->
                 <div class="row">
                     <div class="col-md-10">
                         <nav aria-label="Page navigation example">
@@ -115,6 +98,9 @@
                         </nav>
                     </div>
                 </div>
+                <!-- Pagination End -->
+
+                <!-- Table Start -->
                 <div style="height: 400px; overflow-y: auto;">
                     <table id="" class="table table-striped table-bordered">
                         <thead class="table-success text-center">
@@ -134,7 +120,7 @@
                                     <td><?= $user['name']; ?></td>
                                     <td class="text-center"><?= $user['mobile']; ?></td>
                                     <td><?= $user['email']; ?></td>
-                                    <td><?= $user['type']; ?></td>
+                                    <td class="text-center"><?= $user['type']; ?></td>
                                     <td class="text-center">
                                         <input class="form-check-input" type="checkbox" name='check[]' value="<?= $user['id']; ?>" />
                                     </td>
@@ -147,6 +133,7 @@
                         <input class="btn btn-success mt-3" type="submit" name="submit" value="আপডেট">
                     </p>
                 </div>
+                <!-- Table End -->
             </form>
         </div>
     </div>
