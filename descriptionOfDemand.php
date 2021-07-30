@@ -24,16 +24,26 @@
         $price = $_POST['price'];
         $item_total = $_POST['item_total'];
         $total = $_POST['total'];
-        $query = "INSERT INTO demand (item,qty,price,item_total,total) VALUES ('$item','$qty','$price','$item_total','$total')";
-        
-        $run = mysqli_query($db, $query);
-        if ($run) {
-            $_SESSION['status'] = "Data Inserted Successfully";
-            header("Location: generalInformation.php");
+        $need = $_POST['need'];
+        $advanceAmount = $_POST['advanceAmount'];
+
+        if($total < $advanceAmount)
+        {
+            $errorMsg =  "<div class='alert alert-danger'><strong>অগ্রীম চাহিদা মোট চাহিদার তুলনায় বেশি</strong></div>";
         }
-        else{
-            $_SESSION['status'] = "Data Not Inserted Successfully!";
-            header("Location: descriptionOfDemand.php");
+        else
+        {
+            $query = "INSERT INTO demand (item, qty, price, item_total, total, need, advanceAmount) VALUES ('$item', '$qty', '$price', '$item_total', '$total', '$need', '$advanceAmount')";
+        
+            $run = mysqli_query($db, $query);
+            if ($run) {
+                $_SESSION['status'] = "Data Inserted Successfully";
+                header("Location: generalInformation.php");
+            }
+            else{
+                $_SESSION['status'] = "Data Not Inserted Successfully!";
+                header("Location: descriptionOfDemand.php");
+            }
         }
     }
 ?>
@@ -95,6 +105,11 @@
             চাহিদার বিবারণী ছকঃ 
     </div>
         <div class="container">
+           <?php
+                if (isset($errorMsg)) {
+                    echo $errorMsg;
+                }
+            ?>
             <form action="descriptionOfDemand.php" method="POST" name="cart">
                 <table class="table table-striped table-bordered table-hover" name="cart">
                     <tr class="table-success text-center">
@@ -122,6 +137,24 @@
                         <td class="text-end" colspan="99"><i name="add" class="bi bi-plus-circle"></i></td>
                     </tr>
                 </table>
+
+                <div class="h3 text-center mt-5">
+                    অগ্রীম টাকার প্রয়োজনীয়তা
+                </div>
+                <div style="max-width: 400px; margin: 0 auto">
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-text">
+                            <input class="form-check-input mt-0" id="money_yes" name="need" type="radio" value="yes" aria-label="Radio button for following text input">
+                            <label class="form-check-label m-1" for="money_yes">আছে</label>
+                        </div>
+                        <input name="advanceAmount" type="text" class="form-control" aria-label="Text input with radio button" placeholder="পরিমাণ">
+                        <div class="input-group-text mx-1">
+                            <input class="form-check-input mt-0" id="money_no" name="need" type="radio" value="no" aria-label="Radio button for following text input">
+                            <label class="form-check-label m-1" for="money_no">নেই</label>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="text-center mt-4">
                     <input type="submit" class="btn btn-success" name="submit" value="নিশ্চিত করুন">
                 </div>

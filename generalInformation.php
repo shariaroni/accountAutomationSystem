@@ -20,10 +20,8 @@
 
     if (isset($_POST['submit'])) {
         $recommending = $_POST['recommending'];
-        $need = $_POST['need'];
-        $value = $_POST['value'];
 
-        $query = "INSERT INTO generalinformation (recommending, need, value) VALUES ('$recommending', '$need', '$value')";
+        $query = "INSERT INTO generalinformation (recommending) VALUES ('$recommending')";
         
         $run = mysqli_query($db, $query);
         if ($run) {
@@ -68,23 +66,9 @@
                     <option value="Mr. E">Mr. E</option>
                 </select>
             </div>
-            <div class="h3 text-center mt-5">
-                অগ্রীম টাকার প্রয়োজনীয়তা
-            </div>
-            <div style="max-width: 400px; margin: 0 auto">
-                <div class="input-group input-group-sm">
-                    <div class="input-group-text">
-                        <input class="form-check-input mt-0" id="money_yes" name="need" type="radio" value="yes" aria-label="Radio button for following text input">
-                        <label class="form-check-label m-1" for="money_yes">আছে</label>
-                    </div>
-                    <input name="value" type="text" class="form-control" aria-label="Text input with radio button" placeholder="পরিমাণ">
-                    <div class="input-group-text mx-1">
-                        <input class="form-check-input mt-0" id="money_no" name="need" type="radio" value="no" aria-label="Radio button for following text input">
-                        <label class="form-check-label m-1" for="money_no">নেই</label>
-                    </div>
-                </div>
-            </div>
+            
             <input name="submit" class="btn btn-success m-3" type="submit" value="নিশ্চিত করুন">
+        
         </form>
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
