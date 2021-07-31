@@ -48,11 +48,11 @@
     <?php
         include 'navbar.php';
     ?>
-    <div class="container" style="max-width: 700px;">
+    <div class="container" style="max-width: 1000px;">
         <form action="budgetSeleaction.php" method="POST">
-            <div class="row">
+            <div style="margin-top: 55px;" class="row">
                 <div class="col-6">
-                        <h4 class="text-center mt-5">
+                        <h4 class="text-center">
                             বাজেটের বিভাগ বাছাই করুন
                         </h4>
                     <div style="max-width: 200px; margin: 0 auto">
@@ -71,7 +71,25 @@
                     </div>
                 </div>
                 <div class="col-6">
-                    <h4 class="text-center mt-5">
+                    <div class="h4 text-center">
+                        সুপারিশের আবেদন করুন
+                    </div>
+                    <div style="max-width: 400px; margin: 0 auto">
+                        <select class="form-select mt-3" name="recommending">
+                            <option class="dropdown-menu" value="recommending null">সুপারিশকারী কর্মকর্তা বাছাই করুন</option>
+                            <option value="office_head">অফিস/বিভাগীয় প্রধান</option>
+                            <option value="Mr. A">Mr. A</option>
+                            <option value="Mr. B">Mr. B</option>
+                            <option value="Mr. C">Mr. C</option>
+                            <option value="Mr. D">Mr. D</option>
+                            <option value="Mr. E">Mr. E</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-6">
+                    <h4 class="text-center">
                         বাজেটের প্রকৃতি বাছাই করুন
                     </h4>
                     <div style="max-width: 200px; margin: 0 auto">
@@ -89,15 +107,16 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-6">
+                    <h4 class="text-center">
+                        বাজেটের প্রয়োজনীয়তা বর্ননা করুন
+                    </h4>
+                    <div style="max-width: 400px; margin: 0 auto" class="form-group mt-3">
+                        <textarea class="form-control" name="comment" cols="70" rows="4" placeholder="লিখুন..."></textarea>
+                    </div>
+                </div>
             </div>
-        <h4 class="text-center mt-5 my-4">
-            বাজেটের প্রয়োজনীয়তা বর্ননা করুন
-        </h4>
-        <div style="max-width: 650px; margin: 0 auto">
-            <div class="form-group mt-3">
-                <textarea class="form-control" name="comment" cols="71" rows="7" placeholder="লিখুন..."></textarea>
-            </div>
-            <div class="text-center form-group m-3">
+            <div class="text-center form-group m-5">
                 <input class="btn btn-success" type="submit" name="submit" value="নিশ্চিত করুন">
             </div>
         </form>
@@ -111,7 +130,6 @@
                 </li>
                 <li class="page-item active"><a class="page-link" href="budgetSeleaction.php">1</a></li>
                 <li class="page-item"><a class="page-link" href="descriptionOfDemand.php">2</a></li>
-                <li class="page-item"><a class="page-link" href="generalInformation.php">3</a></li>
                 <li class="page-item">
                     <a class="page-link" href="descriptionOfDemand.php" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
