@@ -157,6 +157,35 @@
 
                 <div class="text-center mt-4">
                     <input type="submit" class="btn btn-success" name="submit" value="নিশ্চিত করুন">
+
+                    <!-- Modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">নিশ্চিত করুন</button>
+
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">বাজেট বিবারণী</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                    <div class="modal-dialog modal-dialog-scrollable">
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi cumque dolorum, ipsam fugiat nisi amet nobis eaque delectus quo, sequi architecto nihil quidem ipsa exercitationem aliquid perferendis necessitatibus. Omnis voluptatum, voluptatem voluptates temporibus dicta possimus reprehenderit ducimus eius ad perferendis culpa quasi ipsa ex pariatur cumque provident nam suscipit at?</p>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="message-text" class="col-form-label" for="cpass">পাসওয়ার্ড নিশ্চিত করুন</label>
+                                        <input type="password" class="form-control" id="cpass">
+                                    </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">বাতিল করুন</button>
+                                    <button type="submit" class="btn btn-success">নিশ্চিত করুন</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </form>
             <nav aria-label="Page navigation example">
