@@ -21,7 +21,7 @@ class user{
         $type   = $data['type'];
         $verification_status = false;
 
-        $chk_email = $this->emailCheck($email);
+        $chk_email = $this->emailAndTypeCheck($email, $type);
 
         if ($name == "" or $email == "" or $mobile == "" or $pass == "" or $type == "") {
             $mgs = "<div class='alert alert-danger'><strong>Error!</strong> Field must not be Empty</div>";
@@ -33,13 +33,13 @@ class user{
             return $mgs;
         }
 
-        if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+        /*if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
             $mgs = "<div class='alert alert-danger'><strong>Error! </strong>The email address is already Exist!</div>";
             return $mgs;
-        }
+        } */
 
         if ($chk_email == true) {
-            $mgs = "<div class='alert alert-danger'><strong>Error! </strong>The email address is not valid!</div>";
+            $mgs = "<div class='alert alert-danger'><strong>Error! </strong>The email address is already exists with this role!</div>";
             return $mgs;
         }
 
@@ -58,11 +58,11 @@ class user{
                 die("Connection failed: " . mysqli_connect_error());
             }
 
-            $sql = "SELECT * FROM tabel_user WHERE email = '$email'";
+            $sql = "SELECT * FROM tabel_user WHERE email = '$email' and type = '$type'";
             $res =  $conn->query($sql);
             $row = $res->fetch_assoc();
             $id = $row['id'];
-            $str = $row['id'] . $row['email'] . $row['name'];
+            $str = $row['id'] . $email . $name . $type;
             $verification_id = hash('md5', $str);
             $sql = "UPDATE tabel_user set verification_id='$verification_id' where id='$id'";
             $conn->query($sql);
@@ -119,6 +119,20 @@ class user{
         $sql = "SELECT email FROM tabel_user WHERE email = :email";
         $query = $this->db->pdo->prepare($sql);
         $query->bindValue(':email',$email);
+        $query->execute();
+        if ($query->rowCount()>0) {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public function emailAndTypeCheck($email, $type){
+        $sql = "SELECT * FROM tabel_user WHERE email = :email and type = :type";
+        $query = $this->db->pdo->prepare($sql);
+        $query->bindValue(':email',$email);
+        $query->bindValue(':type',$type);
         $query->execute();
         if ($query->rowCount()>0) {
             return true;
