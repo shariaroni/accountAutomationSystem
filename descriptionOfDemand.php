@@ -3,6 +3,16 @@
     include 'header.php';
     session::checksession();
 ?>
+
+<?php
+    $conn = mysqli_connect('localhost', 'root', '', 'db_lr');
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+    $sql = "SELECT id, name FROM tabel_user WHERE type = 'recommendingOfficer' and verification_status = 1 and admin_verification_status = 1";
+    $recommendingOfficerArray =  $conn->query($sql);
+?>
+
 <?php
     $loginmgs = session::get("loginmgs");
     if (isset($loginmgs)) {
@@ -19,6 +29,11 @@
     $db = mysqli_connect("localhost","root","","db_lr");
 
     if (isset($_POST['submit'])) {
+        $budget_type = $_POST['budget_type'];
+        $budgetType = $_POST['budgetType'];
+        $comment = $_POST['comment'];
+        $user_id = session::get("id");
+        $recommending_officer_id = $_POST['recommending'];
         $item = $_POST['item'];
         $qty = $_POST['qty'];
         $price = $_POST['price'];
@@ -29,21 +44,24 @@
 
         if($total < $advanceAmount)
         {
-            $errorMsg =  "<div class='alert alert-danger'><strong>অগ্রীম চাহিদা মোট চাহিদার তুলনায় বেশি</strong></div>";
+            $msg =  "<div class='alert alert-danger'><strong>অগ্রীম চাহিদা মোট চাহিদার তুলনায় বেশি</strong></div>";
         }
         else
         {
-            $query = "INSERT INTO demand (item, qty, price, item_total, total, need, advanceAmount) VALUES ('$item', '$qty', '$price', '$item_total', '$total', '$need', '$advanceAmount')";
+            $msg =  "<div class='alert alert-success'><strong>আপনার বাজেট আবেদনটি সম্পন্ন হয়েছে</strong></div>";
+            
+            $query = "INSERT INTO demand (budget_type, budgetType, comment, user_id, recommending_officer_id, item, qty, price, item_total, total, need, advanceAmount) VALUES ('$budget_type', '$budgetType', '$comment', $user_id, $recommending_officer_id, '$item', '$qty', '$price', '$item_total', '$total', '$need', '$advanceAmount')";
         
             $run = mysqli_query($db, $query);
-            if ($run) {
-                $_SESSION['status'] = "Data Inserted Successfully";
-                header("Location: generalInformation.php");
-            }
-            else{
-                $_SESSION['status'] = "Data Not Inserted Successfully!";
-                header("Location: descriptionOfDemand.php");
-            }
+
+            // if ($run) {
+            //     $_SESSION['status'] = "Data Inserted Successfully";
+            //     header("Location: descriptionOfDemand.php");
+            // }
+            // else{
+            //     $_SESSION['status'] = "Data Not Inserted Successfully!";
+            //     header("Location: descriptionOfDemand.php");
+            // }
         }
     }
 ?>
@@ -101,16 +119,86 @@
     <?php
         include 'navbar.php';
     ?>
-    <div class="h4 text-center my-4">
-            চাহিদার বিবারণী ছকঃ 
-    </div>
+    
         <div class="container">
            <?php
-                if (isset($errorMsg)) {
-                    echo $errorMsg;
+                if (isset($msg)) {
+                    echo $msg;
                 }
             ?>
             <form action="descriptionOfDemand.php" method="POST" name="cart">
+                <div class="container" style="max-width: 1000px;">
+                    <div style="margin-top: 20px;" class="row">
+                        <div class="col-6">
+                                <h4 class="text-center">
+                                    <strong> বাজেটের বিভাগ বাছাই করুন</strong> 
+                                </h4>
+                            <div style="max-width: 200px; margin: 0 auto">
+                                <div class="form-check mt-3 d-block">
+                                    <input class="form-check-input" id="revenue" name="budget_type" type="radio" value="revenue">
+                                    <label class="form-check-label" for="revenue">রাজস্ব</label>
+                                </div>
+                                <div class="form-check mt-2 d-block">
+                                    <input class="form-check-input" id="development" name="budget_type" type="radio" value="development">
+                                    <label class="form-check-label" for="development">উন্নায়ন</label>
+                                </div>
+                                <div class="form-check mt-2 d-block">
+                                    <input class="form-check-input" id="others" name="budget_type" type="radio" value="others">
+                                    <label class="form-check-label" for="others">অন্যান্য</label>    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="h4 text-center">
+                                <strong> সুপারিশের আবেদন করুন </strong> 
+                            </div>
+                            <div style="max-width: 400px; margin: 0 auto">
+                                <select class="form-select mt-3" name="recommending">
+                                    <option class="dropdown-menu" value="recommending null">সুপারিশকারী কর্মকর্তা বাছাই করুন</option>
+                                    <?php
+                                        foreach($recommendingOfficerArray as $recommendingOfficer):
+                                        ?>  
+                                            <option value = <?php echo $recommendingOfficer['id'] ?> >
+                                                <?php echo $recommendingOfficer['name'] ?>
+                                            </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-6">
+                            <h4 class="text-center">
+                                <strong> বাজেটের প্রকৃতি বাছাই করুন </strong> 
+                            </h4>
+                            <div style="max-width: 200px; margin: 0 auto">
+                                <div class="form-check mt-3 d-block">
+                                    <input class="form-check-input" id="work" name="budgetType" type="radio" value="work">
+                                    <label for="work">কাজ</label>
+                                </div>
+                                <div class="form-check mt-2 d-block">
+                                    <input class="form-check-input" id="service" name="budgetType" type="radio" value="service">
+                                    <label for="service">সেবা</label>
+                                </div>
+                                <div class="form-check mt-2 d-block">
+                                    <input class="form-check-input" id="buying" name="budgetType" type="radio" value="buyingProduct">
+                                    <label for="buying">মালামাল ক্রয়</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <h4 class="text-center">
+                                <strong> বাজেটের প্রয়োজনীয়তা বর্ননা করুন </strong> 
+                            </h4>
+                            <div style="max-width: 400px; margin: 0 auto" class="form-group mt-3">
+                                <textarea class="form-control" name="comment" cols="70" rows="4" placeholder="লিখুন..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="h4 text-center mt-4 mb-3">
+                    <strong> চাহিদার বিবারণী ছকঃ </strong> 
+                </div>
                 <table class="table table-striped table-bordered table-hover" name="cart">
                     <tr class="table-success text-center">
                         <th>কাজ/সেবা/মালামালের বিবারণ</th>
@@ -121,7 +209,6 @@
                     </tr>
                     
                     <tr name="line_items">
-                        
                         <td><input type="text" name="item" class="input form-control"></td>
                         <td><input type="number" name="qty" class="input form-control" value="1"></td>
                         <td><input type="text" name="price" class="input form-control" value="0.00"></td>
@@ -130,16 +217,16 @@
                     </tr>
                     <tr>
                         <td colspan="2">&nbsp;</td>
-                        <td style="text-align: right">সর্বমোট প্রাক্কলিত মূল্য</td>
+                        <td style="text-align: right"> সর্বমোট প্রাক্কলিত মূল্য </td>
                         <td><input type="text" name="total" class="input form-control" value="" jAutoCalc="SUM({item_total})"></td>
                     </tr>
                     <tr>
-                        <td class="text-end" colspan="99"><i name="add" class="bi bi-plus-circle"></i></td>
+                        <td class="text-start" colspan="99"><i name="add" class="bi bi-plus-circle"></i></td>
                     </tr>
                 </table>
 
-                <div class="h3 text-center mt-5">
-                    অগ্রীম টাকার প্রয়োজনীয়তা
+                <div class="h4 text-center mt-5">
+                    <strong> অগ্রীম টাকার প্রয়োজনীয়তা </strong> 
                 </div>
                 <div style="max-width: 400px; margin: 0 auto">
                     <div class="input-group input-group-sm">
@@ -155,10 +242,10 @@
                     </div>
                 </div>
 
-                <div class="text-center mt-4">
-                    <input type="submit" class="btn btn-success" name="submit" value="নিশ্চিত করুন">
+                <div class="text-center mt-3 mb-5">
+                    <input type="submit" class="btn btn-primary" name="submit" value="নিশ্চিত করুন">
 
-                    <!-- Modal -->
+                    <!-- Modal 
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">নিশ্চিত করুন</button>
 
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -185,25 +272,10 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
+                
             </form>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item">
-                        <a class="page-link" href="budgetSeleaction.php" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="budgetSeleaction.php">1</a></li>
-                    <li class="page-item active"><a class="page-link" href="descriptionOfDemand.php">2</a></li>
-                    <li class="page-item disabled">
-                        <a class="page-link" href="generalInformation.php" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
     </body>
