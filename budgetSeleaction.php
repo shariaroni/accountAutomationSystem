@@ -95,13 +95,6 @@
                                         <?php echo $recommendingOfficer['name'] ?>
                                     </option>
                             <?php endforeach; ?>
-                            <!--
-                            <option value="office_head">অফিস/বিভাগীয় প্রধান</option>
-                            <option value="Mr. A">Mr. A</option>
-                            <option value="Mr. B">Mr. B</option>
-                            <option value="Mr. C">Mr. C</option>
-                            <option value="Mr. D">Mr. D</option>
-                            -->
                         </select>
                     </div>
                 </div>
