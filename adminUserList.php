@@ -23,8 +23,8 @@
 	$users = $result->fetch_all(MYSQLI_ASSOC);
 
 	$result1 = $conn->query("SELECT count(id) AS id FROM tabel_user WHERE admin_verification_status = 1");
-	$custCount = $result1->fetch_all(MYSQLI_ASSOC);
-	$total = $custCount[0]['id'];
+	$usertCount = $result1->fetch_all(MYSQLI_ASSOC);
+	$total = $userCount[0]['id'];
 	$pages = ceil( $total / $limit );
 
 	$Previous = $page - 1;

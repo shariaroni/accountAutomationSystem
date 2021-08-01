@@ -1,7 +1,16 @@
 <?php
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     include 'user.php';
     include 'header.php';
+
     session::checksession();
+    
+    $conn = mysqli_connect('localhost', 'root', '', 'db_lr');
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+    $sql = "SELECT id, name FROM tabel_user WHERE type = 'recommendingOfficer' and verification_status = 1 and admin_verification_status = 1";
+    $recommendingOfficerArray =  $conn->query($sql);
 ?>
 <?php
     $loginmgs = session::get("loginmgs");
@@ -15,6 +24,7 @@
         session::distroy(); 
     }
 ?>
+
 <?php
     $db = mysqli_connect("localhost","root","","db_lr");
 
@@ -22,8 +32,9 @@
         $budget_type = $_POST['budget_type'];
         $budgetType = $_POST['budgetType'];
         $comment = $_POST['comment'];
+        $recommending_officer_id = $_POST['recommending'];
 
-        $query = "INSERT INTO budgetseleaction (budget_type,budgetType,comment) VALUES ('$budget_type','$budgetType','$comment')";
+        $query = "INSERT INTO demand (budget_type,budgetType,comment, recommending_officer_id) VALUES ('$budget_type','$budgetType','$comment', '$recommending_officer_id')";
         $run = mysqli_query($db, $query);
 
         if ($run) {
@@ -77,12 +88,20 @@
                     <div style="max-width: 400px; margin: 0 auto">
                         <select class="form-select mt-3" name="recommending">
                             <option class="dropdown-menu" value="recommending null">সুপারিশকারী কর্মকর্তা বাছাই করুন</option>
+                            <?php
+                                foreach($recommendingOfficerArray as $recommendingOfficer):
+                                ?>  
+                                    <option value = <?php echo $recommendingOfficer['id'] ?> >
+                                        <?php echo $recommendingOfficer['name'] ?>
+                                    </option>
+                            <?php endforeach; ?>
+                            <!--
                             <option value="office_head">অফিস/বিভাগীয় প্রধান</option>
                             <option value="Mr. A">Mr. A</option>
                             <option value="Mr. B">Mr. B</option>
                             <option value="Mr. C">Mr. C</option>
                             <option value="Mr. D">Mr. D</option>
-                            <option value="Mr. E">Mr. E</option>
+                            -->
                         </select>
                     </div>
                 </div>

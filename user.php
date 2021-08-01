@@ -170,8 +170,12 @@ class user{
         $row = $res->fetch_assoc();
         $verification_status = $row['verification_status'];
         $admin_verification_status = $row['admin_verification_status'];
-        if ($verification_status == false || $admin_verification_status == false) {
-            $mgs = "<div class='alert alert-danger'><strong>Error!</strong> Account is not verified yet.</div>";
+        if ($verification_status == false) {
+            $mgs = "<div class='alert alert-danger'><strong>Error!</strong> Email is not verified yet.</div>";
+            return $mgs;
+        }
+        if ($admin_verification_status == false) {
+            $mgs = "<div class='alert alert-danger'><strong>Error!</strong> Admin Verification in progress.</div>";
             return $mgs;
         }
 
