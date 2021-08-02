@@ -41,10 +41,19 @@
         <script>
             window.location.href = 'adminUserList.php';
         </script>
-<?php }
+<?php } ?>
+<?php
+	$user = new user();
+	if (isset($_POST['submit']) && !empty($_POST['delete'])) {
+        $userId = $_POST['delete'];
+        foreach($userId as $key => $id){
+    		$user->updateAdminVerificationDelete($id);
+        }?>
+        <script>
+            window.location.href = 'adminUserList.php';
+        </script>
+<?php } ?>
 
-    
- ?>
 <?php
     if (isset($_GET['action']) && $_GET['action'] == "logout") {
         session::distroy(); 
@@ -59,7 +68,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>অনুমোদিত ব্যবহারকারী</title>
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/descriptionOfDemand.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 </head>
 <body>
     <!-- Navbar Start -->
@@ -148,6 +159,7 @@
                                 <th>ইমেইল</th>
                                 <th>পদবী</th>
                                 <th>অনুমোদন বাতিল</th>
+                                <th><i class="bi bi-trash"></i></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -186,6 +198,9 @@
                                     <td class="text-center"><?= $show; ?></td>
                                     <td class="text-center">
                                         <input class="form-check-input" type="checkbox" name='check[]' value="<?= $user['id']; ?>" />
+                                    </td>
+                                    <td class="text-center">
+                                        <input class="form-check-input is-invalid" type="checkbox" name='delete[]' value="<?= $user['id']; ?>" />
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

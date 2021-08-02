@@ -282,7 +282,7 @@ class user{
             return $mgs;
         }
     }
-
+    //----------Admin Verification Update----------
     public function updateAdminVerificationStatus($id){
         $sql = "UPDATE tabel_user SET admin_verification_status = 1 WHERE id= :id LIMIT 1";
         $query = $this->db->pdo->prepare($sql);
@@ -297,7 +297,7 @@ class user{
             return $mgs;
         }
     }
-    
+    //----------Admin Verification Remove----------
     public function updateAdminVerificationRemove($id){
         $sql = "UPDATE tabel_user SET admin_verification_status = 0 WHERE id= :id LIMIT 1";
         $query = $this->db->pdo->prepare($sql);
@@ -309,6 +309,21 @@ class user{
         }
         else{
             $mgs = "<div class='alert alert-danger'><strong>Error!</strong>Sorry! User data not updated!</div>";
+            return $mgs;
+        }
+    }
+    //----------Admin Verification Delete----------
+    public function updateAdminVerificationDelete($id){
+        $sql = "DELETE FROM tabel_user WHERE id= :id LIMIT 1";
+        $query = $this->db->pdo->prepare($sql);
+        $query->bindValue(':id',$id);
+        $result = $query->execute();
+        if ($result) {
+            $mgs = "<div class='alert alert-success'><strong>Success</strong> User data delete seccessfully.</div>";
+            return $mgs;
+        }
+        else{
+            $mgs = "<div class='alert alert-danger'><strong>Error!</strong>Sorry! User data not delete!</div>";
             return $mgs;
         }
     }

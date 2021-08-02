@@ -75,7 +75,7 @@
                         <div styl="max-width: 400px; margin: 0 auto">
                             <div class="btn-group dropend dropdown mb-3">
                                 <button class="btn btn-outline-dark btn-sm dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false"> 
-                                    অ্যাডমিন
+                                    এডমিন
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
                                 <?php

@@ -118,9 +118,14 @@
         </script>
 </head>
 <body>
-    
+
     <!-- Navbar Start -->
     <div class="container">
+        <?php
+            if (isset($msg)) {
+                echo $msg;
+            }
+        ?>
         <h1>
             <strong>Account</strong> Automation System
         </h1>
@@ -161,11 +166,6 @@
     <!-- Navbar End -->
     
         <div class="container">
-           <?php
-                if (isset($msg)) {
-                    echo $msg;
-                }
-            ?>
             <form action="descriptionOfDemand.php" method="POST" name="cart">
                 <div class="container" style="max-width: 1000px;">
                     <div style="margin-top: 20px;" class="row">
