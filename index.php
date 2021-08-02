@@ -67,55 +67,57 @@
                                 </strong>
                             </span>
                         </h5>
-                            <div style="max-width: 400px; margin: 0 auto">
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                                        আবেদনকারী 
-                                    </button>
-                                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                                    <?php
-                                        foreach($typeArray as $aType):
-                                            if($aType['type'] == "general"){
-                                                $show = "আবেদনকারী";
-                                                $link = "index.php";
-                                            }
-                                            if($aType['type'] == "recommendingOfficer"){
-                                                $show = "সুপারিশকারী কর্মকর্তা";
-                                                $link = "recommendingOfficerIndex.php";
-                                            }
-                                            if($aType['type'] == "accountOfficer"){
-                                                $show = "কর্মকর্তা (হিসাব দপ্তর)";
-                                                $link = "accountOfficerIndex.php";
-                                            }
-                                            if($aType['type'] == "deputyDirector"){
-                                                $show = "উপ পরিচালক (হিসাব দপ্তর)";
-                                                $link = "deputyDirectorIndex.php";
-                                            }
-                                            if($aType['type'] == "director"){
-                                                $show = "পরিচালক (হিসাব দপ্তর)";
-                                                $link = "directorIndex.php";
-                                            }
-                                            if($aType['type'] == "treasure"){
-                                                $show = "ট্রেজারার";
-                                                $link = "treasureIndex.php";
-                                            }
-                                            if($aType['type'] == "vc"){
-                                                $show = "ভাইস-চ্যান্সেলর";
-                                                $link = "vcSirIndex.php";
-                                            }
-                                            if($aType['type'] == "admin"){
-                                                $show = "এডমিন";
-                                                $link = "adminIndex.php";
-                                            }
+                        <p class="card-text">
+                        <div style="max-width: 450px; margin: 0 auto">
+                            <div class="btn-group dropend dropdown mb-3">
+                                <button class="btn btn-outline-dark btn-sm dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                    আবেদনকারী 
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                                <?php
+                                    foreach($typeArray as $aType):
+                                        if($aType['type'] == "general"){
+                                            $show = "আবেদনকারী";
+                                            $link = "index.php";
+                                        }
+                                        if($aType['type'] == "recommendingOfficer"){
+                                            $show = "সুপারিশকারী কর্মকর্তা";
+                                            $link = "recommendingOfficerIndex.php";
+                                        }
+                                        if($aType['type'] == "accountOfficer"){
+                                            $show = "কর্মকর্তা (হিসাব দপ্তর)";
+                                            $link = "accountOfficerIndex.php";
+                                        }
+                                        if($aType['type'] == "deputyDirector"){
+                                            $show = "উপ পরিচালক (হিসাব দপ্তর)";
+                                            $link = "deputyDirectorIndex.php";
+                                        }
+                                        if($aType['type'] == "director"){
+                                            $show = "পরিচালক (হিসাব দপ্তর)";
+                                            $link = "directorIndex.php";
+                                        }
+                                        if($aType['type'] == "treasure"){
+                                            $show = "ট্রেজারার";
+                                            $link = "treasureIndex.php";
+                                        }
+                                        if($aType['type'] == "vc"){
+                                            $show = "ভাইস-চ্যান্সেলর";
+                                            $link = "vcSirIndex.php";
+                                        }
+                                        if($aType['type'] == "admin"){
+                                            $show = "এডমিন";
+                                            $link = "adminIndex.php";
+                                        }
 
-                                            if($aType['type'] != "general"):
-                                            ?>
-                                                <li><a class="dropdown-item" href="<?php echo $link?>"> <?php echo $show ?></a></li>
-                                            <?php endif; ?>
-                                    <?php endforeach; ?>
-                                    </ul>
-                                </div>
+                                        if($aType['type'] != "general"):
+                                        ?>
+                                            <li><a class="dropdown-item" href="<?php echo $link?>"> <?php echo $show ?></a></li>
+                                        <?php endif; ?>
+                                <?php endforeach; ?>
+                                </ul>
                             </div>
+                        </div>
+                        </p>
                         <a class="btn btn-warning" href="descriptionOfDemand.php">
                         বাজেট আবেদন করুন</a>
                         <a class="btn btn-secondary" href="">পূর্বের বাজেট আবেদন</a>

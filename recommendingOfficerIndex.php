@@ -72,10 +72,11 @@
                                 </strong>
                             </span>
                         </h5>
+                        <p class="card-text">
                         <div styl="max-width: 400px; margin: 0 auto">
-                            <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false"> 
-                                        সুপারিশকারী কর্মকর্তা
+                            <div class="btn-group dropend dropdown mb-3">
+                                <button class="btn btn-outline-dark btn-sm dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false"> 
+                                    সুপারিশকারী কর্মকর্তা
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
                                 <?php
@@ -121,6 +122,7 @@
                                 </ul>
                             </div>
                         </div>
+                        </p>
                         <a class="btn btn-warning" href="recommendingOfficerBudgetList.php">
                         বাজেট আবেদন সমূহ</a>
                         <a class="btn btn-secondary" href="">পূর্বের বাজেট আবেদন</a>
