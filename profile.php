@@ -17,6 +17,19 @@
         $updateUser = $user->updateUserData($userid, $_POST);
     }
 ?>
+<?php
+    $conn = mysqli_connect('localhost', 'root', '', 'db_lr');
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+    $id = session::get("id");
+    $sql = "SELECT * FROM tabel_user WHERE id = $id ";
+    $res = $conn->query($sql);
+    $row = $res->fetch_assoc();
+    $email = $row['email'];
+    $sql = "SELECT type FROM tabel_user WHERE email = '$email' and verification_status = 1 and admin_verification_status = 1";
+    $typeArray =  $conn->query($sql);
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -44,12 +57,37 @@
                         $id = session::get("id");
                         $userlogin = session::get("login");
                         if ($userlogin == true) {
+                            foreach($typeArray as $aType)
+                            if($aType['type'] == "general"){
+                                $link = "index.php";
+                            }
+                            if($aType['type'] == "recommendingOfficer"){
+                                $link = "recommendingOfficerIndex.php";
+                            }
+                            if($aType['type'] == "accountOfficer"){
+                                $link = "accountOfficerIndex.php";
+                            }
+                            if($aType['type'] == "deputyDirector"){
+                                $link = "deputyDirectorIndex.php";
+                            }
+                            if($aType['type'] == "director"){
+                                $link = "directorIndex.php";
+                            }
+                            if($aType['type'] == "treasure"){
+                                $link = "treasureIndex.php";
+                            }
+                            if($aType['type'] == "vc"){
+                                $link = "vcSirIndex.php";
+                            }
+                            if($aType['type'] == "admin"){
+                                $link = "adminIndex.php";
+                            }
                     ?>
                     <li class="nav-item">
                         <a class="nav-link" href="home.php">হোম</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?id=<?php echo $id; ?>">ইনডেক্স</a>
+                        <a class="nav-link" href="<?php echo $link?>">ইনডেক্স</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="?action=logout">লগ আউট</a>
