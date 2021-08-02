@@ -1,4 +1,5 @@
 <?php
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     include 'user.php';
     include 'header.php';
     session::checksession();
@@ -41,6 +42,7 @@
         $total = $_POST['total'];
         $need = $_POST['need'];
         $advanceAmount = $_POST['advanceAmount'];
+        $date = date("d-m-Y");
 
         if($total < $advanceAmount)
         {
@@ -50,10 +52,10 @@
         {
             $msg =  "<div class='alert alert-success'><strong>আপনার বাজেট আবেদনটি সম্পন্ন হয়েছে</strong></div>";
             
-            $query = "INSERT INTO demand (budget_type, budgetType, comment, user_id, recommending_officer_id, item, qty, price, item_total, total, need, advanceAmount) VALUES ('$budget_type', '$budgetType', '$comment', $user_id, $recommending_officer_id, '$item', '$qty', '$price', '$item_total', '$total', '$need', '$advanceAmount')";
+            $query = "INSERT INTO demand (budget_type, budgetType, comment, user_id, recommending_officer_id, item, qty, price, item_total, total, need, advanceAmount, date) VALUES ('$budget_type', '$budgetType', '$comment', $user_id, $recommending_officer_id, '$item', '$qty', '$price', '$item_total', '$total', '$need', '$advanceAmount', '$date')";
         
             $run = mysqli_query($db, $query);
-
+            
             // if ($run) {
             //     $_SESSION['status'] = "Data Inserted Successfully";
             //     header("Location: descriptionOfDemand.php");

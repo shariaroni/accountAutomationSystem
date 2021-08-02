@@ -14,7 +14,7 @@
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 	$conn = mysqli_connect('localhost', 'root', '', 'db_lr');
 	
-	$limit = 2;
+	$limit = 10;
 	$page = isset($_GET['page']) ? $_GET['page'] : 1;
 	$start = ($page - 1) * $limit;
 	$result = $conn->query("SELECT * FROM tabel_user WHERE admin_verification_status = 0 LIMIT $start, $limit");
@@ -101,7 +101,7 @@
                 <!-- Pagination End -->
 
                 <!-- Table Start -->
-                <div style="height: 400px; overflow-y: auto;">
+                <div>
                     <table id="" class="table table-striped table-bordered">
                         <thead class="table-success text-center">
                             <tr>
