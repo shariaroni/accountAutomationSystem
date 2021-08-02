@@ -15,7 +15,7 @@
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 	$conn = mysqli_connect('localhost', 'root', '', 'db_lr');
 	
-	$limit = 25;
+	$limit = 8;
 	$page = isset($_GET['page']) ? $_GET['page'] : 1;
     if($page < 1)
         $page = 1;
