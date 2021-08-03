@@ -20,11 +20,23 @@
     if($page < 1)
         $page = 1;
 	$start = ($page - 1) * $limit;
-    $recommending_officer_id = session::get("id");
-	$result = $conn->query("SELECT * FROM demand WHERE recommending_officer_id = '$recommending_officer_id' LIMIT $start, $limit");
-	$budgets = $result->fetch_all(MYSQLI_ASSOC);
+    $id = session::get("id");
 
-	$result1 = $conn->query("SELECT count(id) AS id FROM demand WHERE recommending_officer_id = '$recommending_officer_id' ");
+    $sql = "SELECT * FROM tabel_user WHERE id = '$id'";
+    $res = $conn->query($sql);
+    $row = $res->fetch_assoc();
+    $email = $row['email'];
+
+    $sql = "SELECT * FROM tabel_user WHERE email = '$email' AND type = 'recommendingOfficer'";
+    $res = $conn->query($sql);
+    $row = $res->fetch_assoc();
+    $recommending_officer_id = $row['id'];
+    echo $recommending_officer_id;
+
+	$result = $conn->query("SELECT * FROM demand WHERE recommending_officer_id = '$recommending_officer_id' and stage = 1 LIMIT $start, $limit");
+    $budgets = $result->fetch_all(MYSQLI_ASSOC);
+
+	$result1 = $conn->query("SELECT count(id) AS id FROM demand WHERE recommending_officer_id = '$recommending_officer_id' and stage = 1");
 	$custCount = $result1->fetch_all(MYSQLI_ASSOC);
 	$total = $custCount[0]['id'];
 	$pages = ceil( $total / $limit );
@@ -152,8 +164,8 @@
                                     <td class="text-center"><?= $userName; ?></td>
                                     <td class="text-center"><?= $budget['date']; ?></td>
                                     <td class="text-center">
-                                        <a href = "recommendingOfficerOpinion.php?budgetRequest=<?= $budget['id'];?>" 
-                                        onclick="window.open('recommendingOfficerOpinion.php?budgetRequest=<?= $budget['id'];?>')">
+                                        <a href = "recommendingOfficerOpinion.php?id=<?= $budget['id'];?>" 
+                                        onclick="window.open('recommendingOfficerOpinion.php?id=<?= $budget['id'];?>')">
                                             <input class="btn btn-outline-success btn-sm" type="submit" value="মতামত" />
                                         </a>
                                     </td>

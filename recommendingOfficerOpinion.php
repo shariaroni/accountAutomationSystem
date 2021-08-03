@@ -15,33 +15,50 @@
         session::distroy(); 
     }
 ?>
+
 <?php
     $db = mysqli_connect("localhost","root","","db_lr");
+    $budget_id = mysqli_real_escape_string($db, $_GET['id']);
+    if($budget_id){
+        $sql = "SELECT * FROM demand WHERE id = $budget_id";
+        $res =  $db->query($sql);
+        $row = $res->fetch_assoc();
+        $budgetType = $row['budgetType'];
+    }
+?>
+
+<?php
 
     if (isset($_POST['submit'])) {
+        $budget_id = mysqli_real_escape_string($db, $_GET['id']);
         $budgetSeleaction = $_POST['budgetSeleaction'];
         $recommend = $_POST['recommend'];
-        $image = $_FILES['image']['name'];
+        if($_FILES['image']['name']){
+            $image = $_FILES['image']['name'];
+            $target = "uploads/".basename($_FILES['image']['name']);
+        }
         $day = $_POST['day'];
         $month = $_POST['month'];
         $year = $_POST['year'];
         $comment = $_POST['comment'];
 
-        $target = "uploads/".basename($_FILES['image']['name']);
+        $sql = "INSERT INTO recommendingofficeropinion (budget_id, budgetSeleaction, recommend, image, day, month, year, comment) VALUES ('$budget_id','$budgetSeleaction','$recommend','$image','$day','$month','$year','$comment')";
+        $run = mysqli_query($db, $sql);
 
-        $query = "INSERT INTO recommendingofficeropinion (budgetSeleaction,recommend,image,day,month,year,comment) VALUES ('$budgetSeleaction','$recommend','$image','$day','$month','$year','$comment')";
-        
-        $run = mysqli_query($db, $query);
         if ($run) {
+            $sql = "UPDATE demand SET stage = 2 WHERE id = $budget_id";
+            $run = mysqli_query($db, $sql);
+
             $_SESSION['status'] = "Data Inserted";
-            header("Location: AccountsOfficerOpinion.php");
+            header("Location: recommendingOfficerBudgetList.php");
         }
         else{
             $_SESSION['status'] = "Data Not Inserted";
-            header("Location: recommendingOfficerOpinion.php");
+            header("Location: recommendingOfficerOpinion.php?id=$budget_id");
         }
     }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,10 +78,18 @@
         <h4>
             <a class="btn btn-warning mt-3" href="budgetStatement.php">বাজেট বিবারণী দেখুন</a>
         </h4>
-        <form action="recommendingOfficerOpinion.php" method="post">
-            <p class="h5 text-center my-3">উল্লেখিত
+        <form action="" method="post">
+            <p class="h6 text-center my-3">উল্লেখিত
                     <select name="budgetSeleaction">
-                        <option class="dropdown-menu" value="none">কাজ/সেবা/মালামাল ক্রয়</option>
+                        <option class="dropdown-menu" value="<?php echo $budgetType;?>">
+                            <?php   if($budgetType == 'work')
+                                        echo "কাজ"; 
+                                    else if($budgetType == 'service')
+                                        echo "সেবা"; 
+                                    else if($budgetType == 'buying')
+                                        echo "মালামাল ক্রয়";
+                            ?>
+                        </option>
                         <option value="work">কাজ</option>
                         <option value="service">সেবা</option>
                         <option value="buying">মালামাল ক্রয়</option>
@@ -87,16 +112,16 @@
                 <input name="image" class="form-control form-control-sm" type="file" id="signature">
                 <div class="mt-2">
                     <select name="day">
-                        <option class="dropdown-menu" value="day">Day</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
+                        <option class="dropdown-menu" value="<?php echo $day = date("d"); ?>"> <?php echo $day = date("d"); ?></option>
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
                         <option value="10">10</option>
                         <option value="11">11</option>
                         <option value="12">12</option>
@@ -121,8 +146,8 @@
                         <option value="31">31</option>
                     </select>
                     <select name="month">
-                        <option class="dropdown-menu" value="month">Month</option>
-                        <option  value="jan">Jan</option>
+                        <option class="dropdown-menu" value="<?php echo $day = date("M"); ?>"> <?php echo $day = date("M"); ?> </option>
+                        <option value="jan">Jan</option>
                         <option value="feb">Feb</option>
                         <option value="mar">Mar</option>
                         <option value="apr">Apr</option>
@@ -136,8 +161,8 @@
                         <option value="dec">Dec</option>
                     </select>
                     <select name="year">
-                        <option class="dropdown-menu" value="year">Year</option>
-                        <option  value="2021">2021</option>
+                        <option class="dropdown-menu" value="<?php echo $day = date("Y"); ?>"> <?php echo $day = date("Y"); ?> </option>
+                        <option value="2021">2021</option>
                         <option value="2022">2022</option>
                         <option value="2023">2023</option>
                         <option value="2024">2024</option>

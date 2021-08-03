@@ -43,8 +43,9 @@
         $need = $_POST['need'];
         $advanceAmount = $_POST['advanceAmount'];
         $date = date("d-m-Y");
+        $stage = 1;
 
-        if($total < $advanceAmount)
+        if($total < $advanceAmount && $need == "yes")
         {
             $msg =  "<div class='alert alert-danger'><strong>অগ্রীম চাহিদা মোট চাহিদার তুলনায় বেশি</strong></div>";
         }
@@ -52,7 +53,7 @@
         {
             $msg =  "<div class='alert alert-success'><strong>আপনার বাজেট আবেদনটি সম্পন্ন হয়েছে</strong></div>";
             
-            $query = "INSERT INTO demand (budget_type, budgetType, comment, user_id, recommending_officer_id, item, qty, price, item_total, total, need, advanceAmount, date) VALUES ('$budget_type', '$budgetType', '$comment', $user_id, $recommending_officer_id, '$item', '$qty', '$price', '$item_total', '$total', '$need', '$advanceAmount', '$date')";
+            $query = "INSERT INTO demand (budget_type, budgetType, comment, user_id, recommending_officer_id, item, qty, price, item_total, total, need, advanceAmount, date, stage) VALUES ('$budget_type', '$budgetType', '$comment', $user_id, $recommending_officer_id, '$item', '$qty', '$price', '$item_total', '$total', '$need', '$advanceAmount', '$date', $stage)";
         
             $run = mysqli_query($db, $query);
             
