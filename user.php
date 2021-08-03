@@ -201,7 +201,7 @@ class user{
             session::set("login", true);
             session::set("id", $result->id);
             session::set("name", $result->name);
-            session::set("loginmgs", "<div class='alert alert-success'><strong>Success</strong>You are LoggedIn.</div>");
+            session::set("loginmgs", "<div class='alert alert-success'><strong>Success</strong> You are LoggedIn.</div>");
             if ($row['type']=='general') {
                 header("Location: index.php");
             }
@@ -235,6 +235,46 @@ class user{
 /*----------------------------------------
             user login End
 ------------------------------------------*/
+
+
+
+/*----------------------------------------
+            Switch user start
+------------------------------------------*/
+public function userSwitch($id, $type, $currentType){
+    $conn = mysqli_connect('localhost', 'root', '', 'db_lr');
+
+    $sql = "SELECT * FROM tabel_user WHERE id = $id";
+    $res = $conn->query($sql);
+    $row = $res->fetch_assoc();
+    $email = $row['email'];
+    $name = $row['name'];
+
+    $sql = "SELECT * FROM tabel_user WHERE email = '$email' AND type = '$type'";
+    $res = $conn->query($sql);
+    if(mysqli_num_rows($res) == 0)
+    {
+        session::init();
+        session::set("login", true);
+        session::set("id", $id);
+        session::set("name", $name);
+        header("Location: accessDenied.php");
+    }
+    else{
+        $row = $res->fetch_assoc();
+        $id = $row['id'];
+
+        session::init();
+        session::set("login", true);
+        session::set("id", $id);
+        session::set("name", $name);
+        session::set("loginmgs", "<div class='alert alert-success'><strong>Success!</strong> Account has been switched.</div>");
+    }
+}
+/*----------------------------------------
+            Switch user End
+------------------------------------------*/
+
     public function getuserdata(){
         $sql = "SELECT * FROM tabel_user ORDER BY id ASC";
         $query = $this->db->pdo->prepare($sql);

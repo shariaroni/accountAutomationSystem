@@ -86,13 +86,13 @@
                                         echo "কাজ"; 
                                     else if($budgetType == 'service')
                                         echo "সেবা"; 
-                                    else if($budgetType == 'buying')
+                                    else if($budgetType == 'buyingProduct')
                                         echo "মালামাল ক্রয়";
                             ?>
                         </option>
                         <option value="work">কাজ</option>
                         <option value="service">সেবা</option>
-                        <option value="buying">মালামাল ক্রয়</option>
+                        <option value="buyingProduct">মালামাল ক্রয়</option>
                     </select>
                 এর জন্য প্রশাসনিক ও আর্থিক অনুমোদনের জন্য -
                <br>

@@ -45,6 +45,10 @@ class session{
         header("Location: login.php");
     }
 
+    public static function distroyOnly(){
+        session_destroy();
+        session_unset();
+    }
 }
 
 ?>

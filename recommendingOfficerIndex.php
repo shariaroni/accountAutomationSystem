@@ -2,7 +2,11 @@
     include 'user.php';
     include 'header.php';
     session::checksession();
+
+    $pageType = 'recommendingOfficer';
+    include 'individualSessionCheck.php';
 ?>
+
 <?php
     $loginmgs = session::get("loginmgs");
     if (isset($loginmgs)) {
@@ -17,10 +21,6 @@
 ?>
 
 <?php
-    $conn = mysqli_connect('localhost', 'root', '', 'db_lr');
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
     $id = session::get("id");
     $sql = "SELECT * FROM tabel_user WHERE id = $id ";
     $res = $conn->query($sql);

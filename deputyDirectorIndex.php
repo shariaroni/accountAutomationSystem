@@ -2,6 +2,9 @@
     include 'user.php';
     include 'header.php';
     session::checksession();
+
+    $pageType = 'deputyDirector';
+    include 'individualSessionCheck.php';
 ?>
 <?php
     $loginmgs = session::get("loginmgs");

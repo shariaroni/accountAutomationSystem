@@ -20,18 +20,7 @@
     if($page < 1)
         $page = 1;
 	$start = ($page - 1) * $limit;
-    $id = session::get("id");
-
-    $sql = "SELECT * FROM tabel_user WHERE id = '$id'";
-    $res = $conn->query($sql);
-    $row = $res->fetch_assoc();
-    $email = $row['email'];
-
-    $sql = "SELECT * FROM tabel_user WHERE email = '$email' AND type = 'recommendingOfficer'";
-    $res = $conn->query($sql);
-    $row = $res->fetch_assoc();
-    $recommending_officer_id = $row['id'];
-    echo $recommending_officer_id;
+    $recommending_officer_id = session::get("id");
 
 	$result = $conn->query("SELECT * FROM demand WHERE recommending_officer_id = '$recommending_officer_id' and stage = 1 LIMIT $start, $limit");
     $budgets = $result->fetch_all(MYSQLI_ASSOC);
