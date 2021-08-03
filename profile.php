@@ -9,9 +9,7 @@
     }
 ?>
 <?php
-    if (isset($_GET['id'])) {
-        $userid = (int)$_GET['id'];
-    }
+    $userid = session::get("id");
     $user = new user();
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
         $updateUser = $user->updateUserData($userid, $_POST);

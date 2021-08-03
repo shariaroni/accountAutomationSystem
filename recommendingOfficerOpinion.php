@@ -50,7 +50,7 @@
             $run = mysqli_query($db, $sql);
 
             $_SESSION['status'] = "Data Inserted";
-            header("Location: recommendingOfficerBudgetList.php");
+            header("Location: recommendingOfficerIndex.php");
         }
         else{
             $_SESSION['status'] = "Data Not Inserted";
@@ -76,7 +76,7 @@
             সুপারিশকারী কর্মকর্তার মতামত প্রদান
         </h3>
         <h4>
-            <a class="btn btn-warning mt-3" href="budgetStatement.php">বাজেট বিবারণী দেখুন</a>
+            <a class="btn btn-warning mt-3" href="budgetStatement.php?id=<?php echo $budget_id;?>">বাজেট বিবারণী দেখুন</a>
         </h4>
         <form action="" method="post">
             <p class="h6 text-center my-3">উল্লেখিত
