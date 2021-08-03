@@ -38,22 +38,28 @@
                     <th>ক্রমিক নং</th>
                     <th>আবেদনকারীর নাম</th>
                     <th>বাজেটের বিভাগ</th>
-                    <th>বাজেটের প্রয়োজনীয়তা বর্ননা</th>
                     <th>বাজেটের প্রকৃতি</th>
-                    <th>চাহিদার বিবারণী ছক</th>
+                    <th>সুপারিশকারী কর্মকর্তা</th>
+                    <th>বাজেটের প্রয়োজনীয়তা বর্ননা</th>
+                    <th>মোট টাকার পরিমাণ</th>
                     <th>অগ্রীম টাকার প্রয়োজনীয়তা</th>
                 </tr>
                 <?php
                     $db = mysqli_connect("localhost","root","","db_lr");
-                    $sql = "SELECT * FROM tabel_user INNER JOIN budgettype ON tabel_user.id";
-                    $sql1 = "SELECT id,name FROM tabel_user";
-                    //$sql2 = "SELECT budget_type FROM budgetseleaction";
-                    //$sql3 = "SELECT comment,budgetType FROM budgettype";
-                    //$sql = "SELECT  FROM";
+                    $sql1 = "SELECT id,user_id,budget_type,budgetType,recommending_officer_id,comment,total,need FROM demand WHERE id='1'";
                     $result = $db->query($sql1);
                     if ($result-> num_rows > 0) {
                         while ($row = $result-> fetch_assoc()) {
-                            echo "<tr><td>".$row["id"]."</td><td>".$row["name"]./*"</td><td>".$row["budget_type"]."</td><td>".$row["comment"]."</td><td>".$row["budgetType"].*/"</td></tr>";
+                            echo "<tr>
+                                    <td>".$row["id"]."</td>
+                                    <td>".$row["user_id"]."</td>
+                                    <td>".$row["budget_type"]."</td>
+                                    <td>".$row["budgetType"]."</td>
+                                    <td>".$row["recommending_officer_id"]."</td>
+                                    <td>".$row["comment"]."</td>
+                                    <td>".$row["total"]."</td>
+                                    <td>".$row["need"]."</td>
+                                </tr>";
                         }
                         echo "</table>";
                     }
