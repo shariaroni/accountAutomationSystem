@@ -51,7 +51,7 @@
     		$user->updateAdminVerificationDelete($id);
         }?>
         <script>
-            window.location.href = 'adminUserList.php';
+            window.location.href = 'adminVerification.php';
         </script>
 <?php } ?>
 

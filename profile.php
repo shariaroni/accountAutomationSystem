@@ -21,12 +21,10 @@
         die("Connection failed: " . mysqli_connect_error());
     }
     $id = session::get("id");
-    $sql = "SELECT * FROM tabel_user WHERE id = $id ";
+    $sql = "SELECT type FROM tabel_user WHERE id = $id and verification_status = 1 and admin_verification_status = 1";
     $res = $conn->query($sql);
     $row = $res->fetch_assoc();
-    $email = $row['email'];
-    $sql = "SELECT type FROM tabel_user WHERE email = '$email' and verification_status = 1 and admin_verification_status = 1";
-    $typeArray =  $conn->query($sql);
+    $current_type = $row['type'];
 ?>
 
 <!DOCTYPE html>
@@ -52,32 +50,31 @@
                         যবিপ্রবি</a>
                 <ul class="navbar-nav mt-2">
                     <?php
-                        $id = session::get("id");
                         $userlogin = session::get("login");
                         if ($userlogin == true) {
-                            foreach($typeArray as $aType)
-                            if($aType['type'] == "general"){
+                            $aType = $current_type;
+                            if($aType == "general"){
                                 $link = "index.php";
                             }
-                            if($aType['type'] == "recommendingOfficer"){
+                            if($aType == "recommendingOfficer"){
                                 $link = "recommendingOfficerIndex.php";
                             }
-                            if($aType['type'] == "accountOfficer"){
+                            if($aType == "accountOfficer"){
                                 $link = "accountOfficerIndex.php";
                             }
-                            if($aType['type'] == "deputyDirector"){
+                            if($aType == "deputyDirector"){
                                 $link = "deputyDirectorIndex.php";
                             }
-                            if($aType['type'] == "director"){
+                            if($aType == "director"){
                                 $link = "directorIndex.php";
                             }
-                            if($aType['type'] == "treasure"){
+                            if($aType == "treasure"){
                                 $link = "treasureIndex.php";
                             }
-                            if($aType['type'] == "vc"){
+                            if($aType == "vc"){
                                 $link = "vcSirIndex.php";
                             }
-                            if($aType['type'] == "admin"){
+                            if($aType == "admin"){
                                 $link = "adminIndex.php";
                             }
                     ?>

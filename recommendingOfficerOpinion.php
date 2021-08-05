@@ -46,8 +46,15 @@
         $run = mysqli_query($db, $sql);
 
         if ($run) {
-            $sql = "UPDATE demand SET stage = 2 WHERE id = $budget_id";
+            $stage = 2;
+            if($recommend == 'yes')
+                $status = 'pending';
+            else
+                $status = 'rejected'; 
+
+            $sql = "UPDATE demand SET stage = $stage, status = '$status' WHERE id = $budget_id";
             $run = mysqli_query($db, $sql);
+
 
             $_SESSION['status'] = "Data Inserted";
             header("Location: recommendingOfficerIndex.php");

@@ -44,6 +44,7 @@
         $advanceAmount = $_POST['advanceAmount'];
         $date = date("d-m-Y");
         $stage = 1;
+        $status = "pending";
 
         if($total < $advanceAmount && $need == "yes")
         {
@@ -53,7 +54,7 @@
         {
             $msg =  "<div class='alert alert-success'><strong>আপনার বাজেট আবেদনটি সম্পন্ন হয়েছে</strong></div>";
             
-            $query = "INSERT INTO demand (budget_type, budgetType, comment, user_id, recommending_officer_id, item, qty, price, item_total, total, need, advanceAmount, date, stage) VALUES ('$budget_type', '$budgetType', '$comment', $user_id, $recommending_officer_id, '$item', '$qty', '$price', '$item_total', '$total', '$need', '$advanceAmount', '$date', $stage)";
+            $query = "INSERT INTO demand (budget_type, budgetType, comment, user_id, recommending_officer_id, item, qty, price, item_total, total, need, advanceAmount, date, stage, status) VALUES ('$budget_type', '$budgetType', '$comment', $user_id, $recommending_officer_id, '$item', '$qty', '$price', '$item_total', '$total', '$need', '$advanceAmount', '$date', $stage, '$status')";
         
             $run = mysqli_query($db, $query);
             
@@ -267,7 +268,7 @@
                 </table>
 
                 <div class="h4 text-center mt-5">
-                    <strong> অগ্রীম টাকার প্রয়োজনীয়তা </strong> 
+                    <strong> অগ্রীম টাকার প্রয়োজনীয়তা </strong>
                 </div>
                 <div style="max-width: 400px; margin: 0 auto">
                     <div class="input-group input-group-sm">
