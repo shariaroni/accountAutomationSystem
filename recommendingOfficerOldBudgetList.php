@@ -154,7 +154,7 @@
                                     <td class="text-center"><?= $budget['date']; ?></td>
                                     <td class="text-center">
                                         <a href = "recommendingOfficerOpinion.php?id=<?= $budget['id'];?>" 
-                                        onclick="">
+                                        onclick="recommendingOfficerOpinion.php?id=<?= $budget['id'];?>;">
                                             <input class="btn btn-outline-success btn-sm" type="submit" value="দেখুন" />
                                         </a>
                                     </td>

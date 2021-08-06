@@ -30,21 +30,11 @@
     <?php
         include 'navbar.php';
     ?>
-    <div class="container text-center mt-5">
+    <div class="container text-center mt-5" style="max-width: 450px; margin: 0, auto">
         <h4>বাজেট বিবারণী ছক</h4>
         <form action="" method="post">
-            <table class="table table-striped table-bordered table-hover mt-3">
-                <tr class="table-dark">
-                    <th>ক্রমিক নং</th>
-                    <th>আবেদনকারীর নাম</th>
-                    <th>বাজেটের বিভাগ</th>
-                    <th>বাজেটের প্রকৃতি</th>
-                    <th>সুপারিশকারী কর্মকর্তা</th>
-                    <th>বাজেটের প্রয়োজনীয়তা বর্ননা</th>
-                    <th>মোট টাকার পরিমাণ</th>
-                    <th>অগ্রীম টাকার প্রয়োজনীয়তা</th>
-                </tr>
-                <?php
+            <table class="table table-striped table-bordered mt-3">
+            <?php
                     $db = mysqli_connect("localhost","root","","db_lr");
                     $budget_id = mysqli_real_escape_string($db, $_GET['id']);
                     $sql1 = "SELECT id,user_id,budget_type,budgetType,recommending_officer_id,comment,total,need FROM demand WHERE id='$budget_id'";
@@ -56,27 +46,84 @@
                                 $res2 =  $db->query($sql2);
                                 $row2 = $res2->fetch_assoc();
                                 $userName = $row2['name'];
+                            //recommending_officer_id to recommending_officer_name
+                                $recommending_officer_id = $row['recommending_officer_id'];
+                                $sql3 = "SELECT * FROM tabel_user WHERE id = $recommending_officer_id LIMIT 1";
+                                $res3 = $db->query($sql3);
+                                $row3 = $res3->fetch_assoc();
+                                $recommending_officer_name = $row3['name'];
+
+                                foreach($result as $aType):
+                                        if($aType['budget_type'] == "others"){
+                                            $show1 = "অন্যান্য";
+                                        }
+                                        if($aType['budget_type'] == "development"){
+                                            $show1 = "উন্নায়ন";
+                                        }
+                                        if($aType['budget_type'] == "revenue"){
+                                            $show1 = "রাজস্ব";
+                                        }
+                                        if($aType['budgetType'] == "work"){
+                                            $show2 = "কাজ";
+                                        }
+                                        if($aType['budgetType'] == "service"){
+                                            $show2 = "সেবা";
+                                        }
+                                        if($aType['budgetType'] == "buyingProduct"){
+                                            $show2 = "মালামাল ক্রয়";
+                                        }
+                                        if($aType['need'] == "yes"){
+                                            $show3 = "আছে";
+                                        }
+                                        if($aType['need'] == "no"){
+                                            $show3 = "নেই";
+                                        }
                             echo "<tr>
-                                    <td>".$row["id"]."</td>
-                                    <td>".$userName."</td>
-                                    <td>".$row["budget_type"]."</td>
-                                    <td>".$row["budgetType"]."</td>
-                                    <td>".$row["recommending_officer_id"]."</td>
-                                    <td>".$row["comment"]."</td>
-                                    <td>".$row["total"]."</td>
-                                    <td>".$row["need"]."</td>
+                                    <td class='text-end table-active'>ক্রমিক নং</td>
+                                    <td class='text-start'>".$row["id"]."</td>
+                                <tr>
+                                </tr>
+                                    <td class='text-end table-active'>আবেদনকারীর নাম</td>
+                                    <td class='text-start'>".$userName."</td>
+                                <tr>
+                                </tr>
+                                    <td class='text-end table-active'>বাজেটের বিভাগ</td>
+                                    <td class='text-start'>".$show1."</td>
+                                <tr>
+                                </tr>
+                                    <td class='text-end table-active'>বাজেটের প্রকৃতি</td>
+                                    <td class='text-start'>".$show2."</td>
+                                <tr>
+                                </tr>
+                                    <td class='text-end table-active'>সুপারিশকারী কর্মকর্তা</td>
+                                    <td class='text-start'>".$recommending_officer_name."</td>
+                                <tr>
+                                </tr>
+                                    <td class='text-end table-active'>বাজেটের প্রয়োজনীয়তা বর্ননা</td>
+                                    <td class='text-start'>".$row["comment"]."</td>
+                                <tr>
+                                </tr>
+                                    <td class='text-end table-active'>মোট টাকার পরিমাণ</td>
+                                    <td class='text-start'>".$row["total"]."</td>
+                                <tr>
+                                </tr>
+                                    <td class='text-end table-active'>অগ্রীম টাকার প্রয়োজনীয়তা</td>
+                                    <td class='text-start'>".$show3."</td>
+                                <tr>
+                                </tr>
                                 </tr>";
+                                endforeach;
                         }
-                        echo "</table>";
                     }
                     else{
                         echo "0 result";
                     }
                     $db-> close();
                     if (isset($_POST['back'])) {
-                        header("Location: recommendingOfficerOpinion.php");
+                        header("Location: recommendingOfficerOpinion.php?id=".$budget_id);
                     }
                 ?>
+            </table>
             <button name="back" class="btn btn-primary">Back</button>
         </form>
     </div>

@@ -37,12 +37,10 @@
             $image = $_FILES['image']['name'];
             $target = "uploads/".basename($_FILES['image']['name']);
         }
-        $day = $_POST['day'];
-        $month = $_POST['month'];
-        $year = $_POST['year'];
+        $date = date("d-m-Y");
         $comment = $_POST['comment'];
 
-        $sql = "INSERT INTO recommendingofficeropinion (budget_id, budgetSeleaction, recommend, image, day, month, year, comment) VALUES ('$budget_id','$budgetSeleaction','$recommend','$image','$day','$month','$year','$comment')";
+        $sql = "INSERT INTO recommendingofficeropinion (budget_id, budgetSeleaction, recommend, image, date, comment) VALUES ('$budget_id','$budgetSeleaction','$recommend','$image','$date','$comment')";
         $run = mysqli_query($db, $sql);
 
         if ($run) {
@@ -123,7 +121,7 @@
                 <input name="image" class="form-control form-control-sm" type="file" id="signature">
                 <div class="mt-2">
                     <select name="day">
-                        <option class="dropdown-menu" value="<?php echo $day = date("d"); ?>"> <?php echo $day = date("d"); ?></option>
+                        <option class="dropdown-menu" value="<?php echo $date = date("d"); ?>"> <?php echo $date = date("d"); ?></option>
                         <option value="01">01</option>
                         <option value="02">02</option>
                         <option value="03">03</option>
@@ -157,7 +155,7 @@
                         <option value="31">31</option>
                     </select>
                     <select name="month">
-                        <option class="dropdown-menu" value="<?php echo $day = date("M"); ?>"> <?php echo $day = date("M"); ?> </option>
+                        <option class="dropdown-menu" value="<?php echo $date = date("M"); ?>"> <?php echo $date = date("M"); ?> </option>
                         <option value="jan">Jan</option>
                         <option value="feb">Feb</option>
                         <option value="mar">Mar</option>
@@ -172,7 +170,7 @@
                         <option value="dec">Dec</option>
                     </select>
                     <select name="year">
-                        <option class="dropdown-menu" value="<?php echo $day = date("Y"); ?>"> <?php echo $day = date("Y"); ?> </option>
+                        <option class="dropdown-menu" value="<?php echo $date = date("Y"); ?>"> <?php echo $date = date("Y"); ?> </option>
                         <option value="2021">2021</option>
                         <option value="2022">2022</option>
                         <option value="2023">2023</option>

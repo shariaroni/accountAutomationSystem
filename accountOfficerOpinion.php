@@ -4,6 +4,13 @@
     session::checksession();
 ?>
 <?php
+    $loginmgs = session::get("loginmgs");
+    if (isset($loginmgs)) {
+        echo $loginmgs;
+    }
+    session::set("loginmgs",NULL);
+?>
+<?php
     if (isset($_GET['action']) && $_GET['action'] == "logout") {
         session::distroy(); 
     }
@@ -20,7 +27,15 @@
         $budget_type = $row['budget_type'];
     }
 ?>
-
+<?php
+    $db = mysqli_connect("localhost","root","","db_lr");
+    $budget_id = mysqli_real_escape_string($db, $_GET['id']);
+    if($budget_id){
+        $sql = "SELECT * FROM recommendingofficeropinion WHERE id = $budget_id";
+        $res =  $db->query($sql);
+        $row = $res->fetch_assoc();
+    }
+?>
 <?php
     $db = mysqli_connect("localhost","root","","db_lr");
 
@@ -33,14 +48,12 @@
         $pageNo = $_POST['pageNo'];
         $type = $_POST['type'];
         $image = $_FILES['image']['name'];
-        $day = $_POST['day'];
-        $month = $_POST['month'];
-        $year = $_POST['year'];
+        $date = date("d-m-Y");
         $comment = $_POST['comment'];
 
         $target = "uploads/".basename($_FILES['image']['name']);
 
-        $query = "INSERT INTO accountsofficeropinion (budgetSeleaction,budgetYear,budget_type,budgetCode,budgetSector,pageNo,type,image,day,month,year,comment) VALUES ('$budgetSeleaction','$budgetYear','$budgetType','$budgetCode','$budgetSector','$pageNo','$type','$image','$day','$month','$year','$comment')";
+        $query = "INSERT INTO accountsofficeropinion (budgetSeleaction,budgetYear,budget_type,budgetCode,budgetSector,pageNo,type,image,date,comment) VALUES ('$budgetSeleaction','$budgetYear','$budgetType','$budgetCode','$budgetSector','$pageNo','$type','$image','$date','$comment')";
         
         $run = mysqli_query($db, $query);
         if ($run) {
@@ -70,8 +83,8 @@
             কর্মকর্তা (হিসাব) দপ্তরের মতামত প্রদান
         </h3>
         <h4>
-            <a class="btn btn-warning mt-3" href="budgetStatement.php">বাজেট বিবরণ দেখুন</a>
-            <a class="btn btn-warning mt-3" href="recommendingOfficerStatement.php">সুপারিশকারী কর্মকর্তার মতামত দেখুন</a>
+            <a class="btn btn-warning mt-3" href="budgetStatement.php?id=<?php echo $budget_id;?>">বাজেট বিবরণ দেখুন</a>
+            <a class="btn btn-warning mt-3" href="recommendingOfficerStatement.php?id=<?php echo $budget_id;?>">সুপারিশকারী কর্মকর্তার মতামত দেখুন</a>
         </h4>
         <form action="AccountsOfficerOpinion.php" method="POST">
             <p class="h5 text-center mt-5">প্রস্তাবিত 

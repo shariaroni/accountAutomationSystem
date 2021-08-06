@@ -36,6 +36,8 @@
         <table class="table table-striped table-bordered table-hover mt-3">
             <tr  class="table-dark">
                 <th>ক্রমিক নং</th>
+                <th>আবেদনকারীর নাম</th>
+                <th>সুপারিশকারী কর্মকর্তা</th>
                 <th>বাজেটের ধরণ</th>
                 <th>সুপারিশ</th>
                 <th>সংযুক্ত ছবি</th>
@@ -43,27 +45,39 @@
                 <th>মন্তব্য</th>
             </tr>
             <?php
-                        $db = mysqli_connect("localhost","root","","db_lr");
-                        $sql1 = "SELECT id,budgetSeleaction,recommend,image,day,month,year,comment FROM recommendingofficeropinion";
-                        //$sql2 = "SELECT budget_type FROM budgetseleaction";
-                        //$sql3 = "SELECT comment,budgetType FROM budgettype";
-                        //$sql = "SELECT  FROM";
-                        $result = $db->query($sql1);
-                        if ($result-> num_rows > 0) {
-                            while ($row = $result-> fetch_assoc()) {
-                                echo "<tr><td>".$row["id"]."</td><td>".$row["budgetSeleaction"]."</td><td>".$row["recommend"]."</td><td>".$row["image"]."</td><td>".$row["day"].".".$row["month"].".".$row["year"]."</td><td>".$row["comment"]."</td></tr>";
-                            }
-                            echo "</table>";
-                        }
-                        else{
-                            echo "0 result";
-                        }
-                        $db-> close();
-                        if (isset($_POST['back'])) {
-                            header("Location: AccountsOfficerOpinion.php");
-                        }
-                    ?>
-                    <button name="back" class="btn btn-primary">Back</button>
+                $db = mysqli_connect("localhost","root","","db_lr");
+                $budget_id = mysqli_real_escape_string($db, $_GET['id']);
+                $sql1 = "SELECT id,user_id,	recommending_officer_id,budgetSeleaction,recommend,image,date,comment FROM recommendingofficeropinion WHERE id='$budget_id'";
+                $result = $db->query($sql1);
+                if ($result-> num_rows > 0) {
+                    while ($row = $result-> fetch_assoc()) {
+                        $user_id = $row['user_id'];
+                        $sql2 = "SELECT * FROM tabel_user WHERE id = $id LIMIT 1";
+                        $res2 =  $db->query($sql2);
+                        $row2 = $res2->fetch_assoc();
+                        $userName = $row2['name'];
+                    echo "<tr>
+                            <td>".$row["id"]."</td>
+                            <td>".$userName."</td>
+                            <td>".$row["recommending_officer_id"]."</td>
+                            <td>".$row["budgetSeleaction"]."</td>
+                            <td>".$row["recommend"]."</td>
+                            <td>".$row["image"]."</td>
+                            <td>".$row["date"]."</td>
+                            <td>".$row["comment"]."</td>
+                        </tr>";
+                    }
+                    echo "</table>";
+                }
+                else{
+                    echo "0 result";
+                }
+                $db-> close();
+                if (isset($_POST['back'])) {
+                    header("Location: AccountsOfficerOpinion.php");
+                }
+            ?>
+                <button name="back" class="btn btn-primary">Back</button>
         </table>
         </form>
     </div>

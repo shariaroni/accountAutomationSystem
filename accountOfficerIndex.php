@@ -41,18 +41,6 @@
     <title>ব্যবহারকারীর তথ্য | কর্মকর্তা (হিসাব দপ্তর)</title>
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-
-    <style>
-        .badge{
-            position: absolute;
-            top: -15px;
-            right: -5px;
-            padding: 5px 10px;
-            border-radius: 30%;
-            background-color: red;
-            color: white;
-        }
-    </style>
 </head>
 <?php
     if (isset($_GET['action']) && $_GET['action'] == "logout") {
@@ -137,7 +125,7 @@
                             </div>
                         </div>     
                         </p>
-                        <a class="btn btn-warning" href="accountOfficerBudgetList.php">
+                        <a class="btn btn-warning position-relative" href="accountOfficerBudgetList.php">
                         বাজেট আবেদন সমূহ
                         <?php
                                 $sql = "SELECT count(id) AS id FROM demand WHERE status='unseen' AND stage = 3";
@@ -146,11 +134,11 @@
                                 $countNotification = $countArray[0]['id'];
                                 if($countNotification > 0):
                             ?>
-                            <span class="badge">
+                            <span class="position-absolute top-0 start-100 translate-middle px-2 text-light bg-danger border border-light rounded-pill">
                                 <?php echo $countNotification; 
                                 endif;?>
                             </span>
-                        </a>
+                        </a>&nbsp;
                         <a class="btn btn-secondary" href="">পূর্বের বাজেট আবেদন</a>
                     </div>
                 </div>
