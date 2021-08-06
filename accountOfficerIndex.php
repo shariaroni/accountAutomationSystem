@@ -38,9 +38,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ব্যবহারকারীর তথ্য</title>
+    <title>ব্যবহারকারীর তথ্য | কর্মকর্তা (হিসাব দপ্তর)</title>
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    <style>
+        .badge{
+            position: absolute;
+            top: -15px;
+            right: -5px;
+            padding: 5px 10px;
+            border-radius: 30%;
+            background-color: red;
+            color: white;
+        }
+    </style>
 </head>
 <?php
     if (isset($_GET['action']) && $_GET['action'] == "logout") {
@@ -126,7 +138,19 @@
                         </div>     
                         </p>
                         <a class="btn btn-warning" href="accountOfficerBudgetList.php">
-                        বাজেট আবেদন সমূহ</a>
+                        বাজেট আবেদন সমূহ
+                        <?php
+                                $sql = "SELECT count(id) AS id FROM demand WHERE status='unseen' AND stage = 3";
+                                $res = $conn->query($sql);
+                                $countArray = $res->fetch_all(MYSQLI_ASSOC);
+                                $countNotification = $countArray[0]['id'];
+                                if($countNotification > 0):
+                            ?>
+                            <span class="badge">
+                                <?php echo $countNotification; 
+                                endif;?>
+                            </span>
+                        </a>
                         <a class="btn btn-secondary" href="">পূর্বের বাজেট আবেদন</a>
                     </div>
                 </div>

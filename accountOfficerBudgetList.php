@@ -22,10 +22,10 @@
 	$start = ($page - 1) * $limit;
     $accountOfficer_id = session::get("id");
 
-	$result = $conn->query("SELECT * FROM demand WHERE stage = 2 LIMIT $start, $limit");
+	$result = $conn->query("SELECT * FROM demand WHERE stage = 3 and (status='seen' or status='unseen') LIMIT $start, $limit");
     $budgets = $result->fetch_all(MYSQLI_ASSOC);
 
-	$result1 = $conn->query("SELECT count(id) AS id FROM demand WHERE stage = 2");
+	$result1 = $conn->query("SELECT count(id) AS id FROM demand WHERE stage = 3 and (status='seen' or status='unseen')");
 	$custCount = $result1->fetch_all(MYSQLI_ASSOC);
 	$total = $custCount[0]['id'];
 	$pages = ceil( $total / $limit );
@@ -33,6 +33,12 @@
 	$Previous = $page - 1;
 	$Next = $page + 1;
  ?>
+
+ <!-- updating budget status as seen -->
+<?php
+    $sql = "UPDATE demand SET status='seen' WHERE stage=3";
+    $res =  $conn->query($sql);
+?>
 
 <?php
     if (isset($_GET['action']) && $_GET['action'] == "logout") {

@@ -46,16 +46,20 @@
         $run = mysqli_query($db, $sql);
 
         if ($run) {
-            $stage = 2;
-            if($recommend == 'yes')
-                $status = 'pending';
-            else
+            if($recommend == 'yes'){
+                $stage = 3;
+                $status = 'unseen';
+            }
+            else{
+                $stage = 2;
                 $status = 'rejected'; 
+            }
 
             $sql = "UPDATE demand SET stage = $stage, status = '$status' WHERE id = $budget_id";
             $run = mysqli_query($db, $sql);
 
-
+            $msg =  "<div class='alert alert-success'><strong>আপনার মতামতটি গৃহীত হয়েছে </strong></div>";
+            session::set("loginmgs", $msg);
             $_SESSION['status'] = "Data Inserted";
             header("Location: recommendingOfficerIndex.php");
         }

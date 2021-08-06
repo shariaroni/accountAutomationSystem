@@ -43,8 +43,8 @@
         $need = $_POST['need'];
         $advanceAmount = $_POST['advanceAmount'];
         $date = date("d-m-Y");
-        $stage = 1;
-        $status = "pending";
+        $stage = 2;
+        $status = "unseen";
 
         if($total < $advanceAmount && $need == "yes")
         {

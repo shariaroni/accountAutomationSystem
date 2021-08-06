@@ -15,17 +15,17 @@
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 	$conn = mysqli_connect('localhost', 'root', '', 'db_lr');
 	
-	$limit = 8;
+	$limit = 10;
 	$page = isset($_GET['page']) ? $_GET['page'] : 1;
     if($page < 1)
         $page = 1;
 	$start = ($page - 1) * $limit;
     $recommending_officer_id = session::get("id");
 
-	$result = $conn->query("SELECT * FROM demand WHERE recommending_officer_id = '$recommending_officer_id' and stage = 1 LIMIT $start, $limit");
+	$result = $conn->query("SELECT * FROM demand WHERE recommending_officer_id = '$recommending_officer_id' and stage = 2 and (status='seen' or status='unseen') LIMIT $start, $limit");
     $budgets = $result->fetch_all(MYSQLI_ASSOC);
 
-	$result1 = $conn->query("SELECT count(id) AS id FROM demand WHERE recommending_officer_id = '$recommending_officer_id' and stage = 1");
+	$result1 = $conn->query("SELECT count(id) AS id FROM demand WHERE recommending_officer_id = '$recommending_officer_id' and stage = 2 and (status='seen' or status='unseen') ");
 	$custCount = $result1->fetch_all(MYSQLI_ASSOC);
 	$total = $custCount[0]['id'];
 	$pages = ceil( $total / $limit );
@@ -33,6 +33,12 @@
 	$Previous = $page - 1;
 	$Next = $page + 1;
  ?>
+
+<!-- updating budget status as seen -->
+<?php
+    $sql = "UPDATE demand SET status='seen' WHERE recommending_officer_id = '$recommending_officer_id' and stage=2";
+    $res =  $conn->query($sql);
+?>
 
 <?php
     if (isset($_GET['action']) && $_GET['action'] == "logout") {
