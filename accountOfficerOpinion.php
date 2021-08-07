@@ -76,7 +76,7 @@
 </head>
 <body>
     <?php
-        include 'navbar.php';
+        include 'accountOfficerNavbar.php';
     ?>
     <div style="margin-top: 20px;" class="container text-center">
         <h3>
