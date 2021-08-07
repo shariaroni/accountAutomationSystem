@@ -78,7 +78,7 @@
 </head>
 <body>
     <?php
-        include 'navbar.php';
+        include 'recommendingOfficerNavbar.php';
     ?>
     <div style="margin-top: 30px;" class="container text-center">
         <h3>

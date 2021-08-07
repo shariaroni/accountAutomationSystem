@@ -109,8 +109,6 @@
                                 </tr>
                                     <td class='text-end table-active'>অগ্রীম টাকার প্রয়োজনীয়তা</td>
                                     <td class='text-start'>".$show3."</td>
-                                <tr>
-                                </tr>
                                 </tr>";
                                 endforeach;
                         }
@@ -118,13 +116,9 @@
                     else{
                         echo "0 result";
                     }
-                    $db-> close();
-                    if (isset($_POST['back'])) {
-                        header("Location: recommendingOfficerOpinion.php?id=".$budget_id);
-                    }
                 ?>
             </table>
-            <button name="back" class="btn btn-primary">Back</button>
+            <input class="btn btn-primary" type="button" value="Back" onclick="history.back(-1)" />
         </form>
     </div>
     
