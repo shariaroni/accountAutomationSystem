@@ -4,13 +4,6 @@
     session::checksession();
 ?>
 <?php
-    $loginmgs = session::get("loginmgs");
-    if (isset($loginmgs)) {
-        echo $loginmgs;
-    }
-    session::set("loginmgs",NULL);
-?>
-<?php
     if (isset($_GET['action']) && $_GET['action'] == "logout") {
         session::distroy(); 
     }
@@ -27,19 +20,11 @@
         $budget_type = $row['budget_type'];
     }
 ?>
+
 <?php
     $db = mysqli_connect("localhost","root","","db_lr");
-    $budget_id = mysqli_real_escape_string($db, $_GET['id']);
-    if($budget_id){
-        $sql = "SELECT * FROM recommendingofficeropinion WHERE id = $budget_id";
-        $res =  $db->query($sql);
-        $row = $res->fetch_assoc();
-    }
-?>
-<?php
 
     if (isset($_POST['submit'])) {
-        $budget_id = mysqli_real_escape_string($db, $_GET['id']);
         $budgetSeleaction = $_POST['budgetSeleaction'];
         $budgetYear = $_POST['budgetYear'];
         $budget_type = $_POST['budget_type'];
@@ -47,36 +32,24 @@
         $budgetSector = $_POST['budgetSector'];
         $pageNo = $_POST['pageNo'];
         $type = $_POST['type'];
-        if($_FILES['image']['name']){
-            $image = $_FILES['image']['name'];
-            $target = "uploads/".basename($_FILES['image']['name']);
-        }
-        $date = date("d-m-Y");
+        $image = $_FILES['image']['name'];
+        $day = $_POST['day'];
+        $month = $_POST['month'];
+        $year = $_POST['year'];
         $comment = $_POST['comment'];
 
-        $sql = "INSERT INTO accountsofficeropinion (budget_id,budgetSeleaction,budgetYear,budget_type,budgetCode,budgetSector,pageNo,type,image,date,comment) VALUES ('$budget_id','$budgetSeleaction','$budgetYear','$budgetType','$budgetCode','$budgetSector','$pageNo','$type','$image','$date','$comment')";
-        $run = mysqli_query($db, $sql);
-        
-        if ($run) {
-            if (isset($_POST['submit'])){
-                $stage = 4;
-                $status = 'unseen';    
-            }
-            else{
-                $stage = 3;
-                $status = 'rejected';
-            }
-            $sql = "UPDATE demand SET stage = $stage, status = '$status' WHERE id = $budget_id";
-            $run = mysqli_query($db, $sql);
+        $target = "uploads/".basename($_FILES['image']['name']);
 
-            $msg =  "<div class='alert alert-success'><strong>আপনার মতামতটি গৃহীত হয়েছে </strong></div>";
-            session::set("loginmgs", $msg);
+        $query = "INSERT INTO accountsofficeropinion (budgetSeleaction,budgetYear,budget_type,budgetCode,budgetSector,pageNo,type,image,day,month,year,comment) VALUES ('$budgetSeleaction','$budgetYear','$budgetType','$budgetCode','$budgetSector','$pageNo','$type','$image','$day','$month','$year','$comment')";
+        
+        $run = mysqli_query($db, $query);
+        if ($run) {
             $_SESSION['status'] = "Data Inserted";
-            header("Location: accountOfficerIndex.php");
+            header("Location: deputyDirectorOpinion.php");
         }
         else{
             $_SESSION['status'] = "Data Not Inserted";
-            header("Location: accountOfficerOpinion.php?id=$budget_id");
+            header("Location: deputyDirectorOpinion.php");
         }
     }
 ?>
@@ -84,23 +57,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>মতামত | কর্মকর্তা (হিসাব) দপ্তর</title>
+    <title>কর্মকর্তা (হিসাব) দপ্তরের মতামত</title>
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </head>
 <body>
     <?php
-        include 'accountOfficerNavbar.php';
+        include 'navbar.php';
     ?>
     <div style="margin-top: 20px;" class="container text-center">
         <h3>
             কর্মকর্তা (হিসাব) দপ্তরের মতামত প্রদান
         </h3>
         <h4>
-            <a class="btn btn-warning mt-3" href="budgetStatement.php?id=<?php echo $budget_id;?>">বাজেট বিবরণ দেখুন</a>
-            <a class="btn btn-warning mt-3" href="recommendingOfficerStatement.php?id=<?php echo $budget_id;?>">সুপারিশকারী কর্মকর্তার মতামত দেখুন</a>
+            <a class="btn btn-warning mt-3" href="budgetStatement.php">বাজেট বিবরণ দেখুন</a>
+            <a class="btn btn-warning mt-3" href="recommendingOfficerStatement.php">সুপারিশকারী কর্মকর্তার মতামত দেখুন</a>
         </h4>
-        <form action="" method="POST">
+        <form action="AccountsOfficerOpinion.php" method="POST">
             <p class="h5 text-center mt-5">প্রস্তাবিত 
                 <select name="budgetSeleaction">
                     <option value="<?php echo $budgetType;?>">
