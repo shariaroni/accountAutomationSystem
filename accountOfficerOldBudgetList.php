@@ -20,12 +20,12 @@
     if($page < 1)
         $page = 1;
 	$start = ($page - 1) * $limit;
-    $recommending_officer_id = session::get("id");
+    $accountOfficer_id = session::get("id");
 
-	$result = $conn->query("SELECT * FROM demand WHERE recommending_officer_id = '$recommending_officer_id' and stage > 3  LIMIT $start, $limit");
+	$result = $conn->query("SELECT * FROM demand WHERE stage>3 or (stage=3 and status='rejected') LIMIT $start, $limit");
     $budgets = $result->fetch_all(MYSQLI_ASSOC);
 
-	$result1 = $conn->query("SELECT count(id) AS id FROM demand WHERE recommending_officer_id = '$recommending_officer_id' and stage > 3");
+	$result1 = $conn->query("SELECT count(id) AS id FROM demand WHERE stage>3 or (stage=3 and status='rejected')");
 	$custCount = $result1->fetch_all(MYSQLI_ASSOC);
 	$total = $custCount[0]['id'];
 	$pages = ceil( $total / $limit );
@@ -46,16 +46,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>পূর্বের বাজেট আবেদনের তালিকা</title>
+    <title> আবেদনকারীদের তালিকা | কর্মকর্তা </title>
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </head>
 <body>
     <?php
-        include 'accountOfficerNavbarIndex.php';
+        include 'accountOfficerNavbar.php';
     ?>
     <div class="panel-heading">
-            <h3 class="text-center mt-3">পূর্বের বাজেট আবেদনের তালিকা</h3>
+            <h3 class="text-center mt-3">আবেদনের তালিকা</h3>
     </div>
     <div class="container">
         <div style="margin: 0 auto">
@@ -115,8 +115,8 @@
                                     <td class="text-center"><?= $userName; ?></td>
                                     <td class="text-center"><?= $budget['date']; ?></td>
                                     <td class="text-center">
-                                        <a href = "recommendingOfficerOpinion.php?id=<?= $budget['id'];?>" 
-                                        onclick="recommendingOfficerOpinion.php?id=<?= $budget['id'];?>;">
+                                        <a href = "accountOfficerOpinion.php?id=<?= $budget['id'];?>" 
+                                        onclick="window.open('accountOfficerStatement.php?id=<?= $budget['id'];?>')">
                                             <input class="btn btn-outline-success btn-sm" type="submit" value="দেখুন" />
                                         </a>
                                     </td>
