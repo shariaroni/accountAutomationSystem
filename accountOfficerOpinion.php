@@ -1,8 +1,21 @@
 <?php
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     include 'user.php';
     include 'header.php';
     session::checksession();
+    
+    $pageType = 'accountOfficer';
+    include 'individualSessionCheck.php';
 ?>
+
+<?php
+    $loginmgs = session::get("loginmgs");
+    if (isset($loginmgs)) {
+        echo $loginmgs;
+    }
+    session::set("loginmgs",NULL);
+?>
+
 <?php
     if (isset($_GET['action']) && $_GET['action'] == "logout") {
         session::distroy(); 
@@ -11,6 +24,9 @@
 
 <?php
     $db = mysqli_connect("localhost","root","","db_lr");
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
     $budget_id = mysqli_real_escape_string($db, $_GET['id']);
     if($budget_id){
         $sql = "SELECT * FROM demand WHERE id = $budget_id";
@@ -22,34 +38,40 @@
 ?>
 
 <?php
-    $db = mysqli_connect("localhost","root","","db_lr");
 
     if (isset($_POST['submit'])) {
-        $budgetSeleaction = $_POST['budgetSeleaction'];
+        $budget_id = mysqli_real_escape_string($db, $_GET['id']);
+        $accountofficer_id = session::get("id");
         $budgetYear = $_POST['budgetYear'];
-        $budget_type = $_POST['budget_type'];
         $budgetCode = $_POST['budgetCode'];
         $budgetSector = $_POST['budgetSector'];
         $pageNo = $_POST['pageNo'];
         $type = $_POST['type'];
         $image = $_FILES['image']['name'];
-        $day = $_POST['day'];
-        $month = $_POST['month'];
-        $year = $_POST['year'];
+        $date = $_POST['day'] .'-'. $_POST['month']  .'-'. $_POST['year'];
         $comment = $_POST['comment'];
 
         $target = "uploads/".basename($_FILES['image']['name']);
 
-        $query = "INSERT INTO accountsofficeropinion (budgetSeleaction,budgetYear,budget_type,budgetCode,budgetSector,pageNo,type,image,day,month,year,comment) VALUES ('$budgetSeleaction','$budgetYear','$budgetType','$budgetCode','$budgetSector','$pageNo','$type','$image','$day','$month','$year','$comment')";
+        $query = "INSERT INTO accountsofficeropinion (budget_id, accountofficer_id, budgetYear, budgetCode, budgetSector, pageNo, type, image, date, comment) VALUES ('$budget_id', $accountofficer_id, '$budgetYear', '$budgetCode', '$budgetSector', '$pageNo', '$type', '$image', '$date', '$comment')";
         
         $run = mysqli_query($db, $query);
+        
         if ($run) {
+            $stage = 4;
+            $status = 'unseen';
+
+            $sql = "UPDATE demand SET stage = $stage, status = '$status' WHERE id = '$budget_id'";
+            $run = mysqli_query($db, $sql);
+
+            $msg =  "<div class='alert alert-success'><strong>আপনার মতামতটি গৃহীত হয়েছে ". $budget_id ."</strong></div>" ;
+            session::set("loginmgs", $msg);
             $_SESSION['status'] = "Data Inserted";
-            header("Location: deputyDirectorOpinion.php");
+            header("Location: accountOfficerIndex.php");
         }
         else{
             $_SESSION['status'] = "Data Not Inserted";
-            header("Location: deputyDirectorOpinion.php");
+            header("Location: accountOfficerIndex.php");
         }
     }
 ?>
@@ -57,23 +79,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>কর্মকর্তা (হিসাব) দপ্তরের মতামত</title>
+    <title>মতামত | কর্মকর্তা (হিসাব) দপ্তর </title>
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </head>
 <body>
     <?php
-        include 'navbar.php';
+        include 'accountOfficerNavbar.php';
     ?>
     <div style="margin-top: 20px;" class="container text-center">
         <h3>
             কর্মকর্তা (হিসাব) দপ্তরের মতামত প্রদান
         </h3>
         <h4>
-            <a class="btn btn-warning mt-3" href="budgetStatement.php">বাজেট বিবরণ দেখুন</a>
-            <a class="btn btn-warning mt-3" href="recommendingOfficerStatement.php">সুপারিশকারী কর্মকর্তার মতামত দেখুন</a>
+            <a class="btn btn-warning mt-3" href="budgetStatement.php?id=<?php echo $budget_id;?>">বাজেট বিবরণ দেখুন</a>
+            <a class="btn btn-warning mt-3" href="recommendingOfficerStatement.php?id=<?php echo $budget_id;?>">সুপারিশকারী কর্মকর্তার মতামত দেখুন</a>
         </h4>
-        <form action="AccountsOfficerOpinion.php" method="POST">
+        <form action="" method="POST">
             <p class="h5 text-center mt-5">প্রস্তাবিত 
                 <select name="budgetSeleaction">
                     <option value="<?php echo $budgetType;?>">
@@ -87,7 +109,7 @@
                     </option>
                 </select> এর জন্য 
             <select name="budgetYear">
-                <option class="dropdown-menu" value="none">2021 - 2022 </option>
+                <option class="dropdown-menu" value="2021-2022">2021-2022 </option>
                 <option value="2020-2021">2020-2021</option>
                 <option value="2021-2022">2021-2022</option>
                 <option value="2022-2023">2022-2023</option>
