@@ -126,7 +126,7 @@
                         </div>   
                         </p>
                         <a class="btn btn-warning" href="vcSirOpinion.php">
-                        বাজেট আবেদন সমূহ</a>
+                        বাজেট আবেদন সমূহ</a>&nbsp;
                         <a class="btn btn-secondary" href="">পূর্বের বাজেট আবেদন</a>
                     </div>
                 </div>

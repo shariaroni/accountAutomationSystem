@@ -15,6 +15,26 @@
         session::distroy(); 
     }
 ?>
+
+<?php
+    $db = mysqli_connect("localhost","root","","db_lr");
+    $budget_id = mysqli_real_escape_string($db, $_GET['id']);
+    if($budget_id){
+        $sql = "SELECT * FROM demand WHERE id = $budget_id";
+        $res =  $db->query($sql);
+        $row = $res->fetch_assoc();
+        $budgetType = $row['budgetType'];
+    }
+?>
+<?php
+    $db = mysqli_connect("localhost","root","","db_lr");
+    $budget_id = mysqli_real_escape_string($db, $_GET['id']);
+    if($budget_id){
+        $sql = "SELECT * FROM accountsofficeropinion WHERE id = $budget_id";
+        $res =  $db->query($sql);
+        $row = $res->fetch_assoc();
+    }
+?>
 <?php
     $db = mysqli_connect("localhost","root","","db_lr");
 
@@ -34,7 +54,7 @@
 
         $target = "uploads/".basename($_FILES['image']['name']);
 
-        $query = "INSERT INTO deputydirectoropinion (budgetSeleaction,budgetYear,budgetType,budgetCode,budgetSector,pageNo,type,image,day,month,year,comment) VALUES ('$budgetSeleaction','$budgetYear','$budgetType','$budgetCode','$budgetSector','$pageNo','$type','$image','$day','$month','$year','$comment')";
+        $query = "INSERT INTO deputydirectoropinion (budgetSeleaction,budgetYear,budgetType,budgetCode,budgetSector,pageNo,type,image,date,comment) VALUES ('$budgetSeleaction','$budgetYear','$budgetType','$budgetCode','$budgetSector','$pageNo','$type','$image','$date','$month','$year','$comment')";
         
         $run = mysqli_query($db, $query);
         if ($run) {
@@ -57,15 +77,15 @@
 </head>
 <body>
     <?php
-        include 'navbar.php';
+        include 'deputyDirectorNavbar.php';
     ?>
     <div style="margin-top: 20px;" class="container text-center">
        <h3>
            উপ-পরিচালক (হিসাব) দপ্তরের মতামত প্রদান
        </h3>
        <h4>
-           <a class="btn btn-warning mt-3" href="#">বাজেট বিবরণ দেখুন</a>
-           <a class="btn btn-warning mt-3" href="deputyDirectorStatement.php">কর্মকর্তা (হিসাব) দপ্তরের মতামত দেখুন</a>
+           <a class="btn btn-warning mt-3" href="budgetStatement.php?id=<?php echo $budget_id;?>">বাজেট বিবারণী দেখুন</a>
+           <a class="btn btn-warning mt-3" href="accountOfficerStatement.php?id=<?php echo $budget_id;?>">কর্মকর্তা (হিসাব) দপ্তরের মতামত দেখুন</a>
        </h4>
        <form action="deputyDirectorOpinion.php" method="POST">
           <p class="h5 text-center mt-5">

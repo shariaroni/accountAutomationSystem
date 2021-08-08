@@ -37,23 +37,29 @@
             <?php
                 $db = mysqli_connect("localhost","root","","db_lr");
                 $budget_id = mysqli_real_escape_string($db, $_GET['id']);
-                $sql1 = "SELECT id,user_id,	recommending_officer_id,budgetSeleaction,recommend,image,date,comment FROM recommendingofficeropinion WHERE id='$budget_id'";
+                $sql1 = "SELECT id,user_id,budget_type,budgetType,recommending_officer_id,comment,total,need FROM demand WHERE id='$budget_id'";
                 $result = $db->query($sql1);
                 if ($result-> num_rows > 0) {
                     while ($row = $result-> fetch_assoc()) {
                         $user_id = $row['user_id'];
-                        $sql2 = "SELECT * FROM tabel_user WHERE id = $id LIMIT 1";
+                        $sql2 = "SELECT * FROM tabel_user WHERE id = $user_id LIMIT 1";
                         $res2 =  $db->query($sql2);
                         $row2 = $res2->fetch_assoc();
                         $userName = $row2['name'];
+
                         //recommending_officer_id to recommending_officer_name
                         $recommending_officer_id = $row['recommending_officer_id'];
-                                $sql3 = "SELECT * FROM tabel_user WHERE id = $recommending_officer_id LIMIT 1";
-                                $res3 = $db->query($sql3);
-                                $row3 = $res3->fetch_assoc();
-                                $recommending_officer_name = $row3['name'];
+                        $sql3 = "SELECT * FROM tabel_user WHERE id = $recommending_officer_id LIMIT 1";
+                        $res3 = $db->query($sql3);
+                        $row3 = $res3->fetch_assoc();
+                        $recommending_officer_name = $row3['name'];
 
-                        foreach($result as $aType):
+                        //recomending_officer_opinion
+                        $budget_id = $row['id'];
+                        $sql4 = "SELECT budgetSeleaction,date,image,comment,recommend FROM recommendingofficeropinion WHERE budget_id = $budget_id ";
+                        $result4 = $db->query($sql4);
+                        $row4 = $result4-> fetch_assoc();
+                        foreach($result4 as $aType):
                             if($aType['budgetSeleaction'] == "work"){
                                 $show2 = "কাজ";
                             }
@@ -89,17 +95,14 @@
                             <td class='text-end table-active'>সুপারিশ</th>
                             <td class='text-start'>".$show3."</td>
                         </tr>
-                        <tr>
-                            <td class='text-end table-active'>সংযুক্ত ছবি</th>
-                            <td class='text-start'>".$row["image"]."</td>
-                        </tr>
+                        
                         <tr>
                             <td class='text-end table-active'>তারিখ</th>
-                            <td class='text-start'>".$row["date"]."</td>
+                            <td class='text-start'>".$row4["date"]."</td>
                         </tr>
                         <tr>
                             <td class='text-end table-active'>মন্তব্য</th>
-                            <td class='text-start'>".$row["comment"]."</td>
+                            <td class='text-start'>".$row4["comment"]."</td>
                         </tr>";
                         endforeach;
                     }

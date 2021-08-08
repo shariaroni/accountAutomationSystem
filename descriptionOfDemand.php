@@ -40,8 +40,10 @@
         $price = $_POST['price'];
         $item_total = $_POST['item_total'];
         $total = $_POST['total'];
+        $total = str_replace(',', "", $total);
+        $total = (double) $total;
         $need = $_POST['need'];
-        $advanceAmount = $_POST['advanceAmount'];
+        $advanceAmount = (double) $_POST['advanceAmount'];
         $date = date("d-m-Y");
         $stage = 2;
         $status = "unseen";
@@ -57,15 +59,6 @@
             $query = "INSERT INTO demand (budget_type, budgetType, comment, user_id, recommending_officer_id, item, qty, price, item_total, total, need, advanceAmount, date, stage, status) VALUES ('$budget_type', '$budgetType', '$comment', $user_id, $recommending_officer_id, '$item', '$qty', '$price', '$item_total', '$total', '$need', '$advanceAmount', '$date', $stage, '$status')";
         
             $run = mysqli_query($db, $query);
-            
-            // if ($run) {
-            //     $_SESSION['status'] = "Data Inserted Successfully";
-            //     header("Location: descriptionOfDemand.php");
-            // }
-            // else{
-            //     $_SESSION['status'] = "Data Not Inserted Successfully!";
-            //     header("Location: descriptionOfDemand.php");
-            // }
         }
     }
 ?>

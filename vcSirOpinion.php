@@ -52,16 +52,16 @@
 </head>
 <body>
     <?php
-        include 'navbar.php';
+        include 'vcSirNavbar.php';
     ?>
    <div style="margin-top: 20px;" class="container text-center">
        <h3>
            ভাইস-চ্যান্সেলর মহোদয়ের মতামত প্রদান
        </h3>
        <h4>
-           <a class="btn btn-warning mt-3" href="budgetStatement.php">বাজেট বিবরণ দেখুন</a>
-           <a class="btn btn-warning mt-3" href="directorStatement.php">পরিচালক (হিসাব) দপ্তরের মতামত দেখুন</a>
-           <a class="btn btn-warning mt-3" href="treasureStatement.php">ট্রেজারার মহোদয়ের মতামত দেখুন</a>
+           <a class="btn btn-warning mt-3" href="budgetStatement.php?id=<?php echo $budget_id;?>">বাজেট বিবরণ দেখুন</a>
+           <a class="btn btn-warning mt-3" href="directorStatement.php?id=<?php echo $budget_id?>">পরিচালক (হিসাব) দপ্তরের মতামত দেখুন</a>
+           <a class="btn btn-warning mt-3" href="treasureStatement.php?id=<?php echo $budget_id?>">ট্রেজারার মহোদয়ের মতামত দেখুন</a>
        </h4>
        <p class="h5 text-center my-5">
            প্রস্তাবিত কাজ/ সেবা/ মালামাল ক্রয়ের জন্য প্রশাসনিক ও আর্থিক অনুমোদন - </p>

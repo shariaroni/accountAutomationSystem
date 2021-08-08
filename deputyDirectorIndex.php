@@ -125,8 +125,8 @@
                             </div>
                         </div>     
                         </p>
-                        <a class="btn btn-warning" href="deputyDirectorOpinion.php">
-                        বাজেট আবেদন সমূহ</a>
+                        <a class="btn btn-warning" href="deputyDirectorBudgetList.php">
+                        বাজেট আবেদন সমূহ</a>&nbsp;
                         <a class="btn btn-secondary" href="">পূর্বের বাজেট আবেদন</a>
                     </div>
                 </div>
