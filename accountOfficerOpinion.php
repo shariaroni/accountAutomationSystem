@@ -37,9 +37,9 @@
     }
 ?>
 <?php
-    $db = mysqli_connect("localhost","root","","db_lr");
 
     if (isset($_POST['submit'])) {
+        $budget_id = mysqli_real_escape_string($db, $_GET['id']);
         $budgetSeleaction = $_POST['budgetSeleaction'];
         $budgetYear = $_POST['budgetYear'];
         $budget_type = $_POST['budget_type'];
@@ -47,22 +47,36 @@
         $budgetSector = $_POST['budgetSector'];
         $pageNo = $_POST['pageNo'];
         $type = $_POST['type'];
-        $image = $_FILES['image']['name'];
+        if($_FILES['image']['name']){
+            $image = $_FILES['image']['name'];
+            $target = "uploads/".basename($_FILES['image']['name']);
+        }
         $date = date("d-m-Y");
         $comment = $_POST['comment'];
 
-        $target = "uploads/".basename($_FILES['image']['name']);
-
-        $query = "INSERT INTO accountsofficeropinion (budgetSeleaction,budgetYear,budget_type,budgetCode,budgetSector,pageNo,type,image,date,comment) VALUES ('$budgetSeleaction','$budgetYear','$budgetType','$budgetCode','$budgetSector','$pageNo','$type','$image','$date','$comment')";
+        $sql = "INSERT INTO accountsofficeropinion (budget_id,budgetSeleaction,budgetYear,budget_type,budgetCode,budgetSector,pageNo,type,image,date,comment) VALUES ('$budget_id','$budgetSeleaction','$budgetYear','$budgetType','$budgetCode','$budgetSector','$pageNo','$type','$image','$date','$comment')";
+        $run = mysqli_query($db, $sql);
         
-        $run = mysqli_query($db, $query);
         if ($run) {
+            if (isset($_POST['submit'])){
+                $stage = 4;
+                $status = 'unseen';    
+            }
+            else{
+                $stage = 3;
+                $status = 'rejected';
+            }
+            $sql = "UPDATE demand SET stage = $stage, status = '$status' WHERE id = $budget_id";
+            $run = mysqli_query($db, $sql);
+
+            $msg =  "<div class='alert alert-success'><strong>আপনার মতামতটি গৃহীত হয়েছে </strong></div>";
+            session::set("loginmgs", $msg);
             $_SESSION['status'] = "Data Inserted";
-            header("Location: deputyDirectorOpinion.php");
+            header("Location: accountOfficerIndex.php");
         }
         else{
             $_SESSION['status'] = "Data Not Inserted";
-            header("Location: deputyDirectorOpinion.php");
+            header("Location: accountOfficerOpinion.php?id=$budget_id");
         }
     }
 ?>
@@ -70,7 +84,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>কর্মকর্তা (হিসাব) দপ্তরের মতামত</title>
+    <title>মতামত | কর্মকর্তা (হিসাব) দপ্তর</title>
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </head>
@@ -86,7 +100,7 @@
             <a class="btn btn-warning mt-3" href="budgetStatement.php?id=<?php echo $budget_id;?>">বাজেট বিবরণ দেখুন</a>
             <a class="btn btn-warning mt-3" href="recommendingOfficerStatement.php?id=<?php echo $budget_id;?>">সুপারিশকারী কর্মকর্তার মতামত দেখুন</a>
         </h4>
-        <form action="AccountsOfficerOpinion.php" method="POST">
+        <form action="" method="POST">
             <p class="h5 text-center mt-5">প্রস্তাবিত 
                 <select name="budgetSeleaction">
                     <option value="<?php echo $budgetType;?>">
