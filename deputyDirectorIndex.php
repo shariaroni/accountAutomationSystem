@@ -6,6 +6,7 @@
     $pageType = 'deputyDirector';
     include 'individualSessionCheck.php';
 ?>
+
 <?php
     $loginmgs = session::get("loginmgs");
     if (isset($loginmgs)) {
@@ -13,18 +14,16 @@
     }
     session::set("loginmgs",NULL);
 ?>
+
 <?php
     if (isset($_GET['action']) && $_GET['action'] == "logout") {
         session::distroy(); 
     }
 ?>
+
 <?php
-    $conn = mysqli_connect('localhost', 'root', '', 'db_lr');
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
     $id = session::get("id");
-    $sql = "SELECT * FROM tabel_user WHERE id = $id ";
+    $sql = "SELECT * FROM tabel_user WHERE id = $id";
     $res = $conn->query($sql);
     $row = $res->fetch_assoc();
     $email = $row['email'];
@@ -125,9 +124,20 @@
                             </div>
                         </div>     
                         </p>
-                        <a class="btn btn-warning" href="deputyDirectorBudgetList.php">
-                        বাজেট আবেদন সমূহ</a>&nbsp;
-                        <a class="btn btn-secondary" href="">পূর্বের বাজেট আবেদন</a>
+                        <a class="btn btn-warning position-relative"  href="deputyDirectorBudgetList.php"> বাজেট আবেদন সমূহ
+                            <?php
+                                $sql = "SELECT count(id) AS id FROM demand WHERE status='unseen' AND stage=4";
+                                $res = $conn->query($sql);
+                                $countArray = $res->fetch_all(MYSQLI_ASSOC);
+                                $countNotification = $countArray[0]['id'];
+                                if($countNotification > 0):
+                            ?>
+                            <span class="position-absolute top-0 start-100 translate-middle px-2 text-light bg-danger border border-light rounded-pill">
+                                <?php echo $countNotification; 
+                                endif;?>
+                            </span> 
+                        </a>&nbsp;
+                        <a class="btn btn-secondary" href="deputyDirectorOldBudgetList.php">পূর্বের বাজেট আবেদন</a>
                     </div>
                 </div>
             </div>

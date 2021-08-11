@@ -64,7 +64,7 @@
             $sql = "UPDATE demand SET stage = $stage, status = '$status' WHERE id = '$budget_id'";
             $run = mysqli_query($db, $sql);
 
-            $msg =  "<div class='alert alert-success'><strong>আপনার মতামতটি গৃহীত হয়েছে </strong></div>" ;
+            $msg =  "<div class='alert alert-success'><strong>আপনার মতামতটি গৃহীত হয়েছে </strong></div>";
             session::set("loginmgs", $msg);
             $_SESSION['status'] = "Data Inserted";
             header("Location: accountOfficerIndex.php");

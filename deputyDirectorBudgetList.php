@@ -20,12 +20,12 @@
     if($page < 1)
         $page = 1;
 	$start = ($page - 1) * $limit;
-    $accountOfficer_id = session::get("id");
+    $deputyDirector_id = session::get("id");
 
-	$result = $conn->query("SELECT * FROM accountsofficeropinion WHERE stage = 4 and (status='seen' or status='unseen') LIMIT $start, $limit");
+	$result = $conn->query("SELECT * FROM demand WHERE stage = 4 and (status='unseen' or status='seen') LIMIT $start, $limit");
     $budgets = $result->fetch_all(MYSQLI_ASSOC);
 
-	$result1 = $conn->query("SELECT count(id) AS id FROM accountsofficeropinion WHERE stage = 4 and (status='seen' or status='unseen')");
+	$result1 = $conn->query("SELECT count(id) AS id FROM demand WHERE stage = 4 and (status='unseen' or status='seen')");
 	$custCount = $result1->fetch_all(MYSQLI_ASSOC);
 	$total = $custCount[0]['id'];
 	$pages = ceil( $total / $limit );
@@ -72,19 +72,19 @@
                         <nav aria-label="Page navigation example">
                             <ul class="pagination pagination-sm">
                                 <li class="page-item <?php if($Previous == 0):?> disabled <?php endif; ?>">
-                                    <a class="page-link" href="accountOfficerBudgetList.php?page=<?= $Previous; ?>" aria-label="Previous">
+                                    <a class="page-link" href="deputyDirectorBudgetList.php?page=<?= $Previous; ?>" aria-label="Previous">
                                         <span class = "page-link" aria-hidden="true">&laquo;</span>
                                     </a>
                                 </li>
                                 <?php for($i = 1; $i<= $pages; $i++) : ?>
                                         <li class="page-item <?php if($i == $page):?> active <?php endif; ?>">
-                                            <a class="page-link" href="accountOfficerBudgetList.php?page=<?= $i; ?>"> 
+                                            <a class="page-link" href="deputyDirectorBudgetList.php?page=<?= $i; ?>"> 
                                                 <span class = "page-link"> <?= $i; ?> </span>
                                             </a>
                                         </li>
                                 <?php endfor; ?>
                                 <li class="page-item <?php if($Next == $pages+1):?> disabled <?php endif; ?>">
-                                    <a class="page-link" href="accountOfficerBudgetList.php?page=<?= $Next; ?>" aria-label="Next">
+                                    <a class="page-link" href="deputyDirectorBudgetList.php?page=<?= $Next; ?>" aria-label="Next">
                                         <span class = "page-link" aria-hidden="true">&raquo;</span>
                                     </a>
                                 </li>

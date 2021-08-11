@@ -15,25 +15,53 @@
         session::distroy(); 
     }
 ?>
+
+<?php
+    $db = mysqli_connect("localhost","root","","db_lr");
+    $budget_id = mysqli_real_escape_string($db, $_GET['id']);
+    if($budget_id){
+        $sql = "SELECT * FROM demand WHERE id = $budget_id";
+        $res =  $db->query($sql);
+        $row = $res->fetch_assoc();
+        $budgetType = $row['budgetType'];
+        $budget_type = $row['budget_type'];
+    }
+?>
+
 <?php
     $db = mysqli_connect("localhost","root","","db_lr");
 
     if (isset($_POST['submit'])) {
+        $budget_id = mysqli_real_escape_string($db, $_GET['id']);
+        $treasurer_id = session::get("id");
         $parmited = $_POST['parmited'];
         $image = $_FILES['image']['name'];
-        $day = $_POST['day'];
-        $month = $_POST['month'];
-        $year = $_POST['year'];
+        $date = $_POST['day'] .'-'. $_POST['month']  .'-'. $_POST['year'];
         $comment = $_POST['comment'];
 
         $target = "uploads/".basename($_FILES['image']['name']);
 
-        $query = "INSERT INTO treasureopinion (parmited,image,day,month,year,comment) VALUES ('$parmited','$image','$day','$month','$year','$comment')";
+        $query = "INSERT INTO treasureopinion (budget_id, treasurer_id, parmited, image, date, comment) VALUES ('$budget_id', $treasurer_id, '$parmited', '$image','$date','$comment')";
         
         $run = mysqli_query($db, $query);
+        
         if ($run) {
+            if($parmited == 'yes'){
+                $stage = 7;
+                $status = 'unseen';
+            }
+            else{
+                $stage = 6;
+                $status = 'rejected';
+            }
+
+            $sql = "UPDATE demand SET stage = $stage, status = '$status' WHERE id = '$budget_id'";
+            $run = mysqli_query($db, $sql);
+
+            $msg =  "<div class='alert alert-success'><strong>আপনার মতামতটি গৃহীত হয়েছে </strong></div>";
+            session::set("loginmgs", $msg);
             $_SESSION['status'] = "Data Inserted";
-            header("Location: vcSirOpinion.php");
+            header("Location: treasureIndex.php");
         }
         else{
             $_SESSION['status'] = "Data Not Inserted";
@@ -61,8 +89,16 @@
            <a class="btn btn-warning mt-3" href="#">বাজেট বিবরণ দেখুন</a>
            <a class="btn btn-warning mt-3" href="directorStatement.php">পরিচালক (হিসাব) দপ্তরের মতামত দেখুন</a>
        </h4>
-        <form action="treasureOpinion.php" method="POST">
-            <p class="h5 text-center mt-5">প্রস্তাবিত কাজ/ সেবা/ মালামাল ক্রয়ের জন্য প্রশাসনিক ও আর্থিক অনুমোদনের জন্য - </p>
+        <form action="" method="POST">
+            <p class="h5 text-center mt-5">প্রস্তাবিত <b>
+            <?php   if($budgetType == 'work')
+                        echo "কাজ"; 
+                    else if($budgetType == 'service')
+                        echo "সেবা"; 
+                    else if($budgetType == 'buyingProduct')
+                        echo "মালামাল ক্রয়";
+            ?>    
+            </b> এর জন্য প্রশাসনিক ও আর্থিক অনুমোদনের- </p>
             <div class="text-center my-4">
                 <div class="btn btn-outline-success">
                     <input class="form-check-input" id="yes" type="radio" name="parmited" value="yes">
@@ -76,75 +112,75 @@
             <div style="max-width: 500px; float:left" class="mt-5 form-control">
                 <label for="signature">ট্রেজারার মহোদয়ের স্বাক্ষর ও তারিখ</label>
                 <input name="image" class="form-control mt-2" type="file" id="signature">
-                        <div class="mt-2">
-                            <select name="day">
-                                <option class="dropdown-menu" value="day">Day</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                                <option value="13">13</option>
-                                <option value="14">14</option>
-                                <option value="15">15</option>
-                                <option value="16">16</option>
-                                <option value="17">17</option>
-                                <option value="18">18</option>
-                                <option value="19">19</option>
-                                <option value="20">20</option>
-                                <option value="21">21</option>
-                                <option value="22">22</option>
-                                <option value="23">23</option>
-                                <option value="24">24</option>
-                                <option value="25">25</option>
-                                <option value="26">26</option>
-                                <option value="27">27</option>
-                                <option value="28">28</option>
-                                <option value="29">29</option>
-                                <option value="30">30</option>
-                                <option value="31">31</option>
-                            </select>
-                            <select name="month">
-                                <option class="dropdown-menu" value="month">Month</option>
-                                <option value="jan">Jan</option>
-                                <option value="feb">Feb</option>
-                                <option value="mar">Mar</option>
-                                <option value="apr">Apr</option>
-                                <option value="may">May</option>
-                                <option value="jun">Jun</option>
-                                <option value="jul">Jul</option>
-                                <option value="aug">Aug</option>
-                                <option value="sep">Sep</option>
-                                <option value="oct">Oct</option>
-                                <option value="nov">Nov</option>
-                                <option value="dec">Dec</option>
-                            </select>
-                            <select name="year">
-                                <option class="dropdown-menu" value="year">Year</option>
-                                <option  value="2021">2021</option>
-                                <option value="2022">2022</option>
-                                <option value="2023">2023</option>
-                                <option value="2024">2024</option>
-                                <option value="2025">2025</option>
-                                <option value="2026">2026</option>
-                                <option value="2027">2027</option>
-                                <option value="2028">2028</option>
-                                <option value="2029">2029</option>
-                                <option value="2030">2030</option>
-                                <option value="2031">2031</option>
-                                <option value="2032">2032</option>
-                                <option value="2033">2033</option>
-                                <option value="2034">2034</option>
-                                <option value="2035">2035</option>
-                            </select>
-                        </div>
+                <div class="mt-2">
+                    <select name="day">
+                        <option class="dropdown-menu" value="<?php echo $day = date("d"); ?>"> <?php echo $day = date("d"); ?></option>
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                        <option value="25">25</option>
+                        <option value="26">26</option>
+                        <option value="27">27</option>
+                        <option value="28">28</option>
+                        <option value="29">29</option>
+                        <option value="30">30</option>
+                        <option value="31">31</option>
+                    </select>
+                    <select name="month">
+                        <option class="dropdown-menu" value="<?php echo $day = date("M"); ?>"> <?php echo $day = date("M"); ?> </option>
+                        <option value="jan">Jan</option>
+                        <option value="feb">Feb</option>
+                        <option value="mar">Mar</option>
+                        <option value="apr">Apr</option>
+                        <option value="may">May</option>
+                        <option value="jun">Jun</option>
+                        <option value="jul">Jul</option>
+                        <option value="aug">Aug</option>
+                        <option value="sep">Sep</option>
+                        <option value="oct">Oct</option>
+                        <option value="nov">Nov</option>
+                        <option value="dec">Dec</option>
+                    </select>
+                    <select name="year">
+                        <option class="dropdown-menu" value="<?php echo $day = date("Y"); ?>"> <?php echo $day = date("Y"); ?> </option>
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                        <option value="2028">2028</option>
+                        <option value="2029">2029</option>
+                        <option value="2030">2030</option>
+                        <option value="2031">2031</option>
+                        <option value="2032">2032</option>
+                        <option value="2033">2033</option>
+                        <option value="2034">2034</option>
+                        <option value="2035">2035</option>
+                    </select>
+                </div>
                     </div>
                     <div style="max-width: 400px; margin-left: 800px" class="mt-5 form-control">
                             মন্তব্য<br>

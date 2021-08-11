@@ -6,6 +6,7 @@
     $pageType = 'treasure';
     include 'individualSessionCheck.php';
 ?>
+
 <?php
     $loginmgs = session::get("loginmgs");
     if (isset($loginmgs)) {
@@ -13,11 +14,13 @@
     }
     session::set("loginmgs",NULL);
 ?>
+
 <?php
     if (isset($_GET['action']) && $_GET['action'] == "logout") {
         session::distroy(); 
     }
 ?>
+
 <?php
     $conn = mysqli_connect('localhost', 'root', '', 'db_lr');
     if (!$conn) {
@@ -125,7 +128,7 @@
                             </div>
                         </div>    
                         </p>
-                        <a class="btn btn-warning" href="treasureOpinion.php">
+                        <a class="btn btn-warning position-relative" href="treasureBudgetList.php">
                         বাজেট আবেদন সমূহ
                         <?php
                                 $sql = "SELECT count(id) AS id FROM demand WHERE status='unseen' AND stage = 6";
@@ -139,7 +142,7 @@
                                 endif;?>
                             </span>
                         </a>&nbsp;
-                        <a class="btn btn-secondary" href="">পূর্বের বাজেট আবেদন</a>
+                        <a class="btn btn-secondary" href="treasureOldBudgetList.php">পূর্বের বাজেট আবেদন</a>
                     </div>
                 </div>
             </div>

@@ -22,7 +22,7 @@
 	$start = ($page - 1) * $limit;
     $recommending_officer_id = session::get("id");
 
-	$result = $conn->query("SELECT * FROM demand WHERE recommending_officer_id = '$recommending_officer_id' and stage = 2 and (status='seen' or status='unseen') LIMIT $start, $limit");
+	$result = $conn->query("SELECT * FROM demand WHERE recommending_officer_id = '$recommending_officer_id' and stage = 2 and (status='seen' or status='unseen') ORDER BY id DESC LIMIT $start, $limit");
     $budgets = $result->fetch_all(MYSQLI_ASSOC);
 
 	$result1 = $conn->query("SELECT count(id) AS id FROM demand WHERE recommending_officer_id = '$recommending_officer_id' and stage = 2 and (status='seen' or status='unseen') ");
@@ -36,7 +36,7 @@
 
 <!-- updating budget status as seen -->
 <?php
-    $sql = "UPDATE demand SET status='seen' WHERE recommending_officer_id = '$recommending_officer_id' and stage=2";
+    $sql = "UPDATE demand SET status='seen' WHERE recommending_officer_id = '$recommending_officer_id' and status='unseen' and stage=2";
     $res =  $conn->query($sql);
 ?>
 

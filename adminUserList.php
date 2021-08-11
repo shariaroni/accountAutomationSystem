@@ -22,7 +22,7 @@
     if($page < 1)
         $page = 1;
 	$start = ($page - 1) * $limit;
-	$result = $conn->query("SELECT * FROM tabel_user WHERE verification_status = 1 and  admin_verification_status = 1 LIMIT $start, $limit");
+	$result = $conn->query("SELECT * FROM tabel_user WHERE verification_status = 1 and  admin_verification_status = 1 ORDER BY id DESC LIMIT $start, $limit");
 	$users = $result->fetch_all(MYSQLI_ASSOC);
 
 	$result1 = $conn->query("SELECT count(id) AS id FROM tabel_user WHERE verification_status = 1 and admin_verification_status = 1");

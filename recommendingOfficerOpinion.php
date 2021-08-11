@@ -2,7 +2,11 @@
     include 'user.php';
     include 'header.php';
     session::checksession();
+    
+    $pageType = 'recommendingOfficer';
+    include 'individualSessionCheck.php';
 ?>
+
 <?php
     $loginmgs = session::get("loginmgs");
     if (isset($loginmgs)) {
@@ -10,6 +14,7 @@
     }
     session::set("loginmgs",NULL);
 ?>
+
 <?php
     if (isset($_GET['action']) && $_GET['action'] == "logout") {
         session::distroy(); 
@@ -18,6 +23,9 @@
 
 <?php
     $db = mysqli_connect("localhost","root","","db_lr");
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
     $budget_id = mysqli_real_escape_string($db, $_GET['id']);
     if($budget_id){
         $sql = "SELECT * FROM demand WHERE id = $budget_id";
@@ -37,7 +45,7 @@
             $image = $_FILES['image']['name'];
             $target = "uploads/".basename($_FILES['image']['name']);
         }
-        $date = date("d-m-Y");
+        $date = $_POST['day'] . '-' .$_POST['month'] . '-' . $_POST['year'];
         $comment = $_POST['comment'];
 
         $sql = "INSERT INTO recommendingofficeropinion (budget_id, budgetSeleaction, recommend, image, date, comment) VALUES ('$budget_id','$budgetSeleaction','$recommend','$image','$date','$comment')";
@@ -50,11 +58,11 @@
             }
             else{
                 $stage = 2;
-                $status = 'rejected'; 
+                $status = 'rejected';
             }
 
             $sql = "UPDATE demand SET stage = $stage, status = '$status' WHERE id = $budget_id";
-            $run = mysqli_query($db, $sql);
+            mysqli_query($db, $sql);
 
             $msg =  "<div class='alert alert-success'><strong>আপনার মতামতটি গৃহীত হয়েছে </strong></div>";
             session::set("loginmgs", $msg);

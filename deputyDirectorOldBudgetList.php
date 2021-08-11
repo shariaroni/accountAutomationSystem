@@ -20,12 +20,13 @@
     if($page < 1)
         $page = 1;
 	$start = ($page - 1) * $limit;
-    $accountOfficer_id = session::get("id");
+    $deputyDirector_id = session::get("id");
 
-	$result = $conn->query("SELECT * FROM demand WHERE stage = 3 and (status='seen' or status='unseen') ORDER BY id DESC LIMIT $start, $limit");
+    $sql = "SELECT * FROM demand WHERE stage>4 or (stage=4 and status!='unseen' and status!='seen') ORDER BY id DESC LIMIT $start, $limit";
+	$result = $conn->query($sql);
     $budgets = $result->fetch_all(MYSQLI_ASSOC);
 
-	$result1 = $conn->query("SELECT count(id) AS id FROM demand WHERE stage = 3 and (status='seen' or status='unseen')");
+	$result1 = $conn->query("SELECT count(id) AS id FROM demand WHERE stage>4 or (stage=4 and status!='unseen' and status!='seen')");
 	$custCount = $result1->fetch_all(MYSQLI_ASSOC);
 	$total = $custCount[0]['id'];
 	$pages = ceil( $total / $limit );
@@ -33,12 +34,6 @@
 	$Previous = $page - 1;
 	$Next = $page + 1;
  ?>
-
- <!-- updating budget status as seen -->
-<?php
-    $sql = "UPDATE demand SET status='seen' WHERE stage=3";
-    $res =  $conn->query($sql);
-?>
 
 <?php
     if (isset($_GET['action']) && $_GET['action'] == "logout") {
@@ -52,16 +47,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> আবেদনকারীদের তালিকা | কর্মকর্তা </title>
+    <title> পূর্ববর্তী আবেদন | উপ পরিচালক </title>
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </head>
 <body>
     <?php
-        include 'accountOfficerNavbar.php';
+        include 'deputyDirectorNavbar.php';
     ?>
     <div class="panel-heading">
-            <h3 class="text-center mt-3">আবেদনের তালিকা</h3>
+            <h3 class="text-center mt-3">পূর্ববর্তী আবেদনের তালিকা</h3>
     </div>
     <div class="container">
         <div style="margin: 0 auto">
@@ -72,19 +67,19 @@
                         <nav aria-label="Page navigation example">
                             <ul class="pagination pagination-sm">
                                 <li class="page-item <?php if($Previous == 0):?> disabled <?php endif; ?>">
-                                    <a class="page-link" href="accountOfficerBudgetList.php?page=<?= $Previous; ?>" aria-label="Previous">
+                                    <a class="page-link" href="deputyDirectorOldBudgetList.php?page=<?= $Previous; ?>" aria-label="Previous">
                                         <span class = "page-link" aria-hidden="true">&laquo;</span>
                                     </a>
                                 </li>
                                 <?php for($i = 1; $i<= $pages; $i++) : ?>
                                         <li class="page-item <?php if($i == $page):?> active <?php endif; ?>">
-                                            <a class="page-link" href="accountOfficerBudgetList.php?page=<?= $i; ?>"> 
+                                            <a class="page-link" href="deputyDirectorOldBudgetList.php?page=<?= $i; ?>"> 
                                                 <span class = "page-link"> <?= $i; ?> </span>
                                             </a>
                                         </li>
                                 <?php endfor; ?>
                                 <li class="page-item <?php if($Next == $pages+1):?> disabled <?php endif; ?>">
-                                    <a class="page-link" href="accountOfficerBudgetList.php?page=<?= $Next; ?>" aria-label="Next">
+                                    <a class="page-link" href="deputyDirectorOldBudgetList.php?page=<?= $Next; ?>" aria-label="Next">
                                         <span class = "page-link" aria-hidden="true">&raquo;</span>
                                     </a>
                                 </li>
@@ -121,8 +116,8 @@
                                     <td class="text-center"><?= $userName; ?></td>
                                     <td class="text-center"><?= $budget['date']; ?></td>
                                     <td class="text-center">
-                                        <a href = "accountOfficerOpinion.php?id=<?= $budget['id'];?>" 
-                                        onclick="window.open('accountOfficerOpinion.php?id=<?= $budget['id'];?>')">
+                                        <a href = "deputyDirectorOpinion.php?id=<?= $budget['id'];?>" 
+                                        onclick="window.open('deputyDirectorOpinion.php?id=<?= $budget['id'];?>')">
                                             <input class="btn btn-outline-success btn-sm" type="submit" value="দেখুন" />
                                         </a>
                                     </td>

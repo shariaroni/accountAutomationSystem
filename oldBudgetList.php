@@ -22,10 +22,10 @@
 	$start = ($page - 1) * $limit;
     $user_id = session::get("id");
 
-	$result = $conn->query("SELECT * FROM demand WHERE user_id = '$user_id' and stage > 1  LIMIT $start, $limit");
+	$result = $conn->query("SELECT * FROM demand WHERE user_id='$user_id' ORDER BY id DESC LIMIT $start, $limit");
     $budgets = $result->fetch_all(MYSQLI_ASSOC);
 
-	$result1 = $conn->query("SELECT count(id) AS id FROM demand WHERE user_id = '$user_id' and stage > 1");
+	$result1 = $conn->query("SELECT count(id) AS id FROM demand WHERE user_id='$user_id'");
 	$custCount = $result1->fetch_all(MYSQLI_ASSOC);
 	$total = $custCount[0]['id'];
 	$pages = ceil( $total / $limit );
@@ -134,13 +134,26 @@
                                 <th>ক্রমিক নং</th>
                                 <th>আবেদনকারীর নাম</th>
                                 <th>আবেদনের তারিখ</th>
-                                <th>মতামত</th>
+                                <th>বর্তমান অবস্থা</th>
+                                <th>বিস্তারিত</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php 
                                 $count = 0;
-                                foreach($budgets as $budget) :  ?>
+                                foreach($budgets as $budget) :
+                                    if($budget['status'] == 'accepted')
+                                    {
+                                        $currentStatus = 'অনুমদিত';
+                                    }
+                                    else if($budget['status'] == 'rejected')
+                                    {
+                                        $currentStatus = 'বাতিল';
+                                    }
+                                    else
+                                    {
+                                        $currentStatus = 'প্রক্রিয়াধীন';
+                                    } ?>
                                 <tr>
                                     <td class="text-center"><?= $count = $count+1; ?></td>
                                     <?php
@@ -152,6 +165,7 @@
                                     ?>
                                     <td class="text-center"><?= $userName; ?></td>
                                     <td class="text-center"><?= $budget['date']; ?></td>
+                                    <td class="text-center"><?= $currentStatus; ?></td>
                                     <td class="text-center">
                                         <a href = "budgetStatement.php?id=<?=$budget['id'];?>" 
                                         onclick="window.open('budgetStatement.php?id=<?=$budget['id'];?>')">

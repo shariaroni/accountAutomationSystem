@@ -18,6 +18,18 @@
 
 <?php
     $db = mysqli_connect("localhost","root","","db_lr");
+    $budget_id = mysqli_real_escape_string($db, $_GET['id']);
+    if($budget_id){
+        $sql = "SELECT * FROM demand WHERE id = $budget_id";
+        $res =  $db->query($sql);
+        $row = $res->fetch_assoc();
+        $budgetType = $row['budgetType'];
+        $budget_type = $row['budget_type'];
+    }
+?>
+
+<?php
+    $db = mysqli_connect("localhost","root","","db_lr");
 
     if (isset($_POST['submit'])) {
         $parmited = $_POST['parmited'];

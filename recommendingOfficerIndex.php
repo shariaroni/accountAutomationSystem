@@ -14,6 +14,7 @@
     }
     session::set("loginmgs",NULL);
 ?>
+
 <?php
     if (isset($_GET['action']) && $_GET['action'] == "logout") {
         session::distroy(); 

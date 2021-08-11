@@ -20,7 +20,7 @@
 	$limit = 8;
 	$page = isset($_GET['page']) ? $_GET['page'] : 1;
 	$start = ($page - 1) * $limit;
-	$result = $conn->query("SELECT * FROM tabel_user WHERE admin_verification_status = 0 LIMIT $start, $limit");
+	$result = $conn->query("SELECT * FROM tabel_user WHERE admin_verification_status = 0 ORDER BY id DESC LIMIT $start, $limit");
 	$users = $result->fetch_all(MYSQLI_ASSOC);
 
 	$result1 = $conn->query("SELECT count(id) AS id FROM tabel_user WHERE admin_verification_status = 0");
