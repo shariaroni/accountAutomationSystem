@@ -82,24 +82,21 @@
 
                         if($row['status'] == 'accepted')
                         {
-                            $status = 'অনুমদিত';
+                            $status = '<font class="text-success"> অনুমদিত </font>';
                         }
                         else if($row['status'] == 'rejected')
                         {
-                            $status = 'বাতিল';
+                            $status = '<font class="text-danger"> বাতিল </font>';
                         }
                         else
                         {
-                            $status = 'প্রক্রিয়াধীন';
+                            $status = '<font class="text-primary"> প্রক্রিয়াধীন </font>';
                         }
+    
 
-                        $stage = array("", "", "সুপারিশকারী কর্মকর্তা", "কর্মকর্তা (হিসাব দপ্তর)", "উপ পরিচালক (হিসাব দপ্তর)", "পরিচালক (হিসাব দপ্তর)", "ট্রেজারার মহোদয়", "ভাইস-চ্যান্সেলর মহোদয়");
+                        $stage = array("", "", "সুপারিশকারী কর্মকর্তা", "কর্মকর্তা (হিসাব দপ্তর)", "উপ পরিচালক (হিসাব দপ্তর)", "পরিচালক (হিসাব দপ্তর)", "ট্রেজারার মহোদয়", "উপাচার্য মহোদয়");
 
                         echo "<tr>
-                                <td class='text-end table-active'>ক্রমিক নং</td>
-                                <td class='text-start'>".$row["id"]."</td>
-                            </tr>
-                            <tr>
                                 <td class='text-end table-active'>আবেদনকারীর নাম</td>
                                 <td class='text-start'>".$userName."</td>
                             </tr>

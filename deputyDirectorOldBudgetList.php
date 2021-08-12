@@ -47,7 +47,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> পূর্ববর্তী আবেদন | উপ পরিচালক </title>
+    <title> পূর্ববর্তী আবেদন | উপ-পরিচালক </title>
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </head>
@@ -116,9 +116,8 @@
                                     <td class="text-center"><?= $userName; ?></td>
                                     <td class="text-center"><?= $budget['date']; ?></td>
                                     <td class="text-center">
-                                        <a href = "deputyDirectorOpinion.php?id=<?= $budget['id'];?>" 
-                                        onclick="window.open('deputyDirectorOpinion.php?id=<?= $budget['id'];?>')">
-                                            <input class="btn btn-outline-success btn-sm" type="submit" value="দেখুন" />
+                                        <a href="deputyDirectorStatement.php?id=<?= $budget['id'];?>">   
+                                            <span class="btn btn-outline-success btn-sm"> দেখুন </span>
                                         </a>
                                     </td>
                                 </tr>

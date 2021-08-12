@@ -87,12 +87,12 @@
            <a class="btn btn-warning mt-3" href="budgetStatement.php?id=<?php echo $budget_id;?>">বাজেট বিবারণী দেখুন</a>
            <a class="btn btn-warning mt-3" href="accountOfficerStatement.php?id=<?php echo $budget_id;?>">কর্মকর্তা (হিসাব) দপ্তরের মতামত দেখুন</a>
        </h4>
-       <form action="" method="POST">
-           <?php
+        <form action="" method="POST">
+            <?php
                 $sql1 = "SELECT * FROM accountsofficeropinion WHERE budget_id='$budget_id'";
                 $result1 = $db->query($sql1);
                 $row1 = $result1-> fetch_assoc();
-           ?>
+            ?>
             <p class="h5 text-center mt-5">প্রস্তাবিত 
                 <select name="budgetSeleaction">
                     <option value="<?php echo $budgetType;?>">

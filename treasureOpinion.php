@@ -24,7 +24,6 @@
         $res =  $db->query($sql);
         $row = $res->fetch_assoc();
         $budgetType = $row['budgetType'];
-        $budget_type = $row['budget_type'];
     }
 ?>
 
@@ -33,7 +32,7 @@
 
     if (isset($_POST['submit'])) {
         $budget_id = mysqli_real_escape_string($db, $_GET['id']);
-        $treasurer_id = session::get("id");
+        $treasure_id = session::get("id");
         $parmited = $_POST['parmited'];
         $image = $_FILES['image']['name'];
         $date = $_POST['day'] .'-'. $_POST['month']  .'-'. $_POST['year'];
@@ -41,7 +40,7 @@
 
         $target = "uploads/".basename($_FILES['image']['name']);
 
-        $query = "INSERT INTO treasureopinion (budget_id, treasurer_id, parmited, image, date, comment) VALUES ('$budget_id', $treasurer_id, '$parmited', '$image','$date','$comment')";
+        $query = "INSERT INTO treasureopinion (budget_id, treasurer_id, parmited, image, date, comment) VALUES ('$budget_id', $treasure_id, '$parmited', '$image','$date','$comment')";
         
         $run = mysqli_query($db, $query);
         
@@ -73,22 +72,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ট্রেজারার মহোদয়ের মতামত</title>
+    <title>মতামত প্রদান | ট্রেজারার মহোদয় </title>
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </head>
 <body>
     <?php
-        include 'navbar.php';
+        include 'treasureNavbar.php';
     ?>
- <div style="margin-top: 20px;" class="container text-center">
-       <h3>
-           ট্রেজারার মহোদয়ের মতামত প্রদান
-       </h3>
-       <h4>
-           <a class="btn btn-warning mt-3" href="#">বাজেট বিবরণ দেখুন</a>
-           <a class="btn btn-warning mt-3" href="directorStatement.php">পরিচালক (হিসাব) দপ্তরের মতামত দেখুন</a>
-       </h4>
+    <div style="margin-top: 20px;" class="container text-center">
+        <h3>
+            ট্রেজারার মহোদয়ের মতামত প্রদান
+        </h3>
+        <h4>
+            <a class="btn btn-warning mt-3" href="budgetStatement.php?id=<?php echo $budget_id;?>">বাজেট বিবরণ দেখুন</a>
+            <a class="btn btn-warning mt-3" href="directorStatement.php?id=<?php echo $budget_id;?>">পরিচালক (হিসাব) দপ্তরের মতামত দেখুন</a>
+        </h4>
         <form action="" method="POST">
             <p class="h5 text-center mt-5">প্রস্তাবিত <b>
             <?php   if($budgetType == 'work')
@@ -189,7 +188,7 @@
                     <div class="text-center mt-5">
                         <input class="btn btn-success" name="submit" type="submit" value="নিশ্চিত করুন">
                     </div>
-    </form>
+        </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 </body>

@@ -144,15 +144,15 @@
                                 foreach($budgets as $budget) :
                                     if($budget['status'] == 'accepted')
                                     {
-                                        $currentStatus = 'অনুমদিত';
+                                        $currentStatus = '<font class="text-success"> অনুমদিত </font>';
                                     }
                                     else if($budget['status'] == 'rejected')
                                     {
-                                        $currentStatus = 'বাতিল';
+                                        $currentStatus = '<font class="text-danger"> বাতিল </font>';
                                     }
                                     else
                                     {
-                                        $currentStatus = 'প্রক্রিয়াধীন';
+                                        $currentStatus = '<font class="text-info"> প্রক্রিয়াধীন </font>';
                                     } ?>
                                 <tr>
                                     <td class="text-center"><?= $count = $count+1; ?></td>
@@ -167,9 +167,8 @@
                                     <td class="text-center"><?= $budget['date']; ?></td>
                                     <td class="text-center"><?= $currentStatus; ?></td>
                                     <td class="text-center">
-                                        <a href = "budgetStatement.php?id=<?=$budget['id'];?>" 
-                                        onclick="window.open('budgetStatement.php?id=<?=$budget['id'];?>')">
-                                            <input class="btn btn-outline-success btn-sm" type="submit" value="দেখুন" />
+                                        <a href="budgetStatement.php?id=<?= $budget['id'];?>">   
+                                            <span class="btn btn-outline-success btn-sm"> দেখুন </span>
                                         </a>
                                     </td>
                                 </tr>

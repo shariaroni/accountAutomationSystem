@@ -22,7 +22,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>সুপারিশকারী কর্মকর্তার মতামত</title>
+    <title>মতামত | পরিচালকের (হিসাব দপ্তর)</title>
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </head>
@@ -30,48 +30,75 @@
     <?php
         include 'navbar.php';
     ?>
-    <div class="container text-center mt-5">
-        <h4>পরিচালক (হিসাব) দপ্তরের মতামত</h4>
+    <div class="container text-center mt-5" style="max-width: 450px; margin: 0, auto">
+        <h4>পরিচালকের (হিসাব দপ্তর) মতামত</h4>
         <form action="" method="post">
-        <table class="table table-striped table-bordered table-hover mt-3">
-            <tr  class="table-dark">
-                <th>ক্রমিক নং</th>
-                <th>বাজেটের ধরণ</th>
-                <th>অর্থ বছর</th>
-                <th>বাজেটের বিভাগ</th>
-                <th>বাজেট কোড নম্বর</th>
-                <th>বাজেট খাত</th>
-                <th>পৃষ্ঠা নং -</th>
-                <th>পদ্ধতি</th>
-                <th>সংযুক্ত ছবি</th>
-                <th>তারিখ</th>
-                <th>মন্তব্য</th>
-            </tr>
+        <table class="table table-striped table-bordered mt-3">
             <?php
-                        $db = mysqli_connect("localhost","root","","db_lr");
-                        $sql1 = "SELECT id,budgetSeleaction,budgetYear,budgetType,budgetCode,budgetSector,pageNo,type,image,day,month,year,comment FROM directoropinion";
-                        //$sql2 = "SELECT budget_type FROM budgetseleaction";
-                        //$sql3 = "SELECT comment,budgetType FROM budgettype";
-                        //$sql = "SELECT  FROM";
-                        $result = $db->query($sql1);
-                        if ($result-> num_rows > 0) {
-                            while ($row = $result-> fetch_assoc()) {
-                                echo "<tr><td>".$row["id"]."</td><td>".$row["budgetSeleaction"]."</td><td>".$row["budgetYear"]."</td><td>".$row["budgetType"]."</td><td>".$row["budgetCode"]."</td><td>".$row["budgetSector"]."</td><td>".$row["pageNo"]."</td><td>".$row["type"]."</td><td>".$row["image"]."</td><td>".$row["day"].".".$row["month"].".".$row["year"]."</td><td>".$row["comment"]."</td></tr>";
-                            }
-                            echo "</table>";
+                $db = mysqli_connect("localhost","root","","db_lr");
+                $budget_id = mysqli_real_escape_string($db, $_GET['id']);
+                $sql1 = "SELECT * FROM directoropinion WHERE budget_id='$budget_id'";
+                $result = $db->query($sql1);
+                if ($result-> num_rows > 0) {
+                    while ($row = $result-> fetch_assoc()) {
+                        $director_id = $row['director_id'];
+                        $sql2 = "SELECT * FROM tabel_user WHERE id = $director_id and type = 'director' LIMIT 1";
+                        $res2 =  $db->query($sql2);
+                        $row2 = $res2->fetch_assoc();
+                        //director_id to director_name
+                        $director_name = $row2['name'];
+
+                        $sql3 = "SELECT * FROM demand WHERE id='$budget_id'";
+                        $result3 = $db->query($sql3);
+                        $row3 = $result3-> fetch_assoc();
+
+                        if($row3['budget_type'] == "others"){
+                            $budget_type = "অন্যান্য";
                         }
-                        else{
-                            echo "0 result";
+                        else if($row3['budget_type'] == "development"){
+                            $budget_type = "উন্নায়ন";
                         }
-                        $db-> close();
-                        if (isset($_POST['back'])) {
-                            header("Location: treasureOpinion.php");
+                        else if($row3['budget_type'] == "revenue"){
+                            $budget_type = "রাজস্ব";
                         }
-                    ?>
-                    <button name="back" class="btn btn-primary">Back</button>
+
+                        if($row3['budgetType'] == "work"){
+                            $budgetType = "কাজ";
+                        }
+                        else if($row3['budgetType'] == "service"){
+                            $budgetType = "সেবা";
+                        }
+                        else if($row3['budgetType'] == "buyingProduct"){
+                            $budgetType = "মালামাল ক্রয়";
+                        }
+
+                    echo "<tr>
+                            <td class='text-end table-active'>কর্মকর্তার নাম</th>
+                            <td class='text-start'>".$director_name."</td>
+                        </tr>
+                        <tr>
+                            <td class='text-end table-active'>মতামতের তারিখ</th>
+                            <td class='text-start'>".$row["date"]."</td>
+                        </tr>
+                        <tr>
+                            <td class='text-end table-active'>মন্তব্য</th>
+                            <td class='text-start'>".$row["comment"]."</td>
+                        </tr>
+                        প্রস্তাবিত <b>$budgetType</b> এর জন্য <b>".$row['budgetYear']."</b> অর্থ বছরে <b>$budget_type</b>, বাজেট কোড নম্বর <b>".$row['budgetCode']."</b>, বাজেট খাত <b>".$row['budgetSector']."</b>, এ বরাদ্দ আছে (বাজেট রেজিস্টারে রেকর্ড করা হয়েছে, পৃষ্ঠা নং- <b>".$row['pageNo']."</b>)। <br>
+            
+                        প্রস্তাবিত <b>".$budgetType. ", "."</b> <b>".$row['type']."</b>
+                        পদ্ধতিতে সম্পাদন করা যেতে পারে।";
+                    }
+                }
+                else{
+                    echo "0 result";
+                }
+            ?>
         </table>
+        <input class="btn btn-primary mb-5" type="button" value="Back" onclick="history.back(-1)" />
         </form>
     </div>
+    
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>   
 </body>

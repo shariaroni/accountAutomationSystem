@@ -121,9 +121,8 @@
                                     <td class="text-center"><?= $userName; ?></td>
                                     <td class="text-center"><?= $budget['date']; ?></td>
                                     <td class="text-center">
-                                        <a href = "recommendingOfficerOpinion.php?id=<?= $budget['id'];?>" 
-                                        onclick="window.open('recommendingOfficerOpinion.php?id=<?= $budget['id'];?>')">
-                                            <input class="btn btn-outline-success btn-sm" type="submit" value="মতামত" />
+                                        <a href="recommendingOfficerOpinion.php?id=<?= $budget['id'];?>">   
+                                        <span class="btn btn-outline-success btn-sm"> দেখুন </span>
                                         </a>
                                     </td>
                                 </tr>

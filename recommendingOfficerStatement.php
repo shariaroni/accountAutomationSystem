@@ -30,7 +30,7 @@
     <?php
         include 'navbar.php';
     ?>
-    <div class="container text-center mt-5" style="max-width: 450px; margin: 0, auto">
+    <div class="container text-center mt-5" style="max-width: 675px; margin: 0, auto">
         <h4>সুপারিশকারী কর্মকর্তার মতামত</h4>
         <form action="" method="post">
         <table class="table table-striped table-bordered mt-3">

@@ -22,7 +22,7 @@
 	$start = ($page - 1) * $limit;
     $accountOfficer_id = session::get("id");
 
-	$result = $conn->query("SELECT * FROM demand WHERE stage>6 or (stage=6 and status!='unseen' and status!='seen') LIMIT $start, $limit");
+	$result = $conn->query("SELECT * FROM demand WHERE stage>6 or (stage=6 and status!='unseen' and status!='seen') ORDER BY id DESC LIMIT $start, $limit");
     $budgets = $result->fetch_all(MYSQLI_ASSOC);
 
 	$result1 = $conn->query("SELECT count(id) AS id FROM demand WHERE stage>6 or (stage=6 and status!='unseen' and status!='seen')");
@@ -115,9 +115,8 @@
                                     <td class="text-center"><?= $userName; ?></td>
                                     <td class="text-center"><?= $budget['date']; ?></td>
                                     <td class="text-center">
-                                        <a href = "treasureStatement.php?id=<?= $budget['id'];?>" 
-                                        onclick="window.open('treasureStatement.php?id=<?= $budget['id'];?>')">
-                                            <input class="btn btn-outline-success btn-sm" type="submit" value="দেখুন" />
+                                        <a href="treasureStatement.php?id=<?= $budget['id'];?>">   
+                                            <span class="btn btn-outline-success btn-sm"> দেখুন </span>
                                         </a>
                                     </td>
                                 </tr>

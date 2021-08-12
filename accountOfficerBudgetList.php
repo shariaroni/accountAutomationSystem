@@ -36,7 +36,7 @@
 
  <!-- updating budget status as seen -->
 <?php
-    $sql = "UPDATE demand SET status='seen' WHERE stage=3";
+    $sql = "UPDATE demand SET status='seen' WHERE stage=3 AND status='unseen'";
     $res =  $conn->query($sql);
 ?>
 
@@ -121,9 +121,8 @@
                                     <td class="text-center"><?= $userName; ?></td>
                                     <td class="text-center"><?= $budget['date']; ?></td>
                                     <td class="text-center">
-                                        <a href = "accountOfficerOpinion.php?id=<?= $budget['id'];?>" 
-                                        onclick="window.open('accountOfficerOpinion.php?id=<?= $budget['id'];?>')">
-                                            <input class="btn btn-outline-success btn-sm" type="submit" value="দেখুন" />
+                                        <a href="accountOfficerOpinion.php?id=<?= $budget['id'];?>">   
+                                        <span class="btn btn-outline-success btn-sm"> দেখুন </span>
                                         </a>
                                     </td>
                                 </tr>

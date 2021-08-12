@@ -8,6 +8,7 @@
     $res = $conn->query($sql);
     $row = $res->fetch_assoc();
     $currentUserType = $row['type'];
+    
     if($currentUserType != $pageType)
     {
         session::distroyOnly(); 
