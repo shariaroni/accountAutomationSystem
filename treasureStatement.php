@@ -28,7 +28,7 @@
 </head>
 <body>
     <?php
-        include 'treasureNavbar.php';
+        include 'navbar.php';
     ?>
 <div class="container text-center mt-5" style="max-width: 675px; margin: 0, auto">
     <h4>ট্রেজারার মহোদয়ের মতামত</h4>

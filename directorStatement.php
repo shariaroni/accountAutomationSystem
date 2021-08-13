@@ -30,7 +30,7 @@
     <?php
         include 'navbar.php';
     ?>
-    <div class="container text-center mt-5" style="max-width: 450px; margin: 0, auto">
+    <div class="container text-center mt-5" style="max-width: 675px; margin: 0, auto">
         <h4>পরিচালকের (হিসাব দপ্তর) মতামত</h4>
         <form action="" method="post">
         <table class="table table-striped table-bordered mt-3">
@@ -86,7 +86,7 @@
                         </tr>
                         প্রস্তাবিত <b>$budgetType</b> এর জন্য <b>".$row['budgetYear']."</b> অর্থ বছরে <b>$budget_type</b>, বাজেট কোড নম্বর <b>".$row['budgetCode']."</b>, বাজেট খাত <b>".$row['budgetSector']."</b>, এ বরাদ্দ আছে (বাজেট রেজিস্টারে রেকর্ড করা হয়েছে, পৃষ্ঠা নং- <b>".$row['pageNo']."</b>)। <br>
             
-                        প্রস্তাবিত <b>".$budgetType. ", "."</b> <b>".$row['type']."</b>
+                        প্রস্তাবিত $budgetType <b>".$row['type']."</b>
                         পদ্ধতিতে সম্পাদন করা যেতে পারে।";
                     }
                 }

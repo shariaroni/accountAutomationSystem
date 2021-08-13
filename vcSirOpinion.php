@@ -77,7 +77,7 @@
 </head>
 <body>
     <?php
-        include 'vcSirNavbar.php';
+        include 'navbar.php';
     ?>
     <div style="margin-top: 20px;" class="container text-center">
         <h3>

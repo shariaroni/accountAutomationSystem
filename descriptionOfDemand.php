@@ -59,6 +59,10 @@
             $query = "INSERT INTO demand (budget_type, budgetType, comment, user_id, recommending_officer_id, item, qty, price, item_total, total, need, advanceAmount, date, stage, status) VALUES ('$budget_type', '$budgetType', '$comment', $user_id, $recommending_officer_id, '$item', '$qty', '$price', '$item_total', '$total', '$need', '$advanceAmount', '$date', $stage, '$status')";
         
             $run = mysqli_query($db, $query);
+            session::set("loginmgs", $msg);
+            $_SESSION['status'] = "Data Inserted";
+            $msg =  "<div class='alert alert-success'><strong>>আপনার বাজেট আবেদন সম্পন্ন হয়েছে</strong></div>";
+            header("Location: index.php");
         }
     }
 ?>
@@ -115,49 +119,9 @@
 <body>
 
     <!-- Navbar Start -->
-    <div class="container">
-        <?php
-            if (isset($msg)) {
-                echo $msg;
-            }
-        ?>
-        <h1>
-            <strong>Account</strong> Automation System
-        </h1>
-        <nav class="navbar navbar-expand-sm navbar-light" style="background-color: #e3f2fd;">
-            <div class="container-fluid container">
-                <a class="navbar-brand" href="https://just.edu.bd/"><img src="images/logo.png" alt="JUST logo" width="30" height="30" class="d-inline-block align-text-top">
-                        যবিপ্রবি</a>
-                <ul class="navbar-nav mt-2">
-                    <?php
-                        $id = session::get("id");
-                        $userlogin = session::get("login");
-                        if ($userlogin == true) {
-                    ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="home.php">হোম</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php?id=<?php echo $id; ?>">ইনডেক্স</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="profile.php?id=<?php echo $id; ?>">প্রোফাইল</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="?action=logout">লগ আউট</a>
-                    </li>
-                    <?php }else{ ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="home.php">হোম</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.php">লগ ইন</a>
-                    </li>
-                    <?php } ?>
-                </ul>
-            </div>
-        </nav>
-    </div>
+    <?php
+        include 'navbar.php';
+    ?>
     <!-- Navbar End -->
     
         <div class="container">

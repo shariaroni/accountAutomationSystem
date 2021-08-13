@@ -40,65 +40,9 @@
 <body>
     
     <!-- Navbar Start -->
-    <div class="container">
-        <h1>
-            <strong>Account</strong> Automation System
-        </h1>
-        <nav class="navbar navbar-expand-sm navbar-light" style="background-color: #e3f2fd;">
-            <div class="container-fluid container">
-                <a class="navbar-brand" href="https://just.edu.bd/"><img src="images/logo.png" alt="JUST logo" width="30" height="30" class="d-inline-block align-text-top">
-                        যবিপ্রবি</a>
-                <ul class="navbar-nav mt-2">
-                    <?php
-                        $userlogin = session::get("login");
-                        if ($userlogin == true) {
-                            $aType = $current_type;
-                            if($aType == "general"){
-                                $link = "index.php";
-                            }
-                            if($aType == "recommendingOfficer"){
-                                $link = "recommendingOfficerIndex.php";
-                            }
-                            if($aType == "accountOfficer"){
-                                $link = "accountOfficerIndex.php";
-                            }
-                            if($aType == "deputyDirector"){
-                                $link = "deputyDirectorIndex.php";
-                            }
-                            if($aType == "director"){
-                                $link = "directorIndex.php";
-                            }
-                            if($aType == "treasure"){
-                                $link = "treasureIndex.php";
-                            }
-                            if($aType == "vc"){
-                                $link = "vcSirIndex.php";
-                            }
-                            if($aType == "admin"){
-                                $link = "adminIndex.php";
-                            }
-                    ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="home.php">হোম</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo $link?>">ইনডেক্স</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="?action=logout">লগ আউট</a>
-                    </li>
-                    <?php }else{ ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="home.php">হোম</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login.php">লগ ইন</a>
-                    </li>
-                    <?php } ?>
-                </ul>
-            </div>
-        </nav>
-    </div>
+    <?php
+        include 'navbar.php';
+    ?>
     <!-- Navbar End -->
     
     <div class="text-center mt-5">

@@ -77,7 +77,7 @@
 </head>
 <body>
     <?php
-        include 'deputyDirectorNavbar.php';
+        include 'navbar.php';
     ?>
     <div style="margin-top: 20px;" class="container text-center">
        <h3>
@@ -94,17 +94,15 @@
                 $row1 = $result1-> fetch_assoc();
             ?>
             <p class="h5 text-center mt-5">প্রস্তাবিত 
-                <select name="budgetSeleaction">
-                    <option value="<?php echo $budgetType;?>">
-                        <?php   if($budgetType == 'work')
-                                    echo "কাজ"; 
-                                else if($budgetType == 'service')
-                                    echo "সেবা"; 
-                                else if($budgetType == 'buyingProduct')
-                                    echo "মালামাল ক্রয়";
-                        ?>
-                    </option>
-                </select> এর জন্য 
+            <b>
+                    <?php   if($budgetType == 'work')
+                                echo "কাজ"; 
+                            else if($budgetType == 'service')
+                                echo "সেবা"; 
+                            else if($budgetType == 'buyingProduct')
+                                echo "মালামাল ক্রয়";
+                    ?>
+                </b>- এর জন্য
             <select name="budgetYear">
                 <option class="dropdown-menu" value="<?php echo $row1['budgetYear'];?>"><?php echo $row1['budgetYear']; ?> </option>
                 <option value="2020-2021">2020-2021</option>
@@ -112,17 +110,15 @@
                 <option value="2022-2023">2022-2023</option>
                 <option value="2023-2024">2023-2024</option>
             </select> অর্থ বছরে
-            <select name="budget_type">
-                <option value="<?php echo $budget_type;?>">
-                    <?php   if($budget_type == 'revenue')
-                                echo "রাজস্ব"; 
-                            else if($budget_type == 'development')
-                                echo "উন্নয়ন"; 
-                            else if($budget_type == 'others')
-                                echo "অন্যান্য";
-                    ?>
-                </option>
-            </select> বাজেট কোড নম্বর 
+            <b>
+                <?php   if($budget_type == 'revenue')
+                            echo "রাজস্ব"; 
+                        else if($budget_type == 'development')
+                            echo "উন্নয়ন"; 
+                        else if($budget_type == 'others')
+                            echo "অন্যান্য";
+                ?>
+            </b> বাজেট কোড নম্বর 
             
             <input name="budgetCode" type="text" value="<?php echo $row1['budgetCode'];?>"> , বাজেট খাত <input name="budgetSector" type="text" value="<?php echo $row1['budgetSector'];?>"> , এ বরাদ্দ আছে (বাজেট রেজিস্টারে রেকর্ড করা হয়েছে, পৃষ্ঠা নং -
             <input name="pageNo" type="text" value="<?php echo $row1['pageNo'];?>">)।

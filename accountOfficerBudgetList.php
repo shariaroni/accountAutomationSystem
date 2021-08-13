@@ -3,6 +3,9 @@
     include 'user.php';
     include 'header.php';
     session::checksession();
+    
+    $pageType = 'accountOfficer';
+    include 'individualSessionCheck.php';
 ?>
 <?php
     $loginmgs = session::get("loginmgs");
@@ -58,7 +61,7 @@
 </head>
 <body>
     <?php
-        include 'accountOfficerNavbar.php';
+        include 'navbar.php';
     ?>
     <div class="panel-heading">
             <h3 class="text-center mt-3">আবেদনের তালিকা</h3>

@@ -77,7 +77,7 @@
 </head>
 <body>
     <?php
-        include 'navbarIndex.php';
+        include 'navbar.php';
     ?>
     <div class="panel-heading">
             <h2 class="text-center mt-3">অনুমোদিত ব্যবহারকারী</h2>

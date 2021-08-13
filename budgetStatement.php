@@ -30,7 +30,7 @@
     <?php
         include 'navbar.php';
     ?>
-    <div class="container text-center mt-5" style="max-width: 450px; margin: 0, auto">
+    <div class="container text-center mt-5" style="max-width: 525px; margin: 0, auto">
         <h4>বাজেট বিবারণী ছক</h4>
         <form action="" method="post">
             <table class="table table-striped table-bordered mt-3">
@@ -90,7 +90,7 @@
                         }
                         else
                         {
-                            $status = '<font class="text-primary"> প্রক্রিয়াধীন </font>';
+                            $status = '<font class="text-info"> প্রক্রিয়াধীন </font>';
                         }
     
 

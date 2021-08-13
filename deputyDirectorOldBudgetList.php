@@ -53,7 +53,7 @@
 </head>
 <body>
     <?php
-        include 'deputyDirectorNavbar.php';
+        include 'navbar.php';
     ?>
     <div class="panel-heading">
             <h3 class="text-center mt-3">পূর্ববর্তী আবেদনের তালিকা</h3>

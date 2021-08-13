@@ -39,7 +39,6 @@
 
     if (isset($_POST['submit'])) {
         $budget_id = mysqli_real_escape_string($db, $_GET['id']);
-        $budgetSeleaction = $_POST['budgetSeleaction'];
         $recommend = $_POST['recommend'];
         if($_FILES['image']['name']){
             $image = $_FILES['image']['name'];
@@ -48,7 +47,7 @@
         $date = $_POST['day'] . '-' .$_POST['month'] . '-' . $_POST['year'];
         $comment = $_POST['comment'];
 
-        $sql = "INSERT INTO recommendingofficeropinion (budget_id, budgetSeleaction, recommend, image, date, comment) VALUES ('$budget_id','$budgetSeleaction','$recommend','$image','$date','$comment')";
+        $sql = "INSERT INTO recommendingofficeropinion (budget_id, recommend, image, date, comment) VALUES ('$budget_id', '$recommend', '$image', '$date', '$comment')";
         $run = mysqli_query($db, $sql);
 
         if ($run) {
@@ -86,7 +85,7 @@
 </head>
 <body>
     <?php
-        include 'recommendingOfficerNavbar.php';
+        include 'navbar.php';
     ?>
     <div style="margin-top: 30px;" class="container text-center">
         <h3>
@@ -96,21 +95,16 @@
             <a class="btn btn-warning mt-3" href="budgetStatement.php?id=<?php echo $budget_id;?>">বাজেট বিবারণী দেখুন</a>
         </h4>
         <form action="" method="post">
-            <p class="h6 text-center my-3">উল্লেখিত
-                    <select name="budgetSeleaction">
-                        <option class="dropdown-menu" value="<?php echo $budgetType;?>">
-                            <?php   if($budgetType == 'work')
-                                        echo "কাজ"; 
-                                    else if($budgetType == 'service')
-                                        echo "সেবা"; 
-                                    else if($budgetType == 'buyingProduct')
-                                        echo "মালামাল ক্রয়";
-                            ?>
-                        </option>
-                        <option value="work">কাজ</option>
-                        <option value="service">সেবা</option>
-                        <option value="buyingProduct">মালামাল ক্রয়</option>
-                    </select>
+            <p class="h6 text-center my-3">উল্লেখিত 
+                <b>
+                    <?php   if($budgetType == 'work')
+                                echo "কাজ"; 
+                            else if($budgetType == 'service')
+                                echo "সেবা"; 
+                            else if($budgetType == 'buyingProduct')
+                                echo "মালামাল ক্রয়";
+                    ?>
+                </b>
                 এর জন্য প্রশাসনিক ও আর্থিক অনুমোদনের জন্য -
                <br>
             </p>

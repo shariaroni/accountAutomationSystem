@@ -56,55 +56,40 @@
 
                         //recomending_officer_opinion
                         $budget_id = $row['id'];
-                        $sql4 = "SELECT budgetSeleaction,date,image,comment,recommend FROM recommendingofficeropinion WHERE budget_id = $budget_id ";
+                        $sql4 = "SELECT * FROM recommendingofficeropinion WHERE budget_id = $budget_id";
                         $result4 = $db->query($sql4);
-                        $row4 = $result4-> fetch_assoc();
-                        foreach($result4 as $aType):
-                            if($aType['budgetSeleaction'] == "work"){
-                                $show2 = "কাজ";
-                            }
-                            if($aType['budgetSeleaction'] == "service"){
-                                $show2 = "সেবা";
-                            }
-                            if($aType['budgetSeleaction'] == "buyingProduct"){
-                                $show2 = "মালামাল ক্রয়";
-                            }
-                            if($aType['recommend'] == "yes"){
-                                $show3 = "সুপারিশ করা হলো";
-                            }
-                            if($aType['recommend'] == "no"){
-                                $show3 = "সুপারিশ করা হলো না";
-                            }
-                    echo "<tr>
-                            <td class='text-end table-active'>ক্রমিক নং</td>
-                            <td class='text-start'>".$row["id"]."</td>
-                        </tr>
-                        <tr>
-                            <td class='text-end table-active'>আবেদনকারীর নাম</td>
-                            <td class='text-start'>".$userName."</td>
-                        </tr>
-                        <tr>
-                            <td class='text-end table-active'>সুপারিশকারী কর্মকর্তা</th>
-                            <td class='text-start'>".$recommending_officer_name."</td>
-                        </tr>
-                        <tr>
-                            <td class='text-end table-active'>বাজেটের ধরণ</th>
-                            <td class='text-start'>".$show2."</td>
-                        </tr>
-                        <tr>
-                            <td class='text-end table-active'>সুপারিশ</th>
-                            <td class='text-start'>".$show3."</td>
-                        </tr>
-                        
-                        <tr>
-                            <td class='text-end table-active'>তারিখ</th>
-                            <td class='text-start'>".$row4["date"]."</td>
-                        </tr>
-                        <tr>
-                            <td class='text-end table-active'>মন্তব্য</th>
-                            <td class='text-start'>".$row4["comment"]."</td>
-                        </tr>";
-                        endforeach;
+                        $row4 = $result4->fetch_assoc();
+                        if($row4['recommend'] == "yes"){
+                            $show3 = "সুপারিশ করা হলো";
+                        }
+                        if($row4['recommend'] == "no"){
+                            $show3 = "সুপারিশ করা হলো না";
+                        }
+                        echo "<tr>
+                                <td class='text-end table-active'>ক্রমিক নং</td>
+                                <td class='text-start'>".$row["id"]."</td>
+                            </tr>
+                            <tr>
+                                <td class='text-end table-active'>আবেদনকারীর নাম</td>
+                                <td class='text-start'>".$userName."</td>
+                            </tr>
+                            <tr>
+                                <td class='text-end table-active'>সুপারিশকারী কর্মকর্তা</th>
+                                <td class='text-start'>".$recommending_officer_name."</td>
+                            </tr>
+                            <tr>
+                                <td class='text-end table-active'>সুপারিশ</th>
+                                <td class='text-start'>".$show3."</td>
+                            </tr>
+                            
+                            <tr>
+                                <td class='text-end table-active'>তারিখ</th>
+                                <td class='text-start'>".$row4["date"]."</td>
+                            </tr>
+                            <tr>
+                                <td class='text-end table-active'>মন্তব্য</th>
+                                <td class='text-start'>".$row4["comment"]."</td>
+                            </tr>";
                     }
                 }
                 else{

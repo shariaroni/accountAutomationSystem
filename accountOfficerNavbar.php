@@ -17,7 +17,7 @@
                         <a class="nav-link" href="home.php">হোম</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="accountOfficerIndex.php?id=<?php echo $id; ?>">ইনডেক্স</a>
+                        <a class="nav-link" href="accountOfficerIndex.php">ইনডেক্স</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="profile.php?id=<?php echo $id; ?>">প্রোফাইল</a>

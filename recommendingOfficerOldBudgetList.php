@@ -3,6 +3,9 @@
     include 'user.php';
     include 'header.php';
     session::checksession();
+    
+    $pageType = 'recommendingOfficer';
+    include 'individualSessionCheck.php';
 ?>
 <?php
     $loginmgs = session::get("loginmgs");
@@ -52,7 +55,7 @@
 </head>
 <body>
     <?php
-        include 'recommendingOfficerNavbar.php';
+        include 'navbar.php';
     ?>
     <div class="panel-heading">
             <h3 class="text-center mt-3">সুপারিশের জন্য আবেদনকারীদের তালিকা(পূর্বের বাজেট আবেদন)</h3>
