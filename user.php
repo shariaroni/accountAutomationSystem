@@ -292,28 +292,26 @@ public function userSwitch($id, $type, $currentType){
     }
     public function updateUserData($id, $data){
         $name   = $data['name'];
-        $email  = $data['email'];
         $mobile = $data['mobile'];
 
-        if ($name == "" or $email == "" or $mobile == "") {
+        if ($name == "" or $mobile == "") {
             $mgs = "<div class='alert alert-danger'><strong>Error!</strong>Field must not be Empty</div>";
             return $mgs;
         }
 
         $sql = "UPDATE  tabel_user set 
                     name    = :name,
-                    email   = :email,
                     mobile  = :mobile
                 WHERE id    = :id";
 
         $query = $this->db->pdo->prepare($sql);
 
         $query->bindValue(':name',$name);
-        $query->bindValue(':email',$email);
         $query->bindValue(':mobile',$mobile);
         $query->bindValue(':id', $id);
         $result = $query->execute();
         if ($result) {
+            session::set('name', $name);
             $mgs = "<div class='alert alert-success'><strong>Success</strong> User data updated seccessfully.</div>";
             return $mgs;
         }

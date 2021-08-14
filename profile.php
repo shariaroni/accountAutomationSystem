@@ -5,14 +5,14 @@
 ?>
 <?php
     if (isset($_GET['action']) && $_GET['action'] == "logout") {
-        session::distroy(); 
+        session::distroy();
     }
 ?>
 <?php
-    $userid = session::get("id");
+    $session_id = session::get("id");
     $user = new user();
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
-        $updateUser = $user->updateUserData($userid, $_POST);
+        $updateUser = $user->updateUserData($session_id, $_POST);
     }
 ?>
 <?php
@@ -20,8 +20,8 @@
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
     }
-    $id = session::get("id");
-    $sql = "SELECT type FROM tabel_user WHERE id = $id and verification_status = 1 and admin_verification_status = 1";
+    $current_id = isset($_GET['id']) ? $_GET['id'] : $session_id;
+    $sql = "SELECT type FROM tabel_user WHERE id = $current_id and verification_status=1 and admin_verification_status=1";
     $res = $conn->query($sql);
     $row = $res->fetch_assoc();
     $current_type = $row['type'];
@@ -54,29 +54,25 @@
         <?php
             if (isset($updateUser)) {
             echo $updateUser;
+            $updateUser = "";
         }
         ?>
         <?php
-            $userdata = $user->getuserbyid($userid);
+            $userdata = $user->getuserbyid($current_id);
             if ($userdata) {
         ?>
-            <form action="profile.php" method="POST">
+            <form action="" method="POST">
                 <div class="form-group mt-3">
                     <label for="name">নাম</label>
-                    <input name="name" id="name" class="form-control" value="<?php echo $userdata->name; ?>" type="text" placeholder="Name">
-                </div>
-                <div class="form-group mt-3">
-                    <label for="email">ইমেইল</label>
-                    <input name="email" id="email" class="form-control" value="<?php echo $userdata->email; ?>" type="email" placeholder="Example@gmail.com">
+                    <input name="name" id="name" class="form-control" value="<?php echo $userdata->name; ?>" type="text" placeholder="Name" <?php if($current_id!=$session_id) echo "readonly";?> >
                 </div>
                 <div class="form-group mt-3">
                     <label for="mobile">মোবাইল</label>
-                    <input name="mobile" id="mobile" class="form-control" value="<?php echo $userdata->mobile; ?>" type="text" placeholder="01XXXXXXXXX">
+                    <input name="mobile" id="mobile" class="form-control" value="<?php echo $userdata->mobile; ?>" type="text" placeholder="01XXXXXXXXX" <?php if($current_id!=$session_id) echo "readonly";?>>
                 </div>
                 <div class="from-group mt-3">
                     <?php
-                        $sesId = session::get("id");
-                        if ($userid == $sesId) {
+                        if ($current_id == $session_id) {
                     ?>
                         <input class="btn btn-success mt-3" type="submit" name="submit" value="আপডেট">
                     <?php } ?>

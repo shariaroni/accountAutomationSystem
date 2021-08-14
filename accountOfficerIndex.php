@@ -27,6 +27,7 @@
     $sql = "SELECT * FROM tabel_user WHERE id = $id ";
     $res = $conn->query($sql);
     $row = $res->fetch_assoc();
+    $name = $row['name'];
     $email = $row['email'];
     $sql = "SELECT type FROM tabel_user WHERE email = '$email' and verification_status = 1 and admin_verification_status = 1";
     $typeArray =  $conn->query($sql);
@@ -66,10 +67,7 @@
                             <span class="pull-right">
                                 <strong>
                                     <?php
-                                        $name = session::get("name");
-                                        if (isset($name)) {
-                                            echo $name;
-                                        }
+                                        echo $name;
                                     ?>
                                 </strong>
                             </span>

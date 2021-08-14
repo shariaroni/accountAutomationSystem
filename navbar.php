@@ -28,31 +28,7 @@
     else if($row['type'] == "admin"){
         $pageLink = "adminIndex.php";
     }
-    $pageName = basename($_SERVER['PHP_SELF']);
-    $pageName = strtolower($pageName);
-    $match = "index";
-    $isIndexPage = false;
-    for($i=0; $i<strlen($pageName); $i++)
-    {
-        $flag = true;
-        for($j=0; $j<strlen($match); $j++)
-        {
-            if($pageName[$i] != $match[$j])
-            {
-                $flag = false;
-                break;
-            }
-            else
-            {
-                $i++;
-            }
-        }
-        if($flag == true)
-        {
-            $isIndexPage = true;
-            break;
-        }
-    }
+    
 ?>
 
 <div class="container">
@@ -72,14 +48,50 @@
                 <li class="nav-item">
                     <a class="nav-link" href="home.php">হোম</a>
                 </li>
+                <?php
+                //Checking if current page is user's own profile pages
+                $pageName = basename($_SERVER['PHP_SELF']);
+                $match = "profile.php";
+                $current_user_id = isset($_GET['id']) ? $_GET['id'] : $id;
+                if($pageName == $match && $current_user_id == $user_id)
+                    $isOwnProfilePage = true;
+                else
+                    $isOwnProfilePage = false;
+                ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="profile.php?id=<?php echo $id; ?>">প্রোফাইল</a>
+                    <a class="nav-link <?php if($isOwnProfilePage == true){echo "disabled";}?>" href="profile.php?id=<?php echo $id; ?>">প্রোফাইল</a>
                 </li>
-                <?php if($isIndexPage == false):?>
+                <?php
+                //Checking if current page is one of the index pages
+                $pageName = basename($_SERVER['PHP_SELF']);
+                $pageName = strtolower($pageName);
+                $match = "index";
+                $isIndexPage = false;
+                for($i=0; $i<strlen($pageName); $i++)
+                {
+                    $flag = true;
+                    for($j=0; $j<strlen($match); $j++)
+                    {
+                        if($pageName[$i] != $match[$j])
+                        {
+                            $flag = false;
+                            break;
+                        }
+                        else
+                        {
+                            $i++;
+                        }
+                    }
+                    if($flag == true)
+                    {
+                        $isIndexPage = true;
+                        break;
+                    }
+                }
+                ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo $pageLink;?>">ইনডেক্স</a>
+                    <a class="nav-link <?php if($isIndexPage == true){echo "disabled";}?>" href="<?php echo $pageLink;?>">ইনডেক্স</a>
                 </li>
-                <?php endif; ?>
                 <li class="nav-item">
                     <a class="nav-link" href="?action=logout">লগ আউট</a>
                 </li>
