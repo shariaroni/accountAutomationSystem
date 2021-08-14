@@ -1,36 +1,12 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: Jul 26, 2021 at 10:21 AM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.2
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `db_lr`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `accountsofficeropinion`
----- phpMyAdmin SQL Dump
+SET time_zone = "+06:00";
 -- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 29, 2021 at 01:17 PM
+-- Generation Time: Aug 14, 2021 at 01:36 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -56,17 +32,15 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `accountsofficeropinion` (
   `id` int(255) NOT NULL,
-  `budgetSeleaction` varchar(255) NOT NULL,
+  `budget_id` int(11) NOT NULL,
+  `accountofficer_id` int(11) NOT NULL,
   `budgetYear` varchar(255) NOT NULL,
-  `budgetType` varchar(255) NOT NULL,
   `budgetCode` varchar(255) NOT NULL,
   `budgetSector` varchar(255) NOT NULL,
   `pageNo` varchar(255) NOT NULL,
   `type` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
-  `day` varchar(255) NOT NULL,
-  `month` varchar(255) NOT NULL,
-  `year` varchar(255) NOT NULL,
+  `date` varchar(256) NOT NULL,
   `comment` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -74,15 +48,11 @@ CREATE TABLE `accountsofficeropinion` (
 -- Dumping data for table `accountsofficeropinion`
 --
 
-INSERT INTO `accountsofficeropinion` (`id`, `budgetSeleaction`, `budgetYear`, `budgetType`, `budgetCode`, `budgetSector`, `pageNo`, `type`, `image`, `day`, `month`, `year`, `comment`) VALUES
-(1, 'work', '2023-2024', 'revenue', '345', 'bnp', '44', 'np', '', '17', 'sep', '2030', 'hlw world'),
-(2, 'buying', '2021-2022', 'others', '170145', 'adp', '127', 'abcd', '', '16', 'may', '2023', 'ajker din'),
-(3, 'service', '2023-2024', 'revenue', '1234', 'ndp', '27', 'r15', '', '17', 'oct', '2034', 'gdpa'),
-(4, 'work', '2023-2024', 'revenue', '170145', 'ndp', '145', 'abcd', '', '15', 'aug', '2021', 'good'),
-(5, 'service', '2022-2023', 'others', '12344', 'gbd', '27', 'oop', '', '15', 'aug', '2021', 'Good Comment'),
-(6, 'buying', '2023-2024', 'others', '170145', 'mri', '145', 'oop', '', '20', 'dec', '2035', 'yes'),
-(7, 'service', '2023-2024', 'others', '170145', '', '145', 'oop', '', 'day', 'month', 'year', ''),
-(8, 'none', 'none', 'none', '', '', '', '', '', 'day', 'month', 'year', '');
+INSERT INTO `accountsofficeropinion` (`id`, `budget_id`, `accountofficer_id`, `budgetYear`, `budgetCode`, `budgetSector`, `pageNo`, `type`, `image`, `date`, `comment`) VALUES
+(21, 150, 180, '2021-2022', '1234', 'à¦¬à§ˆà¦œà§à¦žà¦¾à¦¨à¦¿à¦• à¦¯à¦¨à§à¦¤à§à¦°à¦ªà¦¾à¦¤à¦¿', '12', 'ASAP', '', '10-Aug-2021', 'à¦ªà¦°à§€à¦•à§à¦·à¦¿à¦¤'),
+(22, 152, 184, '2021-2022', '123', '123', '123', 'ASAP', '', '11-Aug-2021', '123'),
+(23, 154, 180, '2021-2022', 'à§§à§¨à§©', 'à§©à§¨à§§', 'à§¨à§§', 'à¦…à¦—à§à¦°à¦¿à¦®', '', '12-Aug-2021', 'à¦Ÿà§‡à¦¸à§à¦Ÿ à¦•à¦®à§‡à¦¨à§à¦Ÿ - à¦•à¦°à§à¦®à¦•à¦°à§à¦¤à¦¾'),
+(24, 155, 180, '2021-2022', 'à§§à§¨à§©à§ª', 'à§¨à§¨à§©', 'à§§à§¨', 'à¦…à¦—à§à¦°à¦¿à¦® - à¦²à§‡à¦¨à¦¦à§‡à¦¨', '', '13-Aug-2021', 'à¦Ÿà§‡à¦¸à§à¦Ÿ à¦•à¦®à§‡à¦¨à§à¦Ÿ - à¦•à¦°à§à¦®à¦•à¦°à§à¦¤à¦¾ (à¦¹à¦¿à¦¸à¦¾à¦¬) à¦¦à¦ªà§à¦¤à¦°');
 
 -- --------------------------------------------------------
 
@@ -111,7 +81,12 @@ INSERT INTO `budgetseleaction` (`id`, `budgetId`, `budget_type`, `budgetType`, `
 (16, '180127', 'development', 'buyingProduct', 'Good comment'),
 (17, '', 'revenue', 'buyingProduct', '123456'),
 (18, '', 'development', 'buyingProduct', 'lab information'),
-(19, '', 'revenue', 'service', 'fgfghh');
+(19, '', 'revenue', 'buyingProduct', 'ABCD is here'),
+(20, '', 'revenue', 'work', 'ABCD is here 2'),
+(21, '', 'revenue', 'work', 'ABCD IS HERE 3'),
+(22, '', '', '', ''),
+(23, '', '', '', ''),
+(24, '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -121,26 +96,57 @@ INSERT INTO `budgetseleaction` (`id`, `budgetId`, `budget_type`, `budgetType`, `
 
 CREATE TABLE `demand` (
   `id` int(255) NOT NULL,
-  `budgetId` varchar(255) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `recommending_officer_id` int(11) NOT NULL,
+  `budget_type` varchar(50) NOT NULL,
+  `budgetType` varchar(50) NOT NULL,
+  `comment` varchar(1000) NOT NULL,
   `item` varchar(255) NOT NULL,
   `qty` varchar(255) NOT NULL,
   `price` varchar(255) NOT NULL,
   `item_total` varchar(255) NOT NULL,
-  `total` varchar(255) NOT NULL
+  `total` varchar(255) NOT NULL,
+  `advanceAmount` double NOT NULL,
+  `need` varchar(10) NOT NULL,
+  `date` varchar(50) NOT NULL,
+  `stage` int(11) NOT NULL,
+  `status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `demand`
 --
 
-INSERT INTO `demand` (`id`, `budgetId`, `item`, `qty`, `price`, `item_total`, `total`) VALUES
-(1, '180127', 'book', '3', '150', '450.00', '450.00'),
-(2, '180108', 'pen', '4', '5', '20.00', '820.00'),
-(3, '170145', 'book', '3', '100', '300.00', '615.00'),
-(4, '180127', 'light', '3', '350', '1,050.00', '1,050.00'),
-(5, '170145', 'book', '2', '150', '300.00', '300.00'),
-(6, '', 'book', '3', '30', '90.00', '5,090.00'),
-(7, '', '', '1', '7777', '7,777.00', '1,376,683.00');
+INSERT INTO `demand` (`id`, `user_id`, `recommending_officer_id`, `budget_type`, `budgetType`, `comment`, `item`, `qty`, `price`, `item_total`, `total`, `advanceAmount`, `need`, `date`, `stage`, `status`) VALUES
+(150, 169, 15, 'revenue', 'buyingProduct', 'à¦¸à¦¿à¦à¦¸à¦‡ à¦²à§à¦¯à¦¬à§‡à¦° à¦œà¦¨à§à¦¯ à§§à§¦ à¦Ÿà¦¿ à¦¡à§‡à¦•à§à¦¸à¦Ÿà¦ª à¦•à¦®à§à¦ªà¦¿à¦‰à¦Ÿà¦¾à¦° à¦ªà§à¦°à§Ÿà§‹à¦œà¦¨à¥¤', 'à¦•à¦®à§à¦ªà¦¿à¦‰à¦Ÿà¦¾à¦°', '10', '70000', '700,000.00', '700000', 20000, 'yes', '10-08-2021', 7, 'accepted'),
+(151, 169, 15, 'development', 'work', 'à¦¸à¦¿à¦à¦¸à¦‡ à¦²à§à¦¯à¦¾à¦¬ à¦®à§‡à¦°à¦¾à¦®à¦¤ à¦•à¦°à¦¾ à¦ªà§à¦°à§Ÿà§‹à¦œà¦¨', 'à¦•à¦°à§à¦®à¦šà¦¾à¦°à§€à¦° à¦¬à§‡à¦¤à¦¨', '3', '500.00', '1,500.00', '1500', 1500, 'yes', '11-08-2021', 2, 'rejected'),
+(152, 169, 183, 'revenue', 'work', '123', '123', '1', '0.00', '0.00', '0', 0, 'no', '11-08-2021', 6, 'rejected'),
+(153, 169, 15, 'revenue', 'buyingProduct', 'à¦à¦•à¦Ÿà¦¿ à¦•à¦®à§à¦ªà¦¿à¦‰à¦Ÿà¦¾à¦° à¦ªà§à¦°à§Ÿà§‹à¦œà¦¨', 'à¦¡à§‡à¦•à§à¦¸à¦Ÿà¦ª à¦•à¦®à§à¦ªà¦¿à¦‰à¦Ÿà¦¾à¦°', '1', '25000.00', '25,000.00', '25000', 25000, 'yes', '11-08-2021', 3, 'seen'),
+(154, 169, 15, 'revenue', 'buyingProduct', 'à¦Ÿà§‡à¦¸à§à¦Ÿ à¦¬à¦¾à¦œà§‡à¦Ÿ', 'à¦Ÿà§‡à¦¸à§à¦Ÿ', '4', '10000.00', '40,000.00', '40000', 12300, 'yes', '12-08-2021', 7, 'accepted'),
+(155, 188, 15, 'revenue', 'service', 'à¦¸à¦¿à¦à¦¸à¦‡ à¦²à§à¦¯à¦¾à¦¬à§‡à¦° à¦œà¦¨à§à¦¯ à¦²à§à¦¯à¦¾à¦ªà§à¦Ÿà¦ª à¦ªà§à¦°à§Ÿà§‹à¦œà¦¨ ', 'à¦²à§à¦¯à¦¾à¦ªà§à¦Ÿà¦ª', '3', '100000.00', '300,000.00', '300000', 0, 'no', '12-08-2021', 7, 'accepted'),
+(156, 189, 183, 'revenue', 'work', 'à¦ªà§à¦°à¦šà¦¨à§à¦¡ à¦¦à¦°à¦•à¦¾à¦°à¦¿', 'à¦•à¦®à§à¦ªà¦¿à¦‰à¦Ÿà¦¾à¦°', '1', '120000.00', '120,000.00', '120000', 0, 'no', '13-08-2021', 3, 'unseen');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `demand_chart`
+--
+
+CREATE TABLE `demand_chart` (
+  `id` int(11) NOT NULL,
+  `demand_id` int(11) NOT NULL,
+  `item` varchar(256) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `price` double NOT NULL,
+  `item_total` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `demand_chart`
+--
+
+INSERT INTO `demand_chart` (`id`, `demand_id`, `item`, `qty`, `price`, `item_total`) VALUES
+(1, 142, '3', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -150,17 +156,15 @@ INSERT INTO `demand` (`id`, `budgetId`, `item`, `qty`, `price`, `item_total`, `t
 
 CREATE TABLE `deputydirectoropinion` (
   `id` int(255) NOT NULL,
-  `budgetSeleaction` varchar(255) NOT NULL,
+  `budget_id` int(11) NOT NULL,
+  `deputydirector_id` int(11) NOT NULL,
   `budgetYear` varchar(255) NOT NULL,
-  `budgetType` varchar(255) NOT NULL,
   `budgetCode` varchar(255) NOT NULL,
   `budgetSector` varchar(255) NOT NULL,
   `pageNo` varchar(255) NOT NULL,
   `type` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
-  `day` varchar(255) NOT NULL,
-  `month` varchar(255) NOT NULL,
-  `year` varchar(255) NOT NULL,
+  `date` varchar(256) NOT NULL,
   `comment` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -168,17 +172,12 @@ CREATE TABLE `deputydirectoropinion` (
 -- Dumping data for table `deputydirectoropinion`
 --
 
-INSERT INTO `deputydirectoropinion` (`id`, `budgetSeleaction`, `budgetYear`, `budgetType`, `budgetCode`, `budgetSector`, `pageNo`, `type`, `image`, `day`, `month`, `year`, `comment`) VALUES
-(1, 'service', '2023-2024', 'service', '1234', 'abcd', '23', 'xyz', '', '12', 'oct', '2025', 'no comment'),
-(2, 'work', '2021-2022', 'service', '342', 'npd', '27', 'abc', '', '16', 'nov', '2035', 'speech less'),
-(3, 'buying', '2022-2023', 'others', '1234', 'gbd', '27', 'r1d', '', '23', 'sep', '2021', 'hello world'),
-(4, 'buying', '2022-2023', 'others', '170145', 'dj', '145', 'r15', '', '17', 'jul', '2027', 'data'),
-(6, 'service', '2022-2023', 'others', '342', 'bnp', '23', 'x1f', '', '18', 'aug', '2026', 'we asbr'),
-(7, 'service', '2021-2022', 'development', '170145', 'gbd', '145', 'oop', '', '22', 'jul', '2032', 'gdpa'),
-(8, 'none', 'none', 'development', '12344', 'ndp', '145', 'oop', '', '17', 'aug', '2035', 'good'),
-(9, 'service', '2023-2024', 'others', '342', 'gbd', '342', 'oop', '', '20', 'dec', '2035', 'yes'),
-(10, 'none', 'none', 'none', '', '', '', '', '', 'day', 'month', 'year', ''),
-(11, 'none', 'none', 'none', '', '', '', '', '', 'day', 'month', 'year', '7');
+INSERT INTO `deputydirectoropinion` (`id`, `budget_id`, `deputydirector_id`, `budgetYear`, `budgetCode`, `budgetSector`, `pageNo`, `type`, `image`, `date`, `comment`) VALUES
+(12, 150, 185, '2021-2022', '1234', 'à¦¬à§ˆà¦œà§à¦žà¦¾à¦¨à¦¿à¦• à¦¯à¦¨à§à¦¤à§à¦°à¦ªà¦¾à¦¤à¦¿', '12', 'ASAP', '', '11-Aug-2021', ''),
+(13, 150, 185, '2021-2022', '1234', 'à¦¬à§ˆà¦œà§à¦žà¦¾à¦¨à¦¿à¦• à¦¯à¦¨à§à¦¤à§à¦°à¦ªà¦¾à¦¤à¦¿', '12', 'ASAP', '', '11-Aug-2021', ''),
+(14, 152, 185, '2021-2022', '123', '123', '123', 'ASAP', '', '11-Aug-2021', ''),
+(15, 154, 181, '2021-2022', 'à§§à§¨à§ª', 'à§©à§¨à§¦', 'à§¨à§§', 'à¦…à¦—à§à¦°à¦¿à¦®', '', '12-Aug-2021', 'à¦Ÿà§‡à¦¸à§à¦Ÿ à¦•à¦®à§‡à¦¨à§à¦Ÿ - à¦‰à¦ª-à¦ªà¦°à¦¿à¦šà¦¾à¦²à¦•'),
+(16, 155, 181, '2021-2022', 'à§§à§¨à§©à§ª', 'à§¨à§¨à§©', 'à§§à§¨', 'à¦…à¦—à§à¦°à¦¿à¦® - à¦²à§‡à¦¨à¦¦à§‡à¦¨', '', '13-Aug-2021', 'à¦Ÿà§‡à¦¸à§à¦Ÿ à¦•à¦®à§‡à¦¨à§à¦Ÿ - à¦‰à¦ª-à¦ªà¦°à¦¿à¦šà¦¾à¦²à¦•');
 
 -- --------------------------------------------------------
 
@@ -188,17 +187,15 @@ INSERT INTO `deputydirectoropinion` (`id`, `budgetSeleaction`, `budgetYear`, `bu
 
 CREATE TABLE `directoropinion` (
   `id` int(255) NOT NULL,
-  `budgetSeleaction` varchar(255) NOT NULL,
+  `budget_id` int(11) NOT NULL,
+  `director_id` int(11) NOT NULL,
+  `date` varchar(256) NOT NULL,
   `budgetYear` varchar(255) NOT NULL,
-  `budgetType` varchar(255) NOT NULL,
   `budgetCode` varchar(255) NOT NULL,
   `budgetSector` varchar(255) NOT NULL,
   `pageNo` varchar(255) NOT NULL,
   `type` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
-  `day` varchar(255) NOT NULL,
-  `month` varchar(255) NOT NULL,
-  `year` varchar(255) NOT NULL,
   `comment` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -206,13 +203,10 @@ CREATE TABLE `directoropinion` (
 -- Dumping data for table `directoropinion`
 --
 
-INSERT INTO `directoropinion` (`id`, `budgetSeleaction`, `budgetYear`, `budgetType`, `budgetCode`, `budgetSector`, `pageNo`, `type`, `image`, `day`, `month`, `year`, `comment`) VALUES
-(1, 'service', '2020-2021', 'others', '56', 'mri', '36', 'oop', '', '19', 'sep', '2029', 'good'),
-(2, 'work', '2022-2023', 'revenue', '342', 'ndp', '127', 'x1f', '', '23', 'sep', '2024', '1adrefc'),
-(3, 'service', '2022-2023', 'development', '170145', 'bnp', '145', 'x1f', '', '20', 'may', '2024', 'afcdg'),
-(4, 'work', '2023-2024', 'others', '345', 'Irm', '23', 'Asde', '', '23', 'Jan', '2025', 'Done'),
-(5, 'service', '2023-2024', 'others', '342', 'ndp', '342', 'abcd', '', '20', 'dec', '2035', '12345'),
-(6, 'none', 'none', 'none', '', '', '', '', '', 'day', 'month', 'year', '');
+INSERT INTO `directoropinion` (`id`, `budget_id`, `director_id`, `date`, `budgetYear`, `budgetCode`, `budgetSector`, `pageNo`, `type`, `image`, `comment`) VALUES
+(8, 152, 186, '11-Aug-2021', '2021-2022', '123', '123', '123', 'à¦…à¦—à§à¦°à¦¿à¦®', '', 'à¦¸à§à¦¨à§à¦¦à¦° '),
+(9, 154, 182, '12-Aug-2021', '2021-2022', 'à§§à§¨à§«', 'à§©à§¨à§¨', 'à§¨à§§', 'à¦…à¦—à§à¦°à¦¿à¦® - à¦²à§‡à¦¨à¦¦à§‡à¦¨', '', 'à¦Ÿà§‡à¦¸à§à¦Ÿ à¦•à¦®à§‡à¦¨à§à¦Ÿ - à¦ªà¦°à¦¿à¦šà¦¾à¦²à¦•'),
+(10, 155, 182, '13-Aug-2021', '2021-2022', 'à§§à§¨à§©à§ª', 'à§¨à§¨à§©', 'à§§à§¨', 'à¦…à¦—à§à¦°à¦¿à¦® - à¦²à§‡à¦¨à¦¦à§‡à¦¨', '', 'à¦Ÿà§‡à¦¸à§à¦Ÿ à¦•à¦®à§‡à¦¨à§à¦Ÿ - à¦ªà¦°à¦¿à¦šà¦¾à¦²à¦•');
 
 -- --------------------------------------------------------
 
@@ -223,24 +217,23 @@ INSERT INTO `directoropinion` (`id`, `budgetSeleaction`, `budgetYear`, `budgetTy
 CREATE TABLE `generalinformation` (
   `id` int(255) NOT NULL,
   `budgetId` varchar(255) NOT NULL,
-  `office_head` varchar(255) NOT NULL,
-  `others` varchar(255) NOT NULL,
   `need` varchar(255) NOT NULL,
   `value` varchar(255) NOT NULL,
-  `recommending` varchar(20) NOT NULL
+  `recommending` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `generalinformation`
 --
 
-INSERT INTO `generalinformation` (`id`, `budgetId`, `office_head`, `others`, `need`, `value`, `recommending`) VALUES
-(1, '180127', '', 'Mr. D', 'yes', '', ''),
-(4, '180108', '', 'Mr. H', 'no', '', ''),
-(8, '', '', '', 'yes', '2501', ''),
-(9, '', '', '', '', '', ''),
-(10, '', '', '', 'yes', '2505', ''),
-(11, '', '', '', 'no', '', 'recommending null');
+INSERT INTO `generalinformation` (`id`, `budgetId`, `need`, `value`, `recommending`) VALUES
+(1, '180127', 'yes', '', ''),
+(4, '180108', 'no', '', ''),
+(8, '', 'yes', '2501', ''),
+(9, '', '', '', ''),
+(10, '', 'yes', '2505', ''),
+(11, '', 'yes', '12', 'office_head'),
+(12, '', 'yes', '12', 'office_head');
 
 -- --------------------------------------------------------
 
@@ -249,31 +242,27 @@ INSERT INTO `generalinformation` (`id`, `budgetId`, `office_head`, `others`, `ne
 --
 
 CREATE TABLE `recommendingofficeropinion` (
-  `id` int(255) NOT NULL,
-  `budgetSeleaction` varchar(255) NOT NULL,
-  `recommend` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `day` varchar(255) NOT NULL,
-  `month` varchar(255) NOT NULL,
-  `year` varchar(255) NOT NULL,
-  `comment` varchar(255) NOT NULL
+  `id` int(20) NOT NULL,
+  `budget_id` int(11) NOT NULL,
+  `date` varchar(256) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `comment` varchar(255) CHARACTER SET utf32 COLLATE utf32_bin NOT NULL,
+  `recommend` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `recommendingofficeropinion`
 --
 
-INSERT INTO `recommendingofficeropinion` (`id`, `budgetSeleaction`, `recommend`, `image`, `day`, `month`, `year`, `comment`) VALUES
-(1, 'service', 'yes', '', '23', 'sep', '2030', 'well done'),
-(2, 'service', 'yes', '', '8', 'mar', '2024', 'this is good'),
-(3, 'service', 'yes', '', '16', 'mar', '2033', 'prosside'),
-(4, 'service', 'no', '', '14', 'mar', '2035', 'bad'),
-(5, 'buying', 'no', '', '18', 'apr', '2031', 'abcdg'),
-(13, 'service', 'yes', '', '10', 'may', '2032', 'Good comment'),
-(14, 'service', 'yes', '', '20', 'dec', '2035', 'yes'),
-(15, 'service', 'yes', '', '16', 'oct', '2034', ''),
-(16, 'service', 'yes', '', '16', 'oct', '2034', ''),
-(17, 'none', 'yes', '', 'day', 'month', 'year', '');
+INSERT INTO `recommendingofficeropinion` (`id`, `budget_id`, `date`, `image`, `comment`, `recommend`) VALUES
+(37, 61, '10-08-2021', '', 'à¦¹à§‡à¦¹à§‡', 'yes'),
+(38, 150, '10-Aug-2021', '', 'à¦ªà¦°à§à¦¯à¦¬à§‡à¦•à§à¦·à¦£ à¦•à¦°à¦¾ à¦¹à§Ÿà§‡à¦›à§‡', 'yes'),
+(40, 151, '11-Aug-2021', '', 'à¦…à¦ªà§à¦°à§Ÿà§‹à¦œà¦¨à§€à§Ÿ', 'no'),
+(41, 152, '11-Aug-2021', '', '123', 'yes'),
+(42, 153, '11-Aug-2021', '', '', 'yes'),
+(43, 154, '12-Aug-2021', '', 'à¦¸à§à¦¨à§à¦¦à¦° à¦¬à¦¾à¦œà§‡à¦Ÿ - à¦¸à§à¦ªà¦¾à¦°à¦¿à¦¶à¦•à¦¾à¦°à§€', 'yes'),
+(44, 155, '13-Aug-2021', '', 'à¦Ÿà§‡à¦¸à§à¦Ÿ à¦•à¦®à§‡à¦¨à§à¦Ÿ - à¦¸à§à¦ªà¦¾à¦°à¦¿à¦¶à¦•à¦¾à¦°à§€ à¦•à¦°à§à¦®à¦•à¦°à§à¦¤à¦¾', 'yes'),
+(45, 156, '13-Aug-2021', '', 'à¦¸à§à¦ªà¦¾à¦°à¦¿à¦¶à¦•à¦¾à¦°à§€ à¦•à¦°à§à¦®à¦•à¦°à§à¦¤à¦¾à¦° à¦®à¦¤à¦¾à¦®à¦¤', 'yes');
 
 -- --------------------------------------------------------
 
@@ -283,13 +272,13 @@ INSERT INTO `recommendingofficeropinion` (`id`, `budgetSeleaction`, `recommend`,
 
 CREATE TABLE `tabel_user` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `mobile` varchar(255) NOT NULL,
-  `pass` varchar(255) NOT NULL,
-  `type` varchar(255) NOT NULL,
-  `verification_id` varchar(256) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `mobile` varchar(50) NOT NULL,
+  `pass` varchar(50) NOT NULL,
+  `type` varchar(50) NOT NULL,
   `verification_status` tinyint(1) NOT NULL,
+  `verification_id` varchar(256) NOT NULL,
   `admin_verification_status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -297,8 +286,22 @@ CREATE TABLE `tabel_user` (
 -- Dumping data for table `tabel_user`
 --
 
-INSERT INTO `tabel_user` (`id`, `name`, `email`, `mobile`, `pass`, `type`, `verification_id`, `verification_status`, `admin_verification_status`) VALUES
-(15, 'Shariar Oni', 'shariaroni007@gmail.com', '01716822414', '827ccb0eea8a706c4c34a16891f84e7b', 'general', '9964111abdaf1af6056b75a8e4d928cb', 1, 1);
+INSERT INTO `tabel_user` (`id`, `name`, `email`, `mobile`, `pass`, `type`, `verification_status`, `verification_id`, `admin_verification_status`) VALUES
+(15, 'Shariar Oni', 'shariaroni007@gmail.com', '01716822414', '827ccb0eea8a706c4c34a16891f84e7b', 'recommendingOfficer', 1, '9964111abdaf1af6056b75a8e4d928cb', 1),
+(169, 'Mr. Faisal Nirjhor', 'faisaljabet@gmail.com', '01784301131', '202cb962ac59075b964b07152d234b70', 'general', 1, '9b334558dba187f3d7d851c8cc5240c5', 1),
+(170, 'Latifur Rahman Zihad', 'admin@just.com', '01784301131', '202cb962ac59075b964b07152d234b70', 'admin', 1, 'ecdd3a893e4de089ee988cee8ea83759', 1),
+(177, 'Professor Dr. Md. Anwar Hossain', 'vcsir@just.com', '01700000001', '202cb962ac59075b964b07152d234b70', 'vc', 1, '9bd8483e96353324b4c77a3906a7c74e', 1),
+(178, 'Rahedul Islam', 'rahedul@gmail.com', '01711111112', '202cb962ac59075b964b07152d234b70', 'treasure', 1, '21b13fe33c39ef37db5e16c2aca5287f', 1),
+(180, 'Samiul Basher', 'samiul@gmail.com', '01722222223', '202cb962ac59075b964b07152d234b70', 'accountOfficer', 1, '5e304dd54398a131c8bcc3ae186e6b96', 1),
+(181, 'Mr. Deputy Director', 'deputydirector@just.com', '01744444445', '202cb962ac59075b964b07152d234b70', 'deputyDirector', 1, 'b6cf2d0a12f0163c85bbc8ba0985f3cd', 1),
+(182, 'Mr. Director', 'director@just.com', '01755555556', '202cb962ac59075b964b07152d234b70', 'director', 1, '70f15fa0b9ca4a71e2dd7405805425cd', 1),
+(183, 'R Faisal Nirjhor', 'faisaljabet@gmail.com', '01784301131', '202cb962ac59075b964b07152d234b70', 'recommendingOfficer', 1, '2eeb0637dee7bde01c30155851dee0d0', 1),
+(184, 'AO Faisal Nirjhor', 'faisaljabet@gmail.com', '01784301131', '202cb962ac59075b964b07152d234b70', 'accountOfficer', 1, 'bdec03d653ecba470f629f6e1debafab', 1),
+(185, 'DD Faisal Nirjhor', 'faisaljabet@gmail.com', '01784301131', '202cb962ac59075b964b07152d234b70', 'deputyDirector', 1, '5a7a99f4204b809300b05e8f964c143a', 1),
+(186, 'D Faisal Nirjhor', 'faisaljabet@gmail.com', '01784301131', '202cb962ac59075b964b07152d234b70', 'director', 1, '9119d8642ea8f4964f41dfaeb1b71b74', 1),
+(187, 'FaisalNirjhor', 'faisaljabet@gmail.com', '01784301131', '202cb962ac59075b964b07152d234b70', 'treasure', 1, 'edf77bed2bcb9b99c6118e341fa1c255', 1),
+(188, 'Shariar Oni', 'shariaroni007@gmail.com', '01712345678', '202cb962ac59075b964b07152d234b70', 'general', 1, '474f3707ce5358c6682cca015ac652b7', 1),
+(189, 'Mr. Test Name', 'testemail@just.com', '01712345678', '202cb962ac59075b964b07152d234b70', 'general', 1, '3c61e94aa739a069263432827285e195', 1);
 
 -- --------------------------------------------------------
 
@@ -308,11 +311,11 @@ INSERT INTO `tabel_user` (`id`, `name`, `email`, `mobile`, `pass`, `type`, `veri
 
 CREATE TABLE `treasureopinion` (
   `id` int(255) NOT NULL,
+  `budget_id` int(11) NOT NULL,
+  `treasurer_id` int(11) NOT NULL,
   `parmited` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
-  `day` varchar(255) NOT NULL,
-  `month` varchar(255) NOT NULL,
-  `year` varchar(255) NOT NULL,
+  `date` varchar(256) NOT NULL,
   `comment` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -320,11 +323,11 @@ CREATE TABLE `treasureopinion` (
 -- Dumping data for table `treasureopinion`
 --
 
-INSERT INTO `treasureopinion` (`id`, `parmited`, `image`, `day`, `month`, `year`, `comment`) VALUES
-(1, 'yes', '', '14', 'feb', '2021', 'abcd'),
-(2, 'no', '', '15', 'jul', '2027', 'no recomanded'),
-(3, 'yes', '', '16', 'may', '2022', 'good'),
-(4, 'no', '', 'day', 'month', 'year', '');
+INSERT INTO `treasureopinion` (`id`, `budget_id`, `treasurer_id`, `parmited`, `image`, `date`, `comment`) VALUES
+(9, 150, 187, 'yes', '', '11-Aug-2021', 'à¦¸à§à¦¨à§à¦¦à¦°'),
+(10, 154, 178, 'yes', '', '12-Aug-2021', 'à¦Ÿà§‡à¦¸à§à¦Ÿ - à¦Ÿà§à¦°à§‡à¦œà¦¾à¦°à¦¾à¦° à¦®à¦¹à§‹à¦¦à§Ÿ'),
+(11, 152, 178, 'no', '', '12-Aug-2021', 'à¦Ÿà§‡à¦¸à§à¦Ÿ - à¦Ÿà§à¦°à§‡à¦œà¦¾à¦°à¦¾à¦°'),
+(12, 155, 178, 'yes', '', '13-Aug-2021', 'à¦Ÿà§‡à¦¸à§à¦Ÿ à¦•à¦®à§‡à¦¨à§à¦Ÿ - à¦Ÿà§à¦°à§‡à¦œà¦¾à¦°à¦¾à¦°');
 
 -- --------------------------------------------------------
 
@@ -334,11 +337,11 @@ INSERT INTO `treasureopinion` (`id`, `parmited`, `image`, `day`, `month`, `year`
 
 CREATE TABLE `vcsiropinion` (
   `id` int(255) NOT NULL,
+  `budget_id` int(11) NOT NULL,
+  `vcSir_id` int(11) NOT NULL,
   `parmited` varchar(255) NOT NULL,
   `image` varchar(255) NOT NULL,
-  `day` varchar(255) NOT NULL,
-  `month` varchar(255) NOT NULL,
-  `year` varchar(255) NOT NULL,
+  `date` varchar(256) NOT NULL,
   `comment` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -346,10 +349,10 @@ CREATE TABLE `vcsiropinion` (
 -- Dumping data for table `vcsiropinion`
 --
 
-INSERT INTO `vcsiropinion` (`id`, `parmited`, `image`, `day`, `month`, `year`, `comment`) VALUES
-(1, 'yes', '', '23', 'sep', '2021', 'good'),
-(2, 'no', '', '18', 'aug', '2033', 'no recommended'),
-(3, 'yes', '', '15', 'oct', '2023', 'bad');
+INSERT INTO `vcsiropinion` (`id`, `budget_id`, `vcSir_id`, `parmited`, `image`, `date`, `comment`) VALUES
+(5, 150, 177, 'yes', '', '11-Aug-2021', 'à¦¸à§à¦¨à§à¦¦à¦°'),
+(6, 154, 177, 'yes', '', '12-Aug-2021', 'à¦Ÿà§‡à¦¸à§à¦Ÿ - à¦‰à¦ªà¦¾à¦šà¦¾à¦°à§à¦¯ à¦®à¦¹à§‹à¦¦à§Ÿ'),
+(7, 155, 177, 'yes', '', '14-Aug-2021', '	à¦Ÿà§‡à¦¸à§à¦Ÿ à¦•à¦®à§‡à¦¨à§à¦Ÿ - à¦‰à¦ªà¦¾à¦šà¦¾à¦°à§à¦¯ ');
 
 --
 -- Indexes for dumped tables
@@ -371,6 +374,12 @@ ALTER TABLE `budgetseleaction`
 -- Indexes for table `demand`
 --
 ALTER TABLE `demand`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `demand_chart`
+--
+ALTER TABLE `demand_chart`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -423,484 +432,67 @@ ALTER TABLE `vcsiropinion`
 -- AUTO_INCREMENT for table `accountsofficeropinion`
 --
 ALTER TABLE `accountsofficeropinion`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `budgetseleaction`
 --
 ALTER TABLE `budgetseleaction`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `demand`
 --
 ALTER TABLE `demand`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=175;
+
+--
+-- AUTO_INCREMENT for table `demand_chart`
+--
+ALTER TABLE `demand_chart`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `deputydirectoropinion`
 --
 ALTER TABLE `deputydirectoropinion`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- AUTO_INCREMENT for table `directoropinion`
---
-ALTER TABLE `directoropinion`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `generalinformation`
---
-ALTER TABLE `generalinformation`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- AUTO_INCREMENT for table `recommendingofficeropinion`
---
-ALTER TABLE `recommendingofficeropinion`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-
---
--- AUTO_INCREMENT for table `tabel_user`
---
-ALTER TABLE `tabel_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
-
---
--- AUTO_INCREMENT for table `treasureopinion`
---
-ALTER TABLE `treasureopinion`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `vcsiropinion`
---
-ALTER TABLE `vcsiropinion`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-
-CREATE TABLE `accountsofficeropinion` (
-  `id` int(255) NOT NULL,
-  `budgetSeleaction` varchar(255) NOT NULL,
-  `budgetYear` varchar(255) NOT NULL,
-  `budgetType` varchar(255) NOT NULL,
-  `budgetCode` varchar(255) NOT NULL,
-  `budgetSector` varchar(255) NOT NULL,
-  `pageNo` varchar(255) NOT NULL,
-  `type` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `day` varchar(255) NOT NULL,
-  `month` varchar(255) NOT NULL,
-  `year` varchar(255) NOT NULL,
-  `comment` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `accountsofficeropinion`
---
-
-INSERT INTO `accountsofficeropinion` (`id`, `budgetSeleaction`, `budgetYear`, `budgetType`, `budgetCode`, `budgetSector`, `pageNo`, `type`, `image`, `day`, `month`, `year`, `comment`) VALUES
-(1, 'work', '2023-2024', 'revenue', '345', 'bnp', '44', 'np', '', '17', 'sep', '2030', 'hlw world'),
-(2, 'buying', '2021-2022', 'others', '170145', 'adp', '127', 'abcd', '', '16', 'may', '2023', 'ajker din'),
-(3, 'service', '2023-2024', 'revenue', '1234', 'ndp', '27', 'r15', '', '17', 'oct', '2034', 'gdpa'),
-(4, 'work', '2023-2024', 'revenue', '170145', 'ndp', '145', 'abcd', '', '15', 'aug', '2021', 'good'),
-(5, 'service', '2022-2023', 'others', '12344', 'gbd', '27', 'oop', '', '15', 'aug', '2021', 'Good Comment'),
-(6, 'buying', '2023-2024', 'others', '170145', 'mri', '145', 'oop', '', '20', 'dec', '2035', 'yes'),
-(7, 'service', '2023-2024', 'others', '170145', '', '145', 'oop', '', 'day', 'month', 'year', '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `budgetseleaction`
---
-
-CREATE TABLE `budgetseleaction` (
-  `id` int(255) NOT NULL,
-  `budgetId` varchar(255) NOT NULL,
-  `budget_type` varchar(255) NOT NULL,
-  `budgetType` varchar(255) NOT NULL,
-  `comment` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `budgetseleaction`
---
-
-INSERT INTO `budgetseleaction` (`id`, `budgetId`, `budget_type`, `budgetType`, `comment`) VALUES
-(1, '180127', 'others', 'other', 'money'),
-(2, '180108', 'development', 'work', 'no comment'),
-(3, '170145', 'others', 'service', 'Hello'),
-(4, '180107', 'development', 'buyingProduct', 'SE'),
-(15, '180129', 'development', 'work', 'abcd'),
-(16, '180127', 'development', 'buyingProduct', 'Good comment'),
-(17, '', 'revenue', 'buyingProduct', '123456'),
-(18, '', 'development', 'buyingProduct', 'lab information');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `demand`
---
-
-CREATE TABLE `demand` (
-  `id` int(255) NOT NULL,
-  `budgetId` varchar(255) NOT NULL,
-  `item` varchar(255) NOT NULL,
-  `qty` varchar(255) NOT NULL,
-  `price` varchar(255) NOT NULL,
-  `item_total` varchar(255) NOT NULL,
-  `total` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `demand`
---
-
-INSERT INTO `demand` (`id`, `budgetId`, `item`, `qty`, `price`, `item_total`, `total`) VALUES
-(1, '180127', 'book', '3', '150', '450.00', '450.00'),
-(2, '180108', 'pen', '4', '5', '20.00', '820.00'),
-(3, '170145', 'book', '3', '100', '300.00', '615.00'),
-(4, '180127', 'light', '3', '350', '1,050.00', '1,050.00'),
-(5, '170145', 'book', '2', '150', '300.00', '300.00'),
-(6, '', 'book', '3', '30', '90.00', '5,090.00');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `deputydirectoropinion`
---
-
-CREATE TABLE `deputydirectoropinion` (
-  `id` int(255) NOT NULL,
-  `budgetSeleaction` varchar(255) NOT NULL,
-  `budgetYear` varchar(255) NOT NULL,
-  `budgetType` varchar(255) NOT NULL,
-  `budgetCode` varchar(255) NOT NULL,
-  `budgetSector` varchar(255) NOT NULL,
-  `pageNo` varchar(255) NOT NULL,
-  `type` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `day` varchar(255) NOT NULL,
-  `month` varchar(255) NOT NULL,
-  `year` varchar(255) NOT NULL,
-  `comment` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `deputydirectoropinion`
---
-
-INSERT INTO `deputydirectoropinion` (`id`, `budgetSeleaction`, `budgetYear`, `budgetType`, `budgetCode`, `budgetSector`, `pageNo`, `type`, `image`, `day`, `month`, `year`, `comment`) VALUES
-(1, 'service', '2023-2024', 'service', '1234', 'abcd', '23', 'xyz', '', '12', 'oct', '2025', 'no comment'),
-(2, 'work', '2021-2022', 'service', '342', 'npd', '27', 'abc', '', '16', 'nov', '2035', 'speech less'),
-(3, 'buying', '2022-2023', 'others', '1234', 'gbd', '27', 'r1d', '', '23', 'sep', '2021', 'hello world'),
-(4, 'buying', '2022-2023', 'others', '170145', 'dj', '145', 'r15', '', '17', 'jul', '2027', 'data'),
-(6, 'service', '2022-2023', 'others', '342', 'bnp', '23', 'x1f', '', '18', 'aug', '2026', 'we asbr'),
-(7, 'service', '2021-2022', 'development', '170145', 'gbd', '145', 'oop', '', '22', 'jul', '2032', 'gdpa'),
-(8, 'none', 'none', 'development', '12344', 'ndp', '145', 'oop', '', '17', 'aug', '2035', 'good'),
-(9, 'service', '2023-2024', 'others', '342', 'gbd', '342', 'oop', '', '20', 'dec', '2035', 'yes'),
-(10, 'none', 'none', 'none', '', '', '', '', '', 'day', 'month', 'year', '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `directoropinion`
---
-
-CREATE TABLE `directoropinion` (
-  `id` int(255) NOT NULL,
-  `budgetSeleaction` varchar(255) NOT NULL,
-  `budgetYear` varchar(255) NOT NULL,
-  `budgetType` varchar(255) NOT NULL,
-  `budgetCode` varchar(255) NOT NULL,
-  `budgetSector` varchar(255) NOT NULL,
-  `pageNo` varchar(255) NOT NULL,
-  `type` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `day` varchar(255) NOT NULL,
-  `month` varchar(255) NOT NULL,
-  `year` varchar(255) NOT NULL,
-  `comment` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `directoropinion`
---
-
-INSERT INTO `directoropinion` (`id`, `budgetSeleaction`, `budgetYear`, `budgetType`, `budgetCode`, `budgetSector`, `pageNo`, `type`, `image`, `day`, `month`, `year`, `comment`) VALUES
-(1, 'service', '2020-2021', 'others', '56', 'mri', '36', 'oop', '', '19', 'sep', '2029', 'good'),
-(2, 'work', '2022-2023', 'revenue', '342', 'ndp', '127', 'x1f', '', '23', 'sep', '2024', '1adrefc'),
-(3, 'service', '2022-2023', 'development', '170145', 'bnp', '145', 'x1f', '', '20', 'may', '2024', 'afcdg'),
-(4, 'work', '2023-2024', 'others', '345', 'Irm', '23', 'Asde', '', '23', 'Jan', '2025', 'Done'),
-(5, 'service', '2023-2024', 'others', '342', 'ndp', '342', 'abcd', '', '20', 'dec', '2035', '12345'),
-(6, 'none', 'none', 'none', '', '', '', '', '', 'day', 'month', 'year', '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `generalinformation`
---
-
-CREATE TABLE `generalinformation` (
-  `id` int(255) NOT NULL,
-  `budgetId` varchar(255) NOT NULL,
-  `office_head` varchar(255) NOT NULL,
-  `others` varchar(255) NOT NULL,
-  `need` varchar(255) NOT NULL,
-  `value` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `generalinformation`
---
-
-INSERT INTO `generalinformation` (`id`, `budgetId`, `office_head`, `others`, `need`, `value`) VALUES
-(1, '180127', '', 'Mr. D', 'yes', ''),
-(4, '180108', '', 'Mr. H', 'no', ''),
-(8, '', '', '', 'yes', '2501'),
-(9, '', '', '', '', ''),
-(10, '', '', '', 'yes', '2505');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `recommendingofficeropinion`
---
-
-CREATE TABLE `recommendingofficeropinion` (
-  `id` int(255) NOT NULL,
-  `budgetSeleaction` varchar(255) NOT NULL,
-  `recommend` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `day` varchar(255) NOT NULL,
-  `month` varchar(255) NOT NULL,
-  `year` varchar(255) NOT NULL,
-  `comment` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `recommendingofficeropinion`
---
-
-INSERT INTO `recommendingofficeropinion` (`id`, `budgetSeleaction`, `recommend`, `image`, `day`, `month`, `year`, `comment`) VALUES
-(1, 'service', 'yes', '', '23', 'sep', '2030', 'well done'),
-(2, 'service', 'yes', '', '8', 'mar', '2024', 'this is good'),
-(3, 'service', 'yes', '', '16', 'mar', '2033', 'prosside'),
-(4, 'service', 'no', '', '14', 'mar', '2035', 'bad'),
-(5, 'buying', 'no', '', '18', 'apr', '2031', 'abcdg'),
-(13, 'service', 'yes', '', '10', 'may', '2032', 'Good comment'),
-(14, 'service', 'yes', '', '20', 'dec', '2035', 'yes'),
-(15, 'service', 'yes', '', '16', 'oct', '2034', ''),
-(16, 'service', 'yes', '', '16', 'oct', '2034', '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tabel_user`
---
-
-CREATE TABLE `tabel_user` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `mobile` varchar(255) NOT NULL,
-  `pass` varchar(255) NOT NULL,
-  `type` varchar(255) NOT NULL,
-  `verification_id` varchar(256) NOT NULL,
-  `verification_status` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tabel_user`
---
-
-INSERT INTO `tabel_user` (`id`, `name`, `email`, `mobile`, `pass`, `type`, `verification_id`, `verification_status`) VALUES
-(15, 'Shariar Oni', 'shariaroni007@gmail.com', '01716822414', '827ccb0eea8a706c4c34a16891f84e7b', 'general', '9964111abdaf1af6056b75a8e4d928cb', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `treasureopinion`
---
-
-CREATE TABLE `treasureopinion` (
-  `id` int(255) NOT NULL,
-  `parmited` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `day` varchar(255) NOT NULL,
-  `month` varchar(255) NOT NULL,
-  `year` varchar(255) NOT NULL,
-  `comment` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `treasureopinion`
---
-
-INSERT INTO `treasureopinion` (`id`, `parmited`, `image`, `day`, `month`, `year`, `comment`) VALUES
-(1, 'yes', '', '14', 'feb', '2021', 'abcd'),
-(2, 'no', '', '15', 'jul', '2027', 'no recomanded'),
-(3, 'yes', '', '16', 'may', '2022', 'good'),
-(4, 'no', '', 'day', 'month', 'year', '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `vcsiropinion`
---
-
-CREATE TABLE `vcsiropinion` (
-  `id` int(255) NOT NULL,
-  `parmited` varchar(255) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `day` varchar(255) NOT NULL,
-  `month` varchar(255) NOT NULL,
-  `year` varchar(255) NOT NULL,
-  `comment` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `vcsiropinion`
---
-
-INSERT INTO `vcsiropinion` (`id`, `parmited`, `image`, `day`, `month`, `year`, `comment`) VALUES
-(1, 'yes', '', '23', 'sep', '2021', 'good'),
-(2, 'no', '', '18', 'aug', '2033', 'no recommended'),
-(3, 'yes', '', '15', 'oct', '2023', 'bad');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `accountsofficeropinion`
---
-ALTER TABLE `accountsofficeropinion`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `budgetseleaction`
---
-ALTER TABLE `budgetseleaction`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `demand`
---
-ALTER TABLE `demand`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `deputydirectoropinion`
---
-ALTER TABLE `deputydirectoropinion`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `directoropinion`
---
-ALTER TABLE `directoropinion`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `generalinformation`
---
-ALTER TABLE `generalinformation`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `recommendingofficeropinion`
---
-ALTER TABLE `recommendingofficeropinion`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tabel_user`
---
-ALTER TABLE `tabel_user`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `treasureopinion`
---
-ALTER TABLE `treasureopinion`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `vcsiropinion`
---
-ALTER TABLE `vcsiropinion`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `accountsofficeropinion`
---
-ALTER TABLE `accountsofficeropinion`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `budgetseleaction`
---
-ALTER TABLE `budgetseleaction`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
-
---
--- AUTO_INCREMENT for table `demand`
---
-ALTER TABLE `demand`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `deputydirectoropinion`
---
-ALTER TABLE `deputydirectoropinion`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `directoropinion`
---
-ALTER TABLE `directoropinion`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `generalinformation`
---
-ALTER TABLE `generalinformation`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `recommendingofficeropinion`
---
-ALTER TABLE `recommendingofficeropinion`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
+-- AUTO_INCREMENT for table `directoropinion`
+--
+ALTER TABLE `directoropinion`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `generalinformation`
+--
+ALTER TABLE `generalinformation`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `recommendingofficeropinion`
+--
+ALTER TABLE `recommendingofficeropinion`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+
+--
 -- AUTO_INCREMENT for table `tabel_user`
 --
 ALTER TABLE `tabel_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=190;
 
 --
 -- AUTO_INCREMENT for table `treasureopinion`
 --
 ALTER TABLE `treasureopinion`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `vcsiropinion`
 --
 ALTER TABLE `vcsiropinion`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
