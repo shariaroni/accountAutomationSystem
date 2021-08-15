@@ -30,6 +30,24 @@
     <?php
         include 'navbar.php';
     ?>
+    
+    <?php
+        $db = mysqli_connect("localhost","root","","db_lr");
+        $budget_id = mysqli_real_escape_string($db, $_GET['id']);
+        $sql = "SELECT recommending_officer_id FROM demand WHERE id='$budget_id'";
+        $result = $db->query($sql);
+        $row = $result->fetch_assoc();
+        $recommending_officer_id = $row['recommending_officer_id'];
+        $session_id = session::get("id");
+        if($recommending_officer_id == $session_id):
+    ?>
+    <div style="margin-top: 20px;" class="container text-center">
+        <h4>
+            <a class="btn btn-warning mt-3" href="budgetStatement.php?id=<?php echo $budget_id;?>">বাজেট বিবারণী দেখুন</a>
+        </h4>
+    </div>
+    <?php endif; ?>
+    
     <div class="container text-center mt-5" style="max-width: 675px; margin: 0, auto">
         <h4>সুপারিশকারী কর্মকর্তার মতামত</h4>
         <form action="" method="post">

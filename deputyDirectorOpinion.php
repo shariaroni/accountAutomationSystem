@@ -2,6 +2,9 @@
     include 'user.php';
     include 'header.php';
     session::checksession();
+
+    $pageType = 'deputyDirector';
+    include 'individualSessionCheck.php';
 ?>
 <?php
     $loginmgs = session::get("loginmgs");
@@ -80,13 +83,13 @@
         include 'navbar.php';
     ?>
     <div style="margin-top: 20px;" class="container text-center">
-       <h3>
-           উপ-পরিচালক (হিসাব) দপ্তরের মতামত প্রদান
-       </h3>
-       <h4>
-           <a class="btn btn-warning mt-3" href="budgetStatement.php?id=<?php echo $budget_id;?>">বাজেট বিবারণী দেখুন</a>
-           <a class="btn btn-warning mt-3" href="accountOfficerStatement.php?id=<?php echo $budget_id;?>">কর্মকর্তা (হিসাব) দপ্তরের মতামত দেখুন</a>
-       </h4>
+        <h3>
+            উপ-পরিচালক (হিসাব) দপ্তরের মতামত প্রদান
+        </h3>
+        <h4>
+            <a class="btn btn-warning mt-3" href="budgetStatement.php?id=<?php echo $budget_id;?>">বাজেট বিবারণী দেখুন</a>
+            <a class="btn btn-warning mt-3" href="accountOfficerStatement.php?id=<?php echo $budget_id;?>">কর্মকর্তা (হিসাব) দপ্তরের মতামত দেখুন</a>
+        </h4>
         <form action="" method="POST">
             <?php
                 $sql1 = "SELECT * FROM accountsofficeropinion WHERE budget_id='$budget_id'";

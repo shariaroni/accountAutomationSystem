@@ -79,15 +79,15 @@
     <?php
         include 'navbar.php';
     ?>
- <div style="margin-top: 20px;" class="container text-center">
-       <h3>
-           পরিচালক (হিসাব) দপ্তরের মতামত প্রদান
-       </h3>
-       <h4>
-           <a class="btn btn-warning mt-3" href="budgetStatement.php?id=<?php echo $budget_id;?>">বাজেট বিবরণ দেখুন</a>
-           <a class="btn btn-warning mt-3" href="deputyDirectorStatement.php?id=<?php echo $budget_id;?>">উপ-পরিচালক (হিসাব) দপ্তরের মতামত দেখুন</a>
-       </h4>
-       <form action="" method="POST">
+    <div style="margin-top: 20px;" class="container text-center">
+        <h3>
+            পরিচালক (হিসাব) দপ্তরের মতামত প্রদান
+        </h3>
+        <h4>
+            <a class="btn btn-warning mt-3" href="budgetStatement.php?id=<?php echo $budget_id;?>">বাজেট বিবরণ দেখুন</a>
+            <a class="btn btn-warning mt-3" href="deputyDirectorStatement.php?id=<?php echo $budget_id;?>">উপ-পরিচালক (হিসাব) দপ্তরের মতামত দেখুন</a>
+        </h4>
+        <form action="" method="POST">
             <?php
                 $sql1 = "SELECT * FROM deputydirectoropinion WHERE budget_id='$budget_id'";
                 $result1 = $db->query($sql1);
@@ -214,7 +214,7 @@
                 <input class="btn btn-success" name="submit" type="submit" value="নিশ্চিত করুন">
             </div>
         </form>
-        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 </body>
 </html>

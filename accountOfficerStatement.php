@@ -30,6 +30,24 @@
     <?php
         include 'navbar.php';
     ?>
+    
+    <?php
+        $db = mysqli_connect("localhost","root","","db_lr");
+        $budget_id = mysqli_real_escape_string($db, $_GET['id']);
+        $session_id = session::get("id");
+        $sql = "SELECT type FROM tabel_user WHERE id=$session_id";
+        $result = $db->query($sql);
+        $data = $result->fetch_assoc();
+        if($data['type'] == 'accountOfficer'):
+    ?>
+    <div style="margin-top: 20px;" class="container text-center">
+        <h4>
+            <a class="btn btn-warning mt-3" href="budgetStatement.php?id=<?php echo $budget_id;?>">বাজেট বিবরণ দেখুন</a>
+            <a class="btn btn-warning mt-3" href="recommendingOfficerStatement.php?id=<?php echo $budget_id;?>">সুপারিশকারী কর্মকর্তার মতামত দেখুন</a>
+        </h4>
+    </div>
+    <?php endif; ?>
+
     <div class="container text-center mt-5" style="max-width: 675px; margin: 0, auto">
         <h4>কর্মকর্তা (হিসাব দপ্তর) মতামত</h4>
         <form action="" method="post">
