@@ -41,7 +41,7 @@
 </head>
 <?php
     if (isset($_GET['action']) && $_GET['action'] == "logout") {
-        session::distroy(); 
+        session::distroy();
     }
 ?>
 <body>

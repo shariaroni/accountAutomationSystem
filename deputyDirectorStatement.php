@@ -49,7 +49,7 @@
     <?php endif; ?>
 
     <div class="container text-center mt-5" style="max-width: 675px; margin: 0, auto">
-        <h4>উপ-পরিচালকের (হিসাব দপ্তর) মতামত</h4>
+        <h4><strong> উপ-পরিচালকের (হিসাব দপ্তর) মতামত</strong> </h4>
         <form action="" method="post">
         <table class="table table-striped table-bordered mt-3">
             <?php

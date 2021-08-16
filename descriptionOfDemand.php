@@ -275,8 +275,7 @@
                             </div>
                             <div id="totalamount">
                                 <div class="form-group">
-                                <div class="col-md-offset-3 col-md-4 text-right">
-                                        <label class="text-right"> সর্বমোট প্রাক্কলিত মূল্য</label>
+                                <div class="col-md-offset-3 col-md-4 text-right">সর্বমোট প্রাক্কলিত মূল্য
                                     </div>
                                     <div class="col-md-3">
                                     <input type="text" readonly="" id="totalamounval" name="total" class="form-control"></div>
@@ -287,7 +286,7 @@
                         </div>
                     </div> 
                 </div>
-                <div class="h4 text-center mt-5">
+                <div class="text-center mt-5">
                     <strong> অগ্রীম টাকার প্রয়োজনীয়তা </strong>
                 </div>
                 <div style="max-width: 400px; margin: 0 auto">
