@@ -3,6 +3,9 @@
     include 'user.php';
     include 'header.php';
     session::checksession();
+
+    $pageType = 'treasure';
+    include 'individualSessionCheck.php';
 ?>
 <?php
     $loginmgs = session::get("loginmgs");

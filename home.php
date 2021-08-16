@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <h1>
-            <strong>Account</strong> Automation System
+            <strong>Account Automation System</strong>
         </h1>
         <nav class="navbar navbar-expand-sm navbar-light" style="background-color: #e3f2fd;">
             <div class="container-fluid">
@@ -32,7 +32,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">যোগাযোগ</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="https://github.com/faisaljabet">ফয়সাল নির্ঝর</a></li>
+                                <li><a class="dropdown-item" href="https://github.com/faisaljabet">এস এম ফয়সাল নির্ঝর</a></li>
                                 <li><a class="dropdown-item" href="https://github.com/sujoncep">মোঃ শাহাবুদ্দিন</a></li>
                                 <li><a class="dropdown-item" href="https://github.com/Rahedul">রাহিদুল ইসলাম রূপক</a></li>
                                 <li><a class="dropdown-item" href="https://github.com/samiul-basher">সামিউল বাসার রবিন</a></li>
