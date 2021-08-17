@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 16, 2021 at 08:43 PM
+-- Generation Time: Aug 17, 2021 at 02:36 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -51,40 +51,6 @@ INSERT INTO `accountsofficeropinion` (`id`, `budget_id`, `accountofficer_id`, `b
 (23, 154, 180, '2021-2022', 'à§§à§¨à§©', 'à§©à§¨à§§', 'à§¨à§§', 'à¦…à¦—à§à¦°à¦¿à¦®', '', '12-Aug-2021', 'à¦Ÿà§‡à¦¸à§à¦Ÿ à¦•à¦®à§‡à¦¨à§à¦Ÿ - à¦•à¦°à§à¦®à¦•à¦°à§à¦¤à¦¾'),
 (24, 155, 180, '2021-2022', 'à§§à§¨à§©à§ª', 'à§¨à§¨à§©', 'à§§à§¨', 'à¦…à¦—à§à¦°à¦¿à¦® - à¦²à§‡à¦¨à¦¦à§‡à¦¨', '', '13-Aug-2021', 'à¦Ÿà§‡à¦¸à§à¦Ÿ à¦•à¦®à§‡à¦¨à§à¦Ÿ - à¦•à¦°à§à¦®à¦•à¦°à§à¦¤à¦¾ (à¦¹à¦¿à¦¸à¦¾à¦¬) à¦¦à¦ªà§à¦¤à¦°'),
 (25, 177, 184, '2021-2022', '123', '32', '12', 'ASAP', '', '16-Aug-2021', 'comment officer');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `budgetseleaction`
---
-
-CREATE TABLE `budgetseleaction` (
-  `id` int(255) NOT NULL,
-  `budgetId` varchar(255) NOT NULL,
-  `budget_type` varchar(255) NOT NULL,
-  `budgetType` varchar(255) NOT NULL,
-  `comment` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `budgetseleaction`
---
-
-INSERT INTO `budgetseleaction` (`id`, `budgetId`, `budget_type`, `budgetType`, `comment`) VALUES
-(1, '180127', 'others', 'other', 'money'),
-(2, '180108', 'development', 'work', 'no comment'),
-(3, '170145', 'others', 'service', 'Hello'),
-(4, '180107', 'development', 'buyingProduct', 'SE'),
-(15, '180129', 'development', 'work', 'abcd'),
-(16, '180127', 'development', 'buyingProduct', 'Good comment'),
-(17, '', 'revenue', 'buyingProduct', '123456'),
-(18, '', 'development', 'buyingProduct', 'lab information'),
-(19, '', 'revenue', 'buyingProduct', 'ABCD is here'),
-(20, '', 'revenue', 'work', 'ABCD is here 2'),
-(21, '', 'revenue', 'work', 'ABCD IS HERE 3'),
-(22, '', '', '', ''),
-(23, '', '', '', ''),
-(24, '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -214,33 +180,6 @@ INSERT INTO `directoropinion` (`id`, `budget_id`, `director_id`, `date`, `budget
 (9, 154, 182, '12-Aug-2021', '2021-2022', 'à§§à§¨à§«', 'à§©à§¨à§¨', 'à§¨à§§', 'à¦…à¦—à§à¦°à¦¿à¦® - à¦²à§‡à¦¨à¦¦à§‡à¦¨', '', 'à¦Ÿà§‡à¦¸à§à¦Ÿ à¦•à¦®à§‡à¦¨à§à¦Ÿ - à¦ªà¦°à¦¿à¦šà¦¾à¦²à¦•'),
 (10, 155, 182, '13-Aug-2021', '2021-2022', 'à§§à§¨à§©à§ª', 'à§¨à§¨à§©', 'à§§à§¨', 'à¦…à¦—à§à¦°à¦¿à¦® - à¦²à§‡à¦¨à¦¦à§‡à¦¨', '', 'à¦Ÿà§‡à¦¸à§à¦Ÿ à¦•à¦®à§‡à¦¨à§à¦Ÿ - à¦ªà¦°à¦¿à¦šà¦¾à¦²à¦•'),
 (11, 177, 186, '16-Aug-2021', '2021-2022', '123', '32', '12', 'à¦…à¦—à§à¦°à¦¿à¦®', '', 'à¦…à¦—à§à¦°à¦¿à¦®à¦…à¦—à§à¦°à¦¿à¦®à¦…à¦—à§à¦°à¦¿à¦®à¦…à¦—à§à¦°à¦¿à¦®');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `generalinformation`
---
-
-CREATE TABLE `generalinformation` (
-  `id` int(255) NOT NULL,
-  `budgetId` varchar(255) NOT NULL,
-  `need` varchar(255) NOT NULL,
-  `value` varchar(255) NOT NULL,
-  `recommending` varchar(256) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `generalinformation`
---
-
-INSERT INTO `generalinformation` (`id`, `budgetId`, `need`, `value`, `recommending`) VALUES
-(1, '180127', 'yes', '', ''),
-(4, '180108', 'no', '', ''),
-(8, '', 'yes', '2501', ''),
-(9, '', '', '', ''),
-(10, '', 'yes', '2505', ''),
-(11, '', 'yes', '12', 'office_head'),
-(12, '', 'yes', '12', 'office_head');
 
 -- --------------------------------------------------------
 
@@ -375,12 +314,6 @@ ALTER TABLE `accountsofficeropinion`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `budgetseleaction`
---
-ALTER TABLE `budgetseleaction`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `demand`
 --
 ALTER TABLE `demand`
@@ -402,12 +335,6 @@ ALTER TABLE `deputydirectoropinion`
 -- Indexes for table `directoropinion`
 --
 ALTER TABLE `directoropinion`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `generalinformation`
---
-ALTER TABLE `generalinformation`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -445,12 +372,6 @@ ALTER TABLE `accountsofficeropinion`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
--- AUTO_INCREMENT for table `budgetseleaction`
---
-ALTER TABLE `budgetseleaction`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
-
---
 -- AUTO_INCREMENT for table `demand`
 --
 ALTER TABLE `demand`
@@ -473,12 +394,6 @@ ALTER TABLE `deputydirectoropinion`
 --
 ALTER TABLE `directoropinion`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- AUTO_INCREMENT for table `generalinformation`
---
-ALTER TABLE `generalinformation`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `recommendingofficeropinion`
