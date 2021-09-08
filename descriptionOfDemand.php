@@ -53,7 +53,7 @@
         {
             $msg =  "<div class='alert alert-success'><strong>আপনার বাজেট আবেদনটি সম্পন্ন হয়েছে</strong></div>";
             
-            $query = "INSERT INTO demand (budget_type, budgetType, comment, user_id, recommending_officer_id, item, qty, price, item_total, total, need, advanceAmount, date, stage, status) VALUES ('$budget_type', '$budgetType', '$comment', $user_id, $recommending_officer_id, '$item', '$qty', '$price', '$item_total', '$total', '$need', '$advanceAmount', '$date', $stage, '$status')";
+            $query = "INSERT INTO demand (budget_type, budgetType, comment, user_id, recommending_officer_id, total, need, advanceAmount, date, stage, status) VALUES ('$budget_type', '$budgetType', '$comment', $user_id, $recommending_officer_id, '$total', '$need', '$advanceAmount', '$date', $stage, '$status')";
             $run = mysqli_query($db, $query);
             
             $budget_id = mysqli_insert_id($db);
