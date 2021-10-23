@@ -176,7 +176,7 @@
                 <th></th>
             </tr>
             <?php
-                    $sql4 = "SELECT * FROM demand_chart WHERE budget_id='$budget_id'";
+                    $sql4 = "SELECT * FROM demand WHERE id='$budget_id'";
                     $result4 = $db->query($sql4);
                     foreach($result4 as $aData):
                         $item = $aData['item'];

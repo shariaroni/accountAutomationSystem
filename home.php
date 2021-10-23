@@ -1,3 +1,19 @@
+<?php
+    include 'header.php';
+    include 'user.php';
+?>
+<?php
+    $user = new user();
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
+        $userRegi = $user->userRegistration($_POST);
+    }
+?>
+<?php
+    if (isset($_GET['action']) && $_GET['action'] == "logout") {
+        session::distroy(); 
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,22 +42,33 @@
                         <li class="nav-item">
                             <a class="nav-link" href="registrationform.php">নিবন্ধন</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="login.php">প্রবেশ</a>
-                        </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">যোগাযোগ</a>
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">অফিস সমূহ</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="https://github.com/faisaljabet">এস এম ফয়সাল নির্ঝর</a></li>
-                                <li><a class="dropdown-item" href="https://github.com/sujoncep">মোঃ শাহাবুদ্দিন</a></li>
-                                <li><a class="dropdown-item" href="https://github.com/Rahedul">রাহিদুল ইসলাম রূপক</a></li>
-                                <li><a class="dropdown-item" href="https://github.com/samiul-basher">সামিউল বাসার রবিন</a></li>
-                                <li><a class="dropdown-item" href="#">জেড. এম. আসিফ জামিল</a></li>
-                                <li><a class="dropdown-item" href="https://github.com/zihad18">লতিফুর রহমান জিহাদ</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="https://shariaroni.wordpress.com/">শাহরিয়ার অনি</a></li>
+                                <li><a class="dropdown-item" href="https://just.edu.bd/offices/vc">Office Of The Vice Chancellor</a></li>
+                                <li><a class="dropdown-item" href="https://just.edu.bd/offices/treasurer">Office Of The Treasurer</a></li>
+                                <li><a class="dropdown-item" href="https://just.edu.bd/offices/registrar">Office Of The Registrar</a></li>
+                                <li><a class="dropdown-item" href="https://just.edu.bd/offices/librarian">Office Of The Librarian</a></li>
+                                <li><a class="dropdown-item" href="https://just.edu.bd/offices/proctor">Office Of The Proctor</a></li>
+                                <li><a class="dropdown-item" href="https://just.edu.bd/offices/counselling">Office Of The Student Counseling And Guidance</a></li>
                             </ul>
                         </li>
+                        <?php
+                            $id = session::get("id");
+                            $userlogin = session::get("login");
+                            if ($userlogin == true) {
+                        ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php">ইনডেক্স</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="?action=logout">লগ আউট</a>
+                        </li>
+                        <?php }else{ ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.php">লগ ইন</a>
+                        </li>
+                        <?php } ?>
                     </ul>
                     <form class="d-flex">
                         <input class="form-control me-1" type="search" placeholder="Search" aria-label="Search">

@@ -119,7 +119,7 @@
                             </div>
                         </div>
                         </p>
-                        <a class="btn btn-warning" href="descriptionOfDemand.php">
+                        <a class="btn btn-warning" href="applyType.php">
                         বাজেট আবেদন করুন</a>&nbsp;
                         <a class="btn btn-secondary" href="oldBudgetList.php">পূর্বের বাজেট আবেদন</a>
                     </div>

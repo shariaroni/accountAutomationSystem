@@ -26,7 +26,7 @@
 </head>
 <body>
     <?php
-        include 'navbar.php';
+        include 'navbarIndex.php';
     ?>
     <h2 class="display-4 text-center my-4">নিবন্ধন করুন</h2>
     <div class="container">
