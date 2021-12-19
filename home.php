@@ -20,6 +20,7 @@
     <meta charset="UTF-8">
     <title>হোম পেইজ</title>
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/code.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </head>
 <body>
@@ -39,12 +40,9 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="home.php">হোম</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="registrationform.php">নিবন্ধন</a>
-                        </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">অফিস সমূহ</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">অফিস সমূহ</a>
+                            <ul class="dropdown-menu dropdown-content" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="https://just.edu.bd/offices/vc">Office Of The Vice Chancellor</a></li>
                                 <li><a class="dropdown-item" href="https://just.edu.bd/offices/treasurer">Office Of The Treasurer</a></li>
                                 <li><a class="dropdown-item" href="https://just.edu.bd/offices/registrar">Office Of The Registrar</a></li>
@@ -53,6 +51,10 @@
                                 <li><a class="dropdown-item" href="https://just.edu.bd/offices/counselling">Office Of The Student Counseling And Guidance</a></li>
                             </ul>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="registrationform.php">নিবন্ধন</a>
+                        </li>
+                        
                         <?php
                             $id = session::get("id");
                             $userlogin = session::get("login");
