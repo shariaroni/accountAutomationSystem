@@ -33,11 +33,6 @@ class user{
             return $mgs;
         }
 
-        /*if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-            $mgs = "<div class='alert alert-danger'><strong>Error! </strong>The email address is already Exist!</div>";
-            return $mgs;
-        } */
-
         if ($chk_email == true) {
             $mgs = "<div class='alert alert-danger'><strong>Error! </strong>The email address is already exists with this role!</div>";
             return $mgs;
@@ -320,7 +315,9 @@ public function userSwitch($id, $type, $currentType){
             return $mgs;
         }
     }
-    //----------Admin Verification Update----------
+    /*----------------------------------------
+            Admin Verification Update
+    ----------------------------------------*/
     public function updateAdminVerificationStatus($id){
         $sql = "UPDATE tabel_user SET admin_verification_status = 1 WHERE id= :id LIMIT 1";
         $query = $this->db->pdo->prepare($sql);
@@ -335,7 +332,9 @@ public function userSwitch($id, $type, $currentType){
             return $mgs;
         }
     }
-    //----------Admin Verification Remove----------
+    /*----------------------------------------
+            Admin Verification Remove
+    ----------------------------------------*/
     public function updateAdminVerificationRemove($id){
         $sql = "UPDATE tabel_user SET admin_verification_status = 0 WHERE id= :id LIMIT 1";
         $query = $this->db->pdo->prepare($sql);
@@ -350,7 +349,9 @@ public function userSwitch($id, $type, $currentType){
             return $mgs;
         }
     }
-    //----------Admin Verification Delete----------
+    /*----------------------------------------
+            Admin Verification Delete
+    ----------------------------------------*/
     public function updateAdminVerificationDelete($id){
         $sql = "DELETE FROM tabel_user WHERE id= :id LIMIT 1";
         $query = $this->db->pdo->prepare($sql);

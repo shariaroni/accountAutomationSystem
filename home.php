@@ -20,7 +20,6 @@
     <meta charset="UTF-8">
     <title>হোম পেইজ</title>
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="css/code.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </head>
 <body>
@@ -122,7 +121,7 @@
                         <img src="css/image/images1.jpg" class="card-img-top" alt="image1">
                         <div class="card-body">
                             <h5 class="card-title">বাজেট নং ১</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <p class="card-text">Some quick example text to build on the card title.</p>
                             <a href="#" class="btn btn-primary">বিবারণী দেখুন</a>
                         </div>
                     </div>
@@ -132,7 +131,7 @@
                         <img src="css/image/images2.jpg" class="card-img-top" alt="image1">
                         <div class="card-body">
                             <h5 class="card-title">বাজেট নং ২</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <p class="card-text">Some quick example text to build on the card title.</p>
                             <a href="#" class="btn btn-primary">বিবারণী দেখুন</a>
                         </div>
                     </div>
@@ -142,7 +141,7 @@
                         <img src="css/image/images3.jpg" class="card-img-top" alt="image1">
                         <div class="card-body">
                             <h5 class="card-title">বাজেট নং ৩</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <p class="card-text">Some quick example text to build on the card title.</p>
                             <a href="#" class="btn btn-primary">বিবারণী দেখুন</a>
                         </div>
                     </div>
@@ -152,7 +151,7 @@
                         <img src="css/image/images4.jpg" class="card-img-top" alt="image1">
                         <div class="card-body">
                             <h5 class="card-title">বাজেট নং ৪</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <p class="card-text">Some quick example text to build on the card title.</p>
                             <a href="#" class="btn btn-primary">বিবারণী দেখুন</a>
                         </div>
                     </div>

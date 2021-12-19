@@ -21,6 +21,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </head>
 <body>
+    <!-- Navbar Start -->
     <div class="container">
         <h1>
             <strong>Account</strong> Automation System
@@ -36,10 +37,10 @@
                         if ($userlogin == true) {
                     ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="profile.php?id=<?php echo $id; ?>">Profile</a>
+                        <a class="nav-link" href="profile.php?id=<?php echo $id; ?>">প্রোফাইল</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="?action=logout">Log Out</a>
+                        <a class="nav-link" href="?action=logout">লগ আউট</a>
                     </li>
                     <?php }else{ ?>
                     <li class="nav-item">
@@ -53,6 +54,8 @@
             </div>
         </nav>
     </div>
+    <!-- Navbar End -->
+    
     <h2 class="display-3 text-center my-5">প্রবেশ করুণ</h2>
     <div class="container">
         <div style="max-width: 600px; margin: 0 auto">
