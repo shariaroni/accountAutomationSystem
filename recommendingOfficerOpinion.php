@@ -32,7 +32,13 @@
         $res =  $db->query($sql);
         $row = $res->fetch_assoc();
         $budgetType = $row['budgetType'];
+        $recommending_officer_id = $row['recommending_officer_id'];
+        $sql3 = "SELECT * FROM tabel_user WHERE id = $recommending_officer_id LIMIT 1";
+        $res3 = $db->query($sql3);
+        $row3 = $res3->fetch_assoc();
+        $recommending_officer_name = $row3['name'];
     }
+            
 ?>
 
 <?php
@@ -40,10 +46,6 @@
     if (isset($_POST['submit'])) {
         $budget_id = mysqli_real_escape_string($db, $_GET['id']);
         $recommend = $_POST['recommend'];
-        if($_FILES['image']['name']){
-            $image = $_FILES['image']['name'];
-            $target = "uploads/".basename($_FILES['image']['name']);
-        }
         $date = $_POST['day'] . '-' .$_POST['month'] . '-' . $_POST['year'];
         $comment = $_POST['comment'];
 
@@ -91,9 +93,9 @@
         <h3>
             সুপারিশকারী কর্মকর্তার মতামত প্রদান
         </h3>
-        <h4>
-            <a class="btn btn-warning mt-3" href="budgetStatement.php?id=<?php echo $budget_id;?>">বাজেট বিবারণী দেখুন</a>
-        </h4>
+        <?php
+            include 'budgetStatement.php';
+        ?>
         <form action="" method="post">
             <p class="h6 text-center my-3">উল্লেখিত 
                 <b>
@@ -120,7 +122,12 @@
             </div>
             <div style="max-width: 500px; float:left" class="mt-5 form-control">
                 <label for="signature" class="form-label">সুপারিশকারী কর্মকর্তার স্বাক্ষর ও তারিখ</label>
-                <input name="image" class="form-control form-control-sm" type="file" id="signature">
+                <br>
+                <div class="h4">
+                    <?php
+                        echo $recommending_officer_name;
+                    ?>
+                </div>
                 <div class="mt-2">
                     <select name="day">
                         <option class="dropdown-menu" value="<?php echo $date = date("d"); ?>"> <?php echo $date = date("d"); ?></option>
@@ -195,7 +202,7 @@
                 মন্তব্য<br>
                 <textarea class="form-control" name="comment" cols="60" rows="3" placeholder="লিখুন..."></textarea>
             </div>
-            <div class="text-center mt-5">
+            <div class="text-center m-5">
                 <input class="btn btn-success" name="submit" type="submit" value="নিশ্চিত করুন">
             </div>
         </form>

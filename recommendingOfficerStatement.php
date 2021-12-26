@@ -42,14 +42,14 @@
         if($recommending_officer_id == $session_id):
     ?>
     <div style="margin-top: 20px;" class="container text-center">
-        <h4>
-            <a class="btn btn-warning mt-3" href="budgetStatement.php?id=<?php echo $budget_id;?>">বাজেট বিবারণী দেখুন</a>
-        </h4>
+        <?php
+            include 'budgetStatement.php';
+        ?>
     </div>
     <?php endif; ?>
     
-    <div class="container text-center mt-5" style="max-width: 675px; margin: 0, auto">
-        <h4><strong> সুপারিশকারী কর্মকর্তার মতামত</strong> </h4>
+    <div class="container text-center mt-4" style="max-width: 675px; margin: 0, auto">
+        <h4>সুপারিশকারী কর্মকর্তার মতামত</h4>
         <form action="" method="post">
         <table class="table table-striped table-bordered mt-3">
             <?php
@@ -115,7 +115,7 @@
                 }
             ?>
         </table>
-        <input class="btn btn-primary" type="button" value="Back" onclick="history.back(-1)" />
+        <input class="btn btn-primary m-3" type="button" value="Back" onclick="history.back(-1)" />
         </form>
     </div>
 
