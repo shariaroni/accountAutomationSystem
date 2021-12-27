@@ -40,12 +40,10 @@
         $data = $result->fetch_assoc();
         if($data['type'] == 'deputyDirector'):
     ?>
-    <div style="margin-top: 20px;" class="container text-center">
-       <h4>
-           <a class="btn btn-warning mt-3" href="budgetStatement.php?id=<?php echo $budget_id;?>">বাজেট বিবারণী দেখুন</a>
-           <a class="btn btn-warning mt-3" href="accountOfficerStatement.php?id=<?php echo $budget_id;?>">কর্মকর্তা (হিসাব) দপ্তরের মতামত দেখুন</a>
-       </h4>
-    </div>
+    <?php
+        include 'budgetStatement.php';
+        include 'accountOfficerStatement.php';
+    ?>
     <?php endif; ?>
 
     <div class="container text-center mt-5" style="max-width: 675px; margin: 0, auto">

@@ -34,6 +34,11 @@
         $row = $res->fetch_assoc();
         $budgetType = $row['budgetType'];
         $budget_type = $row['budget_type'];
+        $id = session::get("id");
+        $sql2 = "SELECT * FROM tabel_user WHERE id = $id ";
+        $res2 = $conn->query($sql2);
+        $row2 = $res2->fetch_assoc();
+        $account_officer_name = $row2['name'];
     }
 ?>
 
@@ -47,13 +52,10 @@
         $budgetSector = $_POST['budgetSector'];
         $pageNo = $_POST['pageNo'];
         $type = $_POST['type'];
-        $image = $_FILES['image']['name'];
         $date = $_POST['day'] .'-'. $_POST['month']  .'-'. $_POST['year'];
         $comment = $_POST['comment'];
 
-        $target = "uploads/".basename($_FILES['image']['name']);
-
-        $query = "INSERT INTO accountsofficeropinion (budget_id, accountofficer_id, budgetYear, budgetCode, budgetSector, pageNo, type, image, date, comment) VALUES ('$budget_id', $accountofficer_id, '$budgetYear', '$budgetCode', '$budgetSector', '$pageNo', '$type', '$image', '$date', '$comment')";
+        $query = "INSERT INTO accountsofficeropinion (budget_id, accountofficer_id, budgetYear, budgetCode, budgetSector, pageNo, type, date, comment) VALUES ('$budget_id', $accountofficer_id, '$budgetYear', '$budgetCode', '$budgetSector', '$pageNo', '$type', '$date', '$comment')";
         
         $run = mysqli_query($db, $query);
         
@@ -88,13 +90,11 @@
         include 'navbar.php';
     ?>
     <div style="margin-top: 20px;" class="container text-center">
-        <h3>
-            কর্মকর্তা (হিসাব) দপ্তরের মতামত প্রদান
-        </h3>
-        <h4>
-            <a class="btn btn-warning mt-3" href="budgetStatement.php?id=<?php echo $budget_id;?>">বাজেট বিবরণ দেখুন</a>
-            <a class="btn btn-warning mt-3" href="recommendingOfficerStatement.php?id=<?php echo $budget_id;?>">সুপারিশকারী কর্মকর্তার মতামত দেখুন</a>
-        </h4>
+        <h3><strong>কর্মকর্তা (হিসাব) দপ্তরের মতামত প্রদান</strong></h3>
+        <?php
+            include 'budgetStatement.php';
+            include 'recommendingOfficerStatement.php';
+        ?>
         <form action="" method="POST">
             <p class="h5 text-center mt-5">প্রস্তাবিত 
                 <b>
@@ -137,8 +137,12 @@
             <input name="type" type="text" placeholder=""> পদ্ধতিতে ক্রয় করা যেতে পারে।
             </p>
             <div style="max-width: 500px; float:left" class="mt-5 form-control">
-                <label for="signature">সুপারিশকারী কর্মকর্তার স্বাক্ষর ও তারিখ</label>
-                <input name="image" class="form-control mt-2" type="file" id="signature">
+                <label for="signature">কর্মকর্তা (হিসাব) দপ্তর স্বাক্ষর ও তারিখ</label>
+                <div class="h4">
+                    <?php
+                        echo $account_officer_name;
+                    ?>
+                </div>
                 <div class="mt-2">
                     <select name="day">
                         <option class="dropdown-menu" value="<?php echo $day = date("d"); ?>"> <?php echo $day = date("d"); ?></option>
@@ -213,7 +217,7 @@
                 মন্তব্য<br>
                 <textarea class="form-control" name="comment" cols="60" rows="3" placeholder="লিখুন..."></textarea>
             </div>
-            <div class="text-center mt-5">
+            <div class="text-center m-3">
                 <input class="btn btn-success" name="submit" type="submit" value="নিশ্চিত করুন">
             </div>
         </form>

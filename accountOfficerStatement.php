@@ -1,21 +1,3 @@
-<?php
-    include 'user.php';
-    include 'header.php';
-    session::checksession();
-?>
-<?php
-    $loginmgs = session::get("loginmgs");
-    if (isset($loginmgs)) {
-        echo $loginmgs;
-    }
-    session::set("loginmgs",NULL);
-?>
-<?php
-    if (isset($_GET['action']) && $_GET['action'] == "logout") {
-        session::distroy(); 
-    }
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,9 +9,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 </head>
 <body>
-    <?php
-        include 'navbar.php';
-    ?>
     
     <?php
         $db = mysqli_connect("localhost","root","","db_lr");
@@ -40,12 +19,10 @@
         $data = $result->fetch_assoc();
         if($data['type'] == 'accountOfficer'):
     ?>
-    <div style="margin-top: 20px;" class="container text-center">
-        <h4>
-            <a class="btn btn-warning mt-3" href="budgetStatement.php?id=<?php echo $budget_id;?>">বাজেট বিবরণ দেখুন</a>
-            <a class="btn btn-warning mt-3" href="recommendingOfficerStatement.php?id=<?php echo $budget_id;?>">সুপারিশকারী কর্মকর্তার মতামত দেখুন</a>
-        </h4>
-    </div>
+    <?php
+        include 'budgetStatement.php';
+        include 'recommendingOfficerStatement.php';
+    ?>
     <?php endif; ?>
 
     <div class="container text-center mt-5" style="max-width: 675px; margin: 0, auto">
@@ -114,7 +91,6 @@
                 }
             ?>
         </table>
-        <input class="btn btn-primary mb-5" type="button" value="Back" onclick="history.back(-1)" />
         </form>
     </div>
     

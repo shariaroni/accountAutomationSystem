@@ -29,56 +29,6 @@
         session::distroy(); 
     }
 ?>
-<?php
-    $db = mysqli_connect("localhost","root","","db_lr");
-
-    if (isset($_POST['submit'])) {
-        $budget_type = $_POST['budget_type'];
-        $budgetType = $_POST['budgetType'];
-        $comment = $_POST['comment'];
-        $user_id = session::get("id");
-        $recommending_officer_id = $_POST['recommending'];
-        $total = $_POST['total'];
-        $need = $_POST['need'];
-        $advanceAmount = (double) $_POST['advanceAmount'];
-        $date = date("d-m-Y");
-        $stage = 2;
-        $status = "unseen";
-
-        if($total < $advanceAmount && $need == "yes")
-        {
-            $msg =  "<div class='alert alert-danger'><strong>অগ্রীম চাহিদা মোট চাহিদার তুলনায় বেশি</strong></div>";
-        }
-        else
-        {
-            $msg =  "<div class='alert alert-success'><strong>আপনার বাজেট আবেদনটি সম্পন্ন হয়েছে</strong></div>";
-            
-            $query = "INSERT INTO demand (budget_type, budgetType, comment, user_id, recommending_officer_id, total, need, advanceAmount, date, stage, status) VALUES ('$budget_type', '$budgetType', '$comment', $user_id, $recommending_officer_id, '$total', '$need', '$advanceAmount', '$date', $stage, '$status')";
-            $run = mysqli_query($db, $query);
-            
-            $budget_id = mysqli_insert_id($db);
-
-            for($i=0; $i<sizeof($_POST['item_name']); $i++){
-                $item = $_POST['item_name'][$i];
-                $qty = $_POST['qty'][$i];
-                $price = $_POST['price'][$i];
-                $item_total = $_POST['subtotal'][$i];
-                $total += $item_total;
-                $query1 = "SELECT * FROM demand_chart WHERE budget_id='$budget_id' and item='$item' and qty='$qty' and price='$price' and item_total='$item_total'";
-                $run1 = mysqli_query($db, $query1);
-                if(mysqli_num_rows($run1) == 0){
-                  $query = "INSERT INTO demand_chart (budget_id, item, qty, price, item_total) VALUES ('$budget_id','$item', '$qty', '$price', '$item_total')";
-                  $run = mysqli_query($db, $query);
-                }
-              }
-
-            session::set("loginmgs", $msg);
-            $_SESSION['status'] = "Data Inserted";
-            $msg =  "<div class='alert alert-success'><strong>আপনার বাজেট আবেদন সম্পন্ন হয়েছে</strong></div>";
-            header("Location: index.php");
-        }
-    }
-?>
 
 <!DOCTYPE html>
 <html lang="en">
