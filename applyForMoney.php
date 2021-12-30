@@ -4,7 +4,7 @@
     if (isset($_POST['submit'])) {
         $user_id = session::get("id");
         $document_number = $_POST['document_number'];
-        $Office_department_name = $_POST['Office_department_name'];
+        $office_department_name = $_POST['office_department_name'];
         $total = $_POST['total'];
         $comment = $_POST['comment'];
         $fiscal_year = $_POST['fiscal_year'];
@@ -30,7 +30,7 @@
         {
             $msg =  "<div class='alert alert-success'><strong>আপনার বাজেট আবেদনটি সম্পন্ন হয়েছে</strong></div>";
             
-            $query = "INSERT INTO demand (document_number, Office_department_name, total, comment, fiscal_year, source_of_money, expenditure_budget_sector, expenditure_budget_code, procurement_number, planned_price, procurement_type, details_of_goods_and_work, recommending_officer_id, user_id, advanceAmount, date, stage, status) VALUES ('$document_number', '$Office_department_name', '$total', '$comment', $fiscal_year, '$Source_of_money', '$expenditure_budget_sector', '$expenditure_budget_code', '$procurement_number', '$planned_price', '$procurement_type', '$details_of_goods_and_work', '$recommending_officer_id', '$user_id', '$advanceAmount', '$date', $stage, '$status')";
+            $query = "INSERT INTO demand (document_number, office_department_name, total, comment, fiscal_year, source_of_money, expenditure_budget_sector, expenditure_budget_code, procurement_number, planned_price, procurement_type, details_of_goods_and_work, recommending_officer_id, user_id, advanceAmount, need, date, stage, status) VALUES ('$document_number', '$office_department_name', '$total', '$comment', '$fiscal_year', '$Source_of_money', '$expenditure_budget_sector', '$expenditure_budget_code', '$procurement_number', '$planned_price', '$procurement_type', '$details_of_goods_and_work', '$recommending_officer_id', '$user_id', '$advanceAmount', '$need', '$date', $stage, '$status')";
             $run = mysqli_query($db, $query);
             
             $budget_id = mysqli_insert_id($db);
@@ -58,7 +58,7 @@
 ?>
 
 <div class="container">
-    <form action="" method="POST" name="cart">
+    <form action="index.php" method="POST" name="cart">
     <table>
         <tr>
             <td>১) নথি নম্বর:</td>
