@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 27, 2021 at 09:41 PM
+-- Generation Time: Dec 30, 2021 at 02:00 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -68,7 +68,7 @@ CREATE TABLE `demand` (
   `user_id` int(11) NOT NULL,
   `recommending_officer_id` int(11) NOT NULL,
   `document_number` varchar(50) NOT NULL,
-  `Office_department_name` varchar(50) NOT NULL,
+  `office_department_name` varchar(50) NOT NULL,
   `total` varchar(256) DEFAULT NULL,
   `comment` varchar(1000) NOT NULL,
   `fiscal_year` varchar(256) NOT NULL,
@@ -90,7 +90,7 @@ CREATE TABLE `demand` (
 -- Dumping data for table `demand`
 --
 
-INSERT INTO `demand` (`id`, `user_id`, `recommending_officer_id`, `document_number`, `Office_department_name`, `total`, `comment`, `fiscal_year`, `source_of_money`, `expenditure_budget_sector`, `expenditure_budget_code`, `procurement_number`, `planned_price`, `procurement_type`, `details_of_goods_and_work`, `advanceAmount`, `need`, `date`, `stage`, `status`) VALUES
+INSERT INTO `demand` (`id`, `user_id`, `recommending_officer_id`, `document_number`, `office_department_name`, `total`, `comment`, `fiscal_year`, `source_of_money`, `expenditure_budget_sector`, `expenditure_budget_code`, `procurement_number`, `planned_price`, `procurement_type`, `details_of_goods_and_work`, `advanceAmount`, `need`, `date`, `stage`, `status`) VALUES
 (150, 169, 15, 'revenue', 'buyingProduct', NULL, 'à¦¸à¦¿à¦à¦¸à¦‡ à¦²à§à¦¯à¦¬à§‡à¦° à¦œà¦¨à§à¦¯ à§§à§¦ à¦Ÿà¦¿ à¦¡à§‡à¦•à§à¦¸à¦Ÿà¦ª à¦•à¦®à§à¦ªà¦¿à¦‰à¦Ÿà¦¾à¦° à¦ªà§à¦°à§Ÿà§‹à¦œà¦¨à¥¤', '', 0, '', '', '', '', '', '', 20000, '', '10-08-2021', 7, 'accepted'),
 (151, 169, 15, 'development', 'work', NULL, 'à¦¸à¦¿à¦à¦¸à¦‡ à¦²à§à¦¯à¦¾à¦¬ à¦®à§‡à¦°à¦¾à¦®à¦¤ à¦•à¦°à¦¾ à¦ªà§à¦°à§Ÿà§‹à¦œà¦¨', '', 0, '', '', '', '', '', '', 1500, '', '11-08-2021', 2, 'rejected'),
 (152, 169, 183, 'revenue', 'work', NULL, '123', '', 0, '', '', '', '', '', '', 0, '', '11-08-2021', 6, 'rejected'),
@@ -229,6 +229,84 @@ INSERT INTO `directoropinion` (`id`, `budget_id`, `director_id`, `date`, `budget
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `eqp`
+--
+
+CREATE TABLE `eqp` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `office_department_name` varchar(11) NOT NULL,
+  `fiscal_year` varchar(11) NOT NULL,
+  `budget_code` int(11) NOT NULL,
+  `budget_sector` varchar(11) NOT NULL,
+  `president_1` varchar(11) NOT NULL,
+  `member_11` varchar(11) NOT NULL,
+  `member_12` varchar(11) NOT NULL,
+  `comment_11` varchar(11) NOT NULL,
+  `comment_12` varchar(11) NOT NULL,
+  `comment_13` varchar(11) NOT NULL,
+  `president_2` varchar(11) NOT NULL,
+  `member_21` varchar(11) NOT NULL,
+  `member_22` varchar(11) NOT NULL,
+  `comment_21` varchar(11) NOT NULL,
+  `comment_22` varchar(11) NOT NULL,
+  `comment_23` varchar(11) NOT NULL,
+  `president_3` varchar(11) NOT NULL,
+  `member_31` varchar(11) NOT NULL,
+  `member_32` varchar(11) NOT NULL,
+  `member_33` varchar(11) NOT NULL,
+  `comment_31` varchar(11) NOT NULL,
+  `comment_32` varchar(11) NOT NULL,
+  `comment_33` varchar(11) NOT NULL,
+  `comment_34` varchar(11) NOT NULL,
+  `need` varchar(11) NOT NULL,
+  `date` date NOT NULL,
+  `stage` varchar(11) NOT NULL,
+  `status` varchar(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `open_tenders`
+--
+
+CREATE TABLE `open_tenders` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `office_department_name` varchar(11) NOT NULL,
+  `fiscal_year` varchar(11) NOT NULL,
+  `budget_code` int(11) NOT NULL,
+  `budget_sector` varchar(11) NOT NULL,
+  `president_1` varchar(11) NOT NULL,
+  `member_11` varchar(11) NOT NULL,
+  `member_12` varchar(11) NOT NULL,
+  `comment_11` varchar(11) NOT NULL,
+  `comment_12` varchar(11) NOT NULL,
+  `comment_13` varchar(11) NOT NULL,
+  `president_2` varchar(11) NOT NULL,
+  `member_21` varchar(11) NOT NULL,
+  `member_22` varchar(11) NOT NULL,
+  `comment_21` varchar(11) NOT NULL,
+  `comment_22` varchar(11) NOT NULL,
+  `comment_23` varchar(11) NOT NULL,
+  `president_3` varchar(11) NOT NULL,
+  `member_31` varchar(11) NOT NULL,
+  `member_32` varchar(11) NOT NULL,
+  `member_33` varchar(11) NOT NULL,
+  `comment_31` varchar(11) NOT NULL,
+  `comment_32` varchar(11) NOT NULL,
+  `comment_33` varchar(11) NOT NULL,
+  `comment_34` varchar(11) NOT NULL,
+  `need` varchar(11) NOT NULL,
+  `date` date NOT NULL,
+  `stage` varchar(11) NOT NULL,
+  `status` varchar(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `recommendingofficeropinion`
 --
 
@@ -261,6 +339,58 @@ INSERT INTO `recommendingofficeropinion` (`id`, `budget_id`, `date`, `image`, `c
 (50, 191, '11-Sep-2021', '', 'ggbbht', 'yes'),
 (51, 193, '24-Nov-2021', '', '', ''),
 (52, 192, '24-Nov-2021', '', '', 'yes');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rfq`
+--
+
+CREATE TABLE `rfq` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `office_department_name` varchar(11) NOT NULL,
+  `fiscal_year` varchar(11) NOT NULL,
+  `budget_code` int(11) NOT NULL,
+  `budget_sector` varchar(11) NOT NULL,
+  `president_1` varchar(11) NOT NULL,
+  `member_11` varchar(11) NOT NULL,
+  `member_12` varchar(11) NOT NULL,
+  `comment_11` varchar(11) NOT NULL,
+  `comment_12` varchar(11) NOT NULL,
+  `comment_13` varchar(11) NOT NULL,
+  `president_2` varchar(11) NOT NULL,
+  `member_21` varchar(11) NOT NULL,
+  `member_22` varchar(11) NOT NULL,
+  `comment_21` varchar(11) NOT NULL,
+  `comment_22` varchar(11) NOT NULL,
+  `comment_23` varchar(11) NOT NULL,
+  `president_3` varchar(11) NOT NULL,
+  `member_31` varchar(11) NOT NULL,
+  `member_32` varchar(11) NOT NULL,
+  `member_33` varchar(11) NOT NULL,
+  `comment_31` varchar(11) NOT NULL,
+  `comment_32` varchar(11) NOT NULL,
+  `comment_33` varchar(11) NOT NULL,
+  `comment_34` varchar(11) NOT NULL,
+  `need` varchar(11) NOT NULL,
+  `date` date NOT NULL,
+  `stage` varchar(11) NOT NULL,
+  `status` varchar(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rfq`
+--
+
+INSERT INTO `rfq` (`id`, `user_id`, `office_department_name`, `fiscal_year`, `budget_code`, `budget_sector`, `president_1`, `member_11`, `member_12`, `comment_11`, `comment_12`, `comment_13`, `president_2`, `member_21`, `member_22`, `comment_21`, `comment_22`, `comment_23`, `president_3`, `member_31`, `member_32`, `member_33`, `comment_31`, `comment_32`, `comment_33`, `comment_34`, `need`, `date`, `stage`, `status`) VALUES
+(1, 169, '', 'à§¨à§¦à§§à§', 123, 'aad', 'adef', 'adwd', '', 'adad', '', 'adawwd', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'no', '0000-00-00', '2', 'unseen'),
+(2, 169, '', 'à§¨à§¦à§§à§', 123, 'aad', 'adef', 'adwd', '', 'adad', '', 'adawwd', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'no', '0000-00-00', '2', 'unseen'),
+(3, 169, '', 'à§¨à§¦à§¨à§', 123, 'aad', 'adef', 'adwd', 'as', 'adad', 'adad', 'ass', 'asdd', 'add', 'add', 'add', 'adfe', 'aaaa', 'aaaa', 'aaa', 'aa', 'aaa', 'aaa', 'aa', 'aaa', 'aaa', 'no', '0000-00-00', '2', 'unseen'),
+(4, 169, 'BE', 'à§¨à§¦à§¨à§', 123, 'aad', 'adef', 'adwd', 'as', 'adad', 'adad', 'ass', 'asdd', 'add', 'add', 'add', 'adfe', 'aaaa', 'aaaa', 'aaa', 'aa', 'aaa', 'aaa', 'aa', 'aaa', 'aaa', 'no', '0000-00-00', '2', 'unseen'),
+(5, 169, 'BE', 'à§¨à§¦à§¨à§', 123, 'aad', 'adef', 'adwd', 'as', 'adad', 'adad', 'ass', 'asdd', 'add', 'add', 'add', 'adfe', 'aaaa', 'aaaa', 'aaa', 'aa', 'aaa', 'aaa', 'aa', 'aaa', 'aaa', 'no', '0000-00-00', '2', 'unseen'),
+(6, 169, 'CSE', 'à§¨à§¦à§¨à§', 123, 'aad', 'adef', 'adwd', 'as', 'adad', 'adad', 'adawwd', 'asdd', 'add', 'add', 'add', 'adfe', 'aaaa', 'aaaa', 'aaa', 'aa', 'aaa', 'aaa', 'aa', 'aaa', 'aaa', 'no', '0000-00-00', '2', 'unseen'),
+(7, 169, 'CSE', 'à§¨à§¦à§¨à§', 123, 'aad', 'adef', 'adwd', 'as', 'adad', 'adad', 'adawwd', 'asdd', 'add', 'add', 'add', 'adfe', 'aaaa', 'aaaa', 'aaa', 'aa', 'aaa', 'aaa', 'aa', 'aaa', 'aaa', 'no', '0000-00-00', '2', 'unseen');
 
 -- --------------------------------------------------------
 
@@ -404,6 +534,12 @@ ALTER TABLE `recommendingofficeropinion`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `rfq`
+--
+ALTER TABLE `rfq`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tabel_user`
 --
 ALTER TABLE `tabel_user`
@@ -460,6 +596,12 @@ ALTER TABLE `directoropinion`
 --
 ALTER TABLE `recommendingofficeropinion`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+
+--
+-- AUTO_INCREMENT for table `rfq`
+--
+ALTER TABLE `rfq`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tabel_user`
