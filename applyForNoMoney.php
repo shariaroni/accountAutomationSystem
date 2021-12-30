@@ -1,7 +1,7 @@
 <?php
     $db = mysqli_connect("localhost","root","","db_lr");
 
-    if (isset($_POST['submit'])) {
+    if (isset($_POST['applyForNoMoney'])) {
         $user_id = session::get("id");
         $document_number = $_POST['document_number'];
         $office_department_name = $_POST['Office_department_name'];
@@ -57,7 +57,7 @@
 ?>
 
 <div class="container">
-    <form action="descriptionOfDemand.php" method="POST" name="cart">
+    <form action="applyType.php" method="POST">
         <table>
             <tr>
                 <td>১) নথি নম্বর:</td>
@@ -199,7 +199,7 @@
         </table>
         <div class="mt-3"><strong>উল্লেখিত কাজ/ সেবা/ মালামাল ক্রয়ের জন্য প্রশাসনিক ও আর্থিক অনুমোদনের জন্য অনুরোধ করছি।</strong></div>
         <div class="text-center mt-4 mb-5">
-            <input type="submit" class="btn btn-primary" name="submit" value="নিশ্চিত করুন">
+            <input type="submit" class="btn btn-primary" name="applyForNoMoney" value="নিশ্চিত করুন">
         </div>  
     </form>
 </div>
