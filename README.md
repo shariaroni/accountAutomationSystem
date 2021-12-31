@@ -11,3 +11,5 @@ We need to build a nice website which automate the system of budget.
 
 * Applicant can apply for respective category of budget.
 * The officer can approve or reject or keep the appication in pending and also give his opinion to that budget application.
+
+# Features
