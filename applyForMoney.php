@@ -138,7 +138,7 @@
                 <select class="form-select mt-2 d-inline" name="source_of_money">
                     <option class="d-inline dropdown-menu" value="recommending null">অর্থের উৎস বাছাই করুন</option>
                     <option value="রাজস্ব">রাজস্ব</option>
-                    <option value="উন্নায়ন">উন্নায়ন</option>
+                    <option value="উন্নায়ন">উন্নয়ন</option>
                     <option value="অন্যান্য">অন্যান্য</option>
                 </select>
             </td>
