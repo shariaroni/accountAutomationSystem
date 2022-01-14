@@ -80,6 +80,21 @@
                     <option value="CDM">Climate and Disaster Management</option>
                     <option value="EST">Environmental Science and Technology</option>
                     <option value="NFT">Nutrition and Food Technology</option>
+                    <option value="FMB">Fisheries and Marine Bioscience</option>
+                    <option value="GEBT">Genetic Engineering and Biotechnology</option>
+                    <option value="MB">Microbiology</option>
+                    <option value="Pharmacy">Pharmacy</option>
+                    <option value="NHS">Nursing and Health Science</option>
+                    <option value="PESS">Physical Education and Sports Science</option>
+                    <option value="PTR">Physiotherapy and Rehabilitation</option>
+                    <option value="English">English</option>
+                    <option value="Chemistry">Chemistry</option>
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="Physics">Physics</option>
+                    <option value="AIS">Accounting and Information Systems</option>
+                    <option value="FB">Finance and Banking</option>
+                    <option value="Management">Management</option>
+                    <option value="Marketing">Marketing</option>
                 </select>
             </td>
         </tr>
@@ -129,6 +144,7 @@
                     <option value="২০১৯-২০">২০১৯-২০</option>
                     <option value="২০২০-২১">২০২০-২১</option>
                     <option value="২০২১-২২">২০২১-২২</option>
+                    <option value="২০২২-২৩">২০২২-২৩</option>
                 </select>
             </td>
         </tr>
