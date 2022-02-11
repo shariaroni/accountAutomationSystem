@@ -66,7 +66,7 @@
     </div>
     <!-- Navbar End -->
     
-    <h2 class="display-4 text-center my-4">নিবন্ধন করুন</h2>
+    <h2 class="display-4 text-center my-4">নিবন্ধন করুন </h2>
     <div class="container">
         <div style="max-width: 600px; margin: 0 auto">
         <?php
